@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Add User</title>
+    <title>Add Product</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="myorders.css">
 </head>
@@ -48,47 +48,33 @@
         </nav>
 
         <div class="row m-3">
-            <h4>Add User</h4></div>
+            <h4>Add Product</h4></div>
 
         <form action="" method="post">
             <div class="form-group row">
-                <label for="name" class="col-2 col-form-label">Name</label>
+                <label for="product" class="col-2 col-form-label">Product</label>
                 <div class="col-3">
-                    <input type="text" class="form-control position-relative" id="name" name="name">
+                    <input type="text" class="form-control position-relative" id="product" name="product">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="email" class="col-2 col-form-label">Email</label>
+                <label for="product" class="col-2 col-form-label">Price</label>
                 <div class="col-3">
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="price" class="form-control position-relative" id="price" name="price">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="password" class="col-2 col-form-label">Password</label>
+                <label for="category" class="col-2 col-form-label">Category</label>
                 <div class="col-3">
-                    <input type="password" class="form-control" id="password" name="password">
+                    <select class="form-control" name="category">
+                        <option>Hot Drinks</option>
+                        <option>Cold Drinks</option>
+                      </select>
+                      <a href="#" >Add Category</a>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="confirm_password" class="col-2 col-form-label">Confirm Password</label>
-                <div class="col-3">
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="room_no" class="col-2 col-form-label">Room No.</label>
-                <div class="col-3">
-                    <input type="text" class="form-control" id="room_no" name="room_no">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="ext" class="col-2 col-form-label">Ext.</label>
-                <div class="col-3">
-                    <input type="text" class="form-control" id="ext" name="ext">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="picture" class="col-2 col-form-label">Profile Picture</label>
+                <label for="picture" class="col-2 col-form-label">Product Picture</label>
                 <div class="col-3">
                     <input type="file" class="form-control" id="picture" name="picture">
                 </div>
