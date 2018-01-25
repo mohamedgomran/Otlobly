@@ -1,7 +1,6 @@
 <?php
 
 // Class category, has attribute of name as string
-// void addCatefory(); add catgoty to database
 
 	include_once 'dbase.php';
 	
@@ -26,26 +25,27 @@
 		return $this->$param;
 	}
 
+	// void addCategory(); add catgory to database
+
 	public function addCategory()
 	{
 		$query = "insert into categories values (null, ?)";
-		$dataArr  = array($this -> __get("name"));
+		$dataArr  = array($this -> name);
 		$this -> manDb($query, $dataArr);
 	}
+
+	// static::array getCategory(); get all categories from database
+
 
 	static function getCategory()
 	{
 		$query = "select * from categories";
-		$dataArr  = array();
+		$dataArr  = array('');
 		$prep = category::manDb($query, $dataArr);
-		$result = $prep->fetch(PDO::FETCH_ASSOC);
+		$result = $prep->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
 
 }
-
-
-
-print_r(category::getCategory());
 
 ?>
