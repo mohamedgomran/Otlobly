@@ -52,10 +52,13 @@
 	{
 		$query = "select * from all_users";
 		$parameters  = array('');
-		$prep = category::manDb($query, $dataArr);
+		$prep = user::manDb($query, $parameters);
 		$result = $prep->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
-}
+
 	
+
+}
+
  ?>
