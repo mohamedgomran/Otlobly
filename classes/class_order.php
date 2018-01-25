@@ -3,14 +3,12 @@
 	
 	class Order {
 		use dataBase;
-		private $id;
 		private $date;
 		private $status;
 		private $room;
 		private $notes;
 	
 	public function __construct($id, $date, $status, $room, $notes) {
-		$this->id = $id;
 		$this->date = $date;
 		$this->status = $status;
 		$this->room = $room;
@@ -22,10 +20,7 @@
 	}
 
 	public function __set($name, $value) {
-		if (($name === "id") && is_integer($value)) {
-			$this->id = $value;
-		}
-		else if (($name === "date") && is_string($value) && is_numeric($value)) {
+		if (($name === "date") && is_string($value) && is_numeric($value)) {
 			$this->date = $value;
 		}
 		else if (($name === "room") && is_integer($value)) {
@@ -39,14 +34,16 @@
 		}
 	}
 
-	public function addOrder($user_id, $order_id, $order_date, $order_status, $order_room, $order_notes) {
-		
+	public function addOrder($user_id) {
+		$query = "insert into order values (null, ?)";
+		$dataArr  = array($user_id, $this->date, $this->status, $this->room, $this->notes);
+		$this -> manDb($query, $dataArr);
 	}
 }
-$o = new Order(10,"25136", "processing", 5, "Hello Gemy");
-echo "$o->id\n";
+$o = new Order("25136", "processing", 5, "Hello Gemy");
 echo "$o->date\n";
 echo "$o->status\n";
 echo "$o->room\n";
 echo "$o->notes\n";
+$o.addOrder(10);
 ?>
