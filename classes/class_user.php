@@ -13,7 +13,7 @@
 	private $admin;
 	private $picture;
 	private $extension;
-	private $UID
+	private $UID;
 
 	public function __construct($UserName,$Password,$Room,$Admin=false,$Picture=NULL,$Extension=NULL)
 	{
@@ -48,7 +48,39 @@
 		$parameters=["$this->UID"];
 		$this->manDb($query,$parameters);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	static function getUser()
+	{
+		$query = "select * from users";
+		$dataArr  = array('');
+		$prep = user::manDb($query, $dataArr);
+		$result = $prep->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
+	}
+
+
 }
-$usr =new user("ahmed",125,1515);
-$usr->addUser();		
+// $usr =new user("ahmed",125,1515);
+// $usr->addUser();
+print_r(user::getUser());
+
  ?>

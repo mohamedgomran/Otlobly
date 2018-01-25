@@ -36,7 +36,6 @@
 
 	// static::array getCategory(); get all categories from database
 
-
 	static function getCategory()
 	{
 		$query = "select * from categories";
@@ -45,7 +44,6 @@
 		$result = $prep->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
-
 }
 
 ?>
