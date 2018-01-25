@@ -1,8 +1,8 @@
 <?php  
 
 
-	$dsn="mysql:host=192.168.1.3;dbname=cafeteria";
-	$conn= new PDO($dsn,"Otlobly","iti38");
+	$dsn="mysql:host=localhost;dbname=cafeteria";
+	$conn= new PDO($dsn,"mhassan","iti38");
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Train to manipulate the data base, recives the PDO connection obj, 
