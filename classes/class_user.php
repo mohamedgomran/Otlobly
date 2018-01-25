@@ -35,7 +35,8 @@
 
 	public function addUser($user)
 	{
-		$dsn="mysql:host=localhost;dbname="
+		$dsn="mysql:host=localhost;dbname=cafeteria"
+		$db= new PDO($dsn,"Otlobly","iti38")
 	}
 }
  ?>
