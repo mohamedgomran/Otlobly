@@ -4,7 +4,7 @@
 	class Product {
 
 		use dataBase; 
-		private $id;
+		// private $id;
 		private	$name;
 		private	$category;
 		private $price;
@@ -12,8 +12,7 @@
 		private $availability;
 
 
-		public function __construct($Id, $Name, $Category, $Price, $Picture_source, $Availability) {
-			$this->id = $Id;
+		public function __construct($Name, $Category, $Price, $Picture_source, $Availability) {
 			$this->name = $Name;
 			$this->category = $Category;
 			$this->price = $Price;
@@ -21,12 +20,42 @@
 			$this->availability = $Availability;
 		}
 
-		public static function add_product() {
+
+		public function add() {
 
 			$sql_add_product = "INSERT INTO cafeteria.products
 			VALUES (NULL, ?, ?, ?, ?, ?);";
 
-			$this->manDb($sql_add_product, array($name, $category, $price, $picture_source, $availability));
+			$parameters = ["$this->name, $this->category, $this->price, $this->picture_source, $this->availability"];
+
+			$this->manDb($sql_add_product, $parameters);
+		}
+
+
+		public function edit($Id) {
+
+			$sql_edit_product = "UPDATE cafeteria.products
+			SET
+			pname = ?,
+			p_CID = ?,
+			price = ?,
+			picture = ?,
+			availability = ?
+			WHERE PID = $Id;";
+
+			$parameters = ["$Id, $this->name, $this->category, $this->price, $this->picture_source, $this->availability"];
+
+			$this->manDb($sql_edit_product, $parameters);
+		}
+
+
+		public static function remove($Id) {
+
+			$sql_remove_product = "DELETE FROM cafeteria.products WHERE id = ?";
+
+			$parameters = ["$Id"];
+
+			$this->manDb($sql_remove_product,$parameters);
 		}
 	}
 

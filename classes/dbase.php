@@ -1,6 +1,7 @@
 <?php  
 
-
+// need to set a global CONFIG_HOST and CONFIG_PASSWORD and CONFIG_DB
+// as well as CONFIG_USER CONFIG_USER_PASSWORD
 	$dsn="mysql:host=192.168.1.3;dbname=cafeteria";
 	$conn= new PDO($dsn,"Otlobly","iti38");
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
