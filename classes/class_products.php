@@ -41,9 +41,9 @@
 			price = ?,
 			picture = ?,
 			availability = ?
-			WHERE PID = $Id;";
+			WHERE PID = ?;";
 
-			$parameters = ["$Id, $this->name, $this->category, $this->price, $this->picture_source, $this->availability"];
+			$parameters = ["$this->name, $this->category, $this->price, $this->picture_source, $this->availability, $Id"];
 
 			$this->manDb($sql_edit_product, $parameters);
 		}
@@ -51,23 +51,27 @@
 
 		public static function remove($Id) {
 
-			$sql_remove_product = "DELETE FROM cafeteria.products WHERE id = ?";
+			$sql_remove_product = "DELETE FROM cafeteria.products WHERE PID = ?;";
 
 			$parameters = ["$Id"];
 
-			$this->manDb($sql_remove_product,$parameters);
+			Product::manDb($sql_remove_product, $parameters);
 		}
+
+
+		public function set_availability($Id) {
+			
+			$sql_set_availability = "UPDATE cafeteria.products
+			SET
+			availability = ?
+			WHERE PID = ?;";
+
+			$parameters = ["$this->availability, $Id"];
+
+			$this->manDb($sql_edit_product, $parameters);
+		}
+
 	}
-
-
-
-
-
-
-
-
-
-
 
 
 
