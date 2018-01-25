@@ -70,7 +70,7 @@
 
 	static function getUser()
 	{
-		$query = "select * from users";
+		$query = "select * from all_users";
 		$dataArr  = array('');
 		$prep = user::manDb($query, $dataArr);
 		$result = $prep->fetchAll(PDO::FETCH_ASSOC);
