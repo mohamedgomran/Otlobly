@@ -69,4 +69,13 @@ td{
 
 tr{
 	text-align: center;
+<<<<<<< HEAD
+=======
+}
+
+/************additions by AsSamhaa****************/
+form.form-login { /*login.html*/
+	width: 50%;
+	margin: 20% auto; /*20% applies to top and bottom, auto to left and right*/
+>>>>>>> temp
 }
