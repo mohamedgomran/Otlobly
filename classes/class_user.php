@@ -5,23 +5,23 @@
 	{
 		
 	public use dataBase; 
-	private $email
-	private	$name
-	private	$password
-	private $room
-	private $admin
-	private $picture
-	private $extension
+	private $email;
+	private	$name;
+	private	$password;
+	private $room;
+	private $admin;
+	private $picture;
+	private $extension;
 
 	public function __construct($Email,$Name,$Password,$Room="in place",$Admin=false,$Picture=NULL,$Extension=NULL)
 	{
-		$this->email=$Email
-		$this->name=$Name
-		$this->password=$Password
-		$this->room=$Room
-		$this->admin=$Admin
-		$this->picture=$Picture
-		$this->extension=$Extension
+		$this->email=$Email;
+		$this->name=$Name;
+		$this->password=$Password;
+		$this->room=$Room;
+		$this->admin=$Admin;
+		$this->picture=$Picture;
+		$this->extension=$Extension;
 	}
 
 	public function __set($param,$value)
@@ -35,8 +35,10 @@
 
 	public function addUser($user)
 	{
-		$dsn="mysql:host=localhost;dbname=cafeteria"
-		$db= new PDO($dsn,"Otlobly","iti38")
+		$dsn="mysql:host=localhost;dbname=cafeteria";
+		$db= new PDO($dsn,"Otlobly","iti38");
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$query = "insert into users";
 	}
 }
  ?>
