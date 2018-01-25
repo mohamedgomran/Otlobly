@@ -1,8 +1,10 @@
 <?php 
-
+	
+	include_once 'dbase';
 	class user
 	{
 		
+	public use dataBase; 
 	private $email
 	private	$name
 	private	$password
@@ -22,34 +24,18 @@
 		$this->extension=$Extension
 	}
 
-	public function __set($name,$Name)
+	public function __set($param,$value)
 	{
-		$this->name=$Name;
+		$this->param=$value;
+	}
+	public function __get($param)
+	{
+		return $this->name;
 	}
 
-	public function __set($email,$Email)
+	public function addUser($user)
 	{
-		$this->email=$Email
-	}
-
-	public function __set($password,$Password)
-	{
-		$this->password=$Password
-	}
-
-	public function __set($room,$Room)
-	{
-		$this->room=$Room
-	}
-
-	public function __set($admin,$Admin)
-	{
-		$this->admin=$Admin
-	}
-
-	public function __set($picture,$Picture)
-	{
-		$this->picture=$Picture
+		$dsn="mysql:host=localhost;dbname="
 	}
 }
  ?>
