@@ -27,7 +27,7 @@
 
 	// void addCategory(); add catgory to database
 
-	public function addCategory()
+	public function add()
 	{
 		$query = "insert into categories values (null, ?)";
 		$dataArr  = array($this -> name);

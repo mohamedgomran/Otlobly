@@ -13,7 +13,6 @@
 	private $admin;
 	private $picture;
 	private $extension;
-	private $UID;
 
 	public function __construct($UserName,$Password,$Room,$Admin=false,$Picture=NULL,$Extension=NULL)
 	{
@@ -37,50 +36,44 @@
 	public function addUser()
 	{
 		
-		$query = "insert into Users values(null,?,?,?,?,?,?)";
+		$query = "insert into users values(null,?,?,?,?,?,?)";
 		$parameters=["$this->userName","$this->room","$this->extension","$this->password","$this->picture","$this->admin"];
 		$this->manDb($query,$parameters);
 	}
 
-	public function removeUser()
+	static function removeUser($id)
 	{
-		$query = "delete from Users where id=?";
-		$parameters=["$this->UID"];
-		$this->manDb($query,$parameters);
+		$query = "delete from users where UID=?";
+		$parameters=["$id"];
+		user::manDb($query,$parameters);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	static function getUser()
+	static function getUsers()
 	{
-		$query = "select * from users";
+		$query = "select * from all_users";
+
 		$dataArr  = array('');
 		$prep = user::manDb($query, $dataArr);
 		$result = $prep->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
 
+	static function getSingleUser($id)
+	{
+		$query = "select * from users where UID=?";
+		$parameters = ["$id"];
+		$prep = user::manDb($query, $parameters);
+		$result = $prep->fetch(PDO::FETCH_ASSOC);
+		return $result;
+	}
+	
+	public function editUser($id)
+	{
+		$query="update users set userName=? , room=? , extension=? , password=?, picture=? , admin=? where UID=$id";
+		$parameters=["$this->userName","$this->room","$this->extension","$this->password","$this->picture","$this->admin"];
+		$this->manDb($query,$parameters);
+	}
 
 }
-// $usr =new user("ahmed",125,1515);
-// $usr->addUser();
-print_r(user::getUser());
 
  ?>
