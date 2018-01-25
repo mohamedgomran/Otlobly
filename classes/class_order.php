@@ -35,13 +35,13 @@
 		$this -> manDb($query, $dataArr);
 	}
 
-	static function deleteOrder($user_id) {
-
+	static function deleteOrder($order_id) {
+		$query = "delete from orders where OID = ?";
+		$dataArr  = array($order_id);
+		Order::manDb($query, $dataArr);
 	}
 }
 $o = new Order("processing", 5, "Hello Gemy");
-echo "$o->status\n";
-echo "$o->room\n";
-echo "$o->notes\n";
-$o->addOrder(1);
+//$o->addOrder(4)
+//Order::deleteOrder(783);
 ?>
