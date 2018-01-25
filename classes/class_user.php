@@ -13,7 +13,6 @@
 	private $admin;
 	private $picture;
 	private $extension;
-	private $UID
 
 	public function __construct($UserName,$Password,$Room,$Admin=false,$Picture=NULL,$Extension=NULL)
 	{
@@ -37,18 +36,26 @@
 	public function addUser()
 	{
 		
-		$query = "insert into Users values(null,?,?,?,?,?,?)";
+		$query = "insert into users values(null,?,?,?,?,?,?)";
 		$parameters=["$this->userName","$this->room","$this->extension","$this->password","$this->picture","$this->admin"];
 		$this->manDb($query,$parameters);
 	}
 
-	public function removeUser()
+	static function removeUser($id)
 	{
-		$query = "delete from Users where id=?";
-		$parameters=["$this->UID"];
-		$this->manDb($query,$parameters);
+		$query = "delete from users where UID=?";
+		$parameters=["$id"];
+		user::manDb($query,$parameters);
+	}
+
+	static function getUsers()
+	{
+		$query = "select * from all_users";
+		$parameters  = array('');
+		$prep = category::manDb($query, $dataArr);
+		$result = $prep->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
 	}
 }
-$usr =new user("ahmed",125,1515);
-$usr->addUser();		
+	
  ?>
