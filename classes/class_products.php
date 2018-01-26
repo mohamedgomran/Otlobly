@@ -60,40 +60,51 @@
 		}
 
 
-		// public static function set_availability($Id) {
+		public static function set_availability($Id, $availability) {
 			
-		// 	$sql_set_availability = "UPDATE cafeteria.products
-		// 	SET
-		// 	availability = ?
-		// 	WHERE PID = ?;";
-
-		// 	$parameters = ["$this->availability, $Id"];
-
-		// 	$this->manDb($sql_edit_product, $parameters);
-		// }
-
-		public static function set_field($Id, $field, $new_value) {
-			
-			$sql_set_field = "UPDATE cafeteria.products
+			$sql_set_availability = "UPDATE cafeteria.products
 			SET
-			? = ?
+			availability = ?
 			WHERE PID = ?;";
 
-			$parameters = [$field, "$new_value", "$Id"];
+			$parameters = ["$availability", "$Id"];
 
-			Product::manDb($sql_set_field, $parameters);
+			Product::manDb($sql_set_availability, $parameters);
 		}
 
-		public static function get_field($Id, $field) {
+		public static function get_availability($Id) {
 			
-			$sql_get_field = "SELECT ? FROM cafeteria.products
-			WHERE PID = ?";
+			$sql_get_availability = "SELECT availability FROM cafeteria.products
+			WHERE PID = ?;";
 
-			$parameters = [$field, "$Id"];
+			$parameters = ["$Id"];
 
-			$prep = Product::manDb($sql_get_field, $parameters);
-			return $prep->fetch();
+			$prep = Product::manDb($sql_get_availability, $parameters);
+			return $prep->fetch(PDO::FETCH_ASSOC);
 		}
+
+		// public static function set_field($Id, $field, $new_value) {
+			
+		// 	$sql_set_field = "UPDATE cafeteria.products
+		// 	SET
+		// 	? = ?
+		// 	WHERE PID = ?;";
+
+		// 	$parameters = [$field, "$new_value", "$Id"];
+
+		// 	Product::manDb($sql_set_field, $parameters);
+		// }
+
+		// public static function get_field($Id, $field) {
+			
+		// 	$sql_get_field = "SELECT ? FROM cafeteria.products
+		// 	WHERE PID = ?;";
+
+		// 	$parameters = [$field, $Id];
+
+		// 	$prep = Product::manDb($sql_get_field, $parameters);
+		// 	return $prep->fetchAll();
+		// }
 
 
 		public static function get_available_products() {
