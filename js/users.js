@@ -43,7 +43,7 @@ function putElementsInTBody() {
 			parentTr.id = arrayOfUsers[index]['UID'];
 
 			var nameTd = document.createElement('td');
-			nameTd.textContent = arrayOfUsers[index]['userName'];
+			nameTd.textContent = arrayOfUsers[index]['name'];
 			parentTr.appendChild(nameTd);
 
 			var roomTd = document.createElement('td');
