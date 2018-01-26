@@ -29,6 +29,7 @@ function appendIntoTable(row) {
 }
 
 function handler() {
+    total_amount = 0;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -54,7 +55,6 @@ function handler() {
                 total_tr = document.createElement('tr');
                 total_tr.innerHTML = `<td colspan="4" class="text-center"><h4>Total = ${total_amount} LE</h4></td>`;
                 tableBody.appendChild(total_tr);
-                total_amount = 0;
             }
         }
     };
@@ -63,13 +63,14 @@ function handler() {
     xhttp.send();
 }
 
-function cancelOrder(id) {
+function cancelOrder(id, amount) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             isOk = JSON.parse(this.responseText);
             if (isOk) {
-                tableBody.removeChild(document.getElementById(id));      
+                tableBody.removeChild(document.getElementById(id));  
+                total_tr.children[0].children[0].textContent = 'Total = ' + (total_amount-amount) + ' LE';    
             }
         }
     };
@@ -82,7 +83,8 @@ tableBody.addEventListener('click', function(e) {
     if (e.target.getAttribute('class') === 'action') {
         //tableBody.removeChild(e.target.parentElement);
         // delete the row in database
-        cancelOrder(e.target.parentElement.getAttribute('id'));
+        deleted_amount = parseInt(e.target.previousElementSibling.textContent);
+        cancelOrder(e.target.parentElement.getAttribute('id'), deleted_amount);
     }
 
 });
