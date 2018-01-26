@@ -33,7 +33,7 @@ function appendIntoTable(row) {
 
 function ajaxSuccess () {
 
-	var response = JSON.parse(this.responseText)
+	var response = (this.responseText)
   	console.log(response);
 	if (response['rstatus']=="error") {
 	}
