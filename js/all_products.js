@@ -43,7 +43,7 @@ function putElementsInTBody() {
 			parentTr.id = arrayOfProducts[index]['PID'];
 
 			var lableTd = document.createElement('td');
-			lableTd.class = 'test', lableTd.textContent = arrayOfProducts[index]['pname'];
+			lableTd.setAttribute('class', 'test'), lableTd.textContent = arrayOfProducts[index]['pname'];
 			parentTr.appendChild(lableTd);
 
 			var priceTd = document.createElement('td');
@@ -52,9 +52,9 @@ function putElementsInTBody() {
 
 			var srcTd = document.createElement('td');
 			var srcDiv = document.createElement('div');
-			srcDiv.class = 'productimgdiv';
+			srcDiv.setAttribute('class', productimgdiv);
 			var srcImg = document.createElement('img');
-			srcImg.class = 'rounded imgindiv';
+			srcImg.setAttribute('class', 'rounded imgindiv');
 			srcImg.src = arrayOfProducts[index]['picture'];
 			srcTd.appendChild(srcDiv.appendChild(srcImg));
 			parentTr.appendChild(srcTd);
