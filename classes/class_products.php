@@ -61,31 +61,23 @@
 			return $prep->fetch(PDO::FETCH_ASSOC);
 		}
 
-		// public static function set_field($Id, $field, $new_value) {
+		public static function get_all_products() {
 			
-		// 	$sql_set_field = "UPDATE cafeteria.products
-		// 	SET
-		// 	? = ?
-		// 	WHERE PID = ?;";
+			$sql_get_all_products = "SELECT * FROM cafeteria.all_products;";
 
-		// 	$parameters = [$field, "$new_value", "$Id"];
-
-		// 	Product::manDb($sql_set_field, $parameters);
-		// }
-
-		// public static function get_field($Id, $field) {
-			
-		// 	$sql_get_field = "SELECT ? FROM cafeteria.products
-		// 	WHERE PID = ?;";
-
-		// 	$parameters = [$field, $Id];
-
-		// 	$prep = Product::manDb($sql_get_field, $parameters);
-		// 	return $prep->fetchAll();
-		// }
-
+<<<<<<< HEAD
 		public static function get_available_products() {
 			$sql_get_available_products = "SELECT * FROM cafeteria.all_products;";
+=======
+			$prep = Product::manDb($sql_get_all_products, array());
+			return $prep->fetchAll(PDO::FETCH_ASSOC);
+		}
+
+		public static function get_available_products() {
+			
+			$sql_get_available_products = "SELECT * FROM cafeteria.all_products WHERE availability=1";
+
+>>>>>>> dc41b64f88cc0b4e841875b6f3a29c72802e7e91
 			$prep = Product::manDb($sql_get_available_products, array());
 			return $prep->fetchAll(PDO::FETCH_ASSOC);
 		}

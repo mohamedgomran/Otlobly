@@ -51,7 +51,7 @@
         <div class="row m-3" id="superDiv">
             <h4>Add Product</h4></div>
 
-        <form action="../php/add_product.php" method="post" id="form">
+        <form action="../php/add_product.php" method="post" id="form" onsubmit="AJAXSubmit(this)" style="display: none;">
             <div class="form-group row">
                 <label for="product" class="col-2 col-form-label">Product</label>
                 <div class="col-3">
@@ -67,10 +67,8 @@
             <div class="form-group row">
                 <label for="category" class="col-2 col-form-label">Category</label>
                 <div style="display:inline-block;" class="col-3">
-                    <select class="form-control" name="category">
+                    <select class="form-control" name="category" id="select">
 
-                        <option>Hot Drinks</option>
-                        <option>Cold Drinks</option>
                     </select>
 
                 </div>
