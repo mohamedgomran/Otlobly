@@ -47,7 +47,7 @@ function putElementsInTBody() {
 			parentTr.appendChild(lableTd);
 
 			var priceTd = document.createElement('td');
-			priceTd.textContent = arrayOfProducts[index]['price'] + 'LE.';
+			priceTd.textContent = arrayOfProducts[index]['price'] + ' LE.';
 			parentTr.appendChild(priceTd);
 
 			var srcTd = document.createElement('td');
