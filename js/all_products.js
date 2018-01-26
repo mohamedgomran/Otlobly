@@ -52,7 +52,7 @@ function putElementsInTBody() {
 
 			var srcTd = document.createElement('td');
 			var srcDiv = document.createElement('div');
-			srcDiv.setAttribute('class', productimgdiv);
+			srcDiv.setAttribute('class', 'productimgdiv');
 			var srcImg = document.createElement('img');
 			srcImg.setAttribute('class', 'rounded imgindiv');
 			srcImg.src = arrayOfProducts[index]['picture'];
