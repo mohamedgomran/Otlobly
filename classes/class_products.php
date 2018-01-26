@@ -11,9 +11,7 @@
 		private $picture_source;
 		private $availability;
 
-
 		public function __construct($Name, $Category, $Price, $Picture_source, $Availability) {
-
 			$this->name = $Name;
 			$this->category = $Category;
 			$this->price = $Price;
@@ -21,20 +19,13 @@
 			$this->availability = $Availability;
 		}
 
-
 		public function add() {
-
-			$sql_add_product = "INSERT INTO cafeteria.products
-			VALUES (NULL, ?, ?, ?, ?, ?);";
-
+			$sql_add_product = "INSERT INTO cafeteria.products VALUES (NULL, ?, ?, ?, ?, ?);";
 			$parameters = ["$this->name", "$this->category", "$this->price", "$this->picture_source", "$this->availability"];
-
 			$this->manDb($sql_add_product, $parameters);
 		}
 
-
 		public function edit($Id) {
-
 			$sql_edit_product = "UPDATE cafeteria.products
 			SET
 			pname = ?,
@@ -43,42 +34,29 @@
 			picture = ?,
 			availability = ?
 			WHERE PID = ?;";
-
 			$parameters = ["$this->name", "$this->category", "$this->price", "$this->picture_source", "$this->availability", "$Id"];
-
 			$this->manDb($sql_edit_product, $parameters);
 		}
 
-
 		public static function remove($Id) {
-
 			$sql_remove_product = "DELETE FROM cafeteria.products WHERE PID = ?;";
-
 			$parameters = ["$Id"];
-
 			Product::manDb($sql_remove_product, $parameters);
 		}
 
-
 		public static function set_availability($Id, $availability) {
-			
 			$sql_set_availability = "UPDATE cafeteria.products
 			SET
 			availability = ?
 			WHERE PID = ?;";
-
 			$parameters = ["$availability", "$Id"];
-
 			Product::manDb($sql_set_availability, $parameters);
 		}
 
 		public static function get_availability($Id) {
-			
 			$sql_get_availability = "SELECT availability FROM cafeteria.products
 			WHERE PID = ?;";
-
 			$parameters = ["$Id"];
-
 			$prep = Product::manDb($sql_get_availability, $parameters);
 			return $prep->fetch(PDO::FETCH_ASSOC);
 		}
@@ -87,6 +65,10 @@
 			
 			$sql_get_all_products = "SELECT * FROM cafeteria.all_products;";
 
+<<<<<<< HEAD
+		public static function get_available_products() {
+			$sql_get_available_products = "SELECT * FROM cafeteria.all_products;";
+=======
 			$prep = Product::manDb($sql_get_all_products, array());
 			return $prep->fetchAll(PDO::FETCH_ASSOC);
 		}
@@ -104,10 +86,10 @@
 			
 			$sql_get_available_products = "SELECT * FROM cafeteria.all_products WHERE availability=1";
 
+>>>>>>> dc41b64f88cc0b4e841875b6f3a29c72802e7e91
 			$prep = Product::manDb($sql_get_available_products, array());
 			return $prep->fetchAll(PDO::FETCH_ASSOC);
 		}
-
 	}
 
 ?>
