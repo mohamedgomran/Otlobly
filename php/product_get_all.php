@@ -6,5 +6,4 @@
 
 	// print_r(Product::get_available_products());
 
-
 ?>

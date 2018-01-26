@@ -27,7 +27,7 @@
 			$sql_add_product = "INSERT INTO cafeteria.products
 			VALUES (NULL, ?, ?, ?, ?, ?);";
 
-			$parameters = ["$this->name, $this->category, $this->price, $this->picture_source, $this->availability"];
+			$parameters = ["$this->name", "$this->category", "$this->price", "$this->picture_source", "$this->availability"];
 
 			$this->manDb($sql_add_product, $parameters);
 		}
@@ -44,7 +44,7 @@
 			availability = ?
 			WHERE PID = ?;";
 
-			$parameters = ["$this->name, $this->category, $this->price, $this->picture_source, $this->availability, $Id"];
+			$parameters = ["$this->name", "$this->category", "$this->price", "$this->picture_source", "$this->availability", "$Id"];
 
 			$this->manDb($sql_edit_product, $parameters);
 		}
@@ -60,16 +60,39 @@
 		}
 
 
-		public function set_availability($Id) {
+		// public static function set_availability($Id) {
 			
-			$sql_set_availability = "UPDATE cafeteria.products
+		// 	$sql_set_availability = "UPDATE cafeteria.products
+		// 	SET
+		// 	availability = ?
+		// 	WHERE PID = ?;";
+
+		// 	$parameters = ["$this->availability, $Id"];
+
+		// 	$this->manDb($sql_edit_product, $parameters);
+		// }
+
+		public static function set_field($Id, $field, $new_value) {
+			
+			$sql_set_field = "UPDATE cafeteria.products
 			SET
-			availability = ?
+			? = ?
 			WHERE PID = ?;";
 
-			$parameters = ["$this->availability, $Id"];
+			$parameters = [$field, "$new_value", "$Id"];
 
-			$this->manDb($sql_edit_product, $parameters);
+			Product::manDb($sql_set_field, $parameters);
+		}
+
+		public static function get_field($Id, $field) {
+			
+			$sql_get_field = "SELECT ? FROM cafeteria.products
+			WHERE PID = ?";
+
+			$parameters = [$field, "$Id"];
+
+			$prep = Product::manDb($sql_get_field, $parameters);
+			return $prep->fetch();
 		}
 
 

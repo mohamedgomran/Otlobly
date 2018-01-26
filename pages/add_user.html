@@ -8,8 +8,10 @@
 </head>
 
 <body>
-
-    <div class="container">
+    <php?
+        onre
+    ?>
+    <div class="container" id="superDiv" style="display: block;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Otlobly</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +53,7 @@
         <div class="row m-3">
             <h4>Add User</h4></div>
 
-        <form action="../php/add_user.php" method="post" onsubmit="AJAXSubmit(this) ;return false;">
+        <form id="form" action="../php/add_user.php" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this) ;return false;">
             <div class="form-group row">
                 <label for="name" class="col-2 col-form-label">Name</label>
                 <div class="col-3" id="nameDiv">
@@ -70,19 +72,19 @@
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" id="confirm_passwordDiv">
                 <label for="confirm_password" class="col-2 col-form-label">Confirm Password</label>
                 <div class="col-3">
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" id="roomDiv">
                 <label for="room_no" class="col-2 col-form-label">Room No.</label>
                 <div class="col-3">
                     <input type="text" class="form-control" id="room_no" name="room_no">
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" id="extDiv">
                 <label for="ext" class="col-2 col-form-label">Ext.</label>
                 <div class="col-3">
                     <input type="text" class="form-control" id="ext" name="ext">
