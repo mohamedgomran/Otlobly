@@ -35,11 +35,12 @@ function categoryMan(row)
 function ajaxSuccess () 
 {
   var response = JSON.parse(this.responseText)
+  console.log(response);
   if (response["admin"]=="true")
   	{
   		form.style.display='block';
   	}
-  else if (response["admin"]=="false"){
+  else if (response['admin']=="false"){
   	location.href="login.html";
   }
   
