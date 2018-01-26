@@ -8,15 +8,15 @@
 
 	if ($userId) {
 		if (user::isAdmin($userId)) {
-			echo json_encode(array('status'=>'go', 'link'=>'admin_home.html'));
+			echo json_encode(array('rstatus'=>'go', 'link'=>'admin_home.html'));
 		}
 		else {
-			echo json_encode(array('status'=>'go', 'link'=>'user_home.html'));
+			echo json_encode(array('rstatus'=>'go', 'link'=>'user_home.html'));
 		}
 		exit;
 	}
 	elseif (!$userEmailInput&&!$passwordInput){
-		echo json_encode(array('status'=>'login'));
+		echo json_encode(array('rstatus'=>'login'));
 		exit;
 
 	}
@@ -33,19 +33,19 @@
 		$_SESSION['userId'] = trim($result['UID']);
 		
 		if (user::isAdmin($result['UID'])) {
-			echo json_encode(array('status'=>'go', 'link'=>'admin_home.html'));
+			echo json_encode(array('rstatus'=>'go', 'link'=>'admin_home.html'));
 		}
 		else{
-			echo json_encode(array('status'=>'go', 'link'=>'user_home.html'));
+			echo json_encode(array('rstatus'=>'go', 'link'=>'user_home.html'));
 		}
 
 		exit;
 	}
 	elseif(empty($password)||empty($user_name)){
-		echo json_encode(array('status'=>'error', 'msg'=>'Login info is not correct'));
+		echo json_encode(array('rstatus'=>'error', 'msg'=>'Login info is not correct'));
 	}
 	else{
-		echo json_encode(array('status'=>'error', 'msg'=>'Login info is not correct'));
+		echo json_encode(array('rstatus'=>'error', 'msg'=>'Login info is not correct'));
 	}
 
 ?>

@@ -11,7 +11,7 @@
 function ajaxSuccess () {
 
 	var response = JSON.parse(this.responseText)
-	if (response['status']=="error") {
+	if (response['rstatus']=="error") {
 		var errorDiv = document.getElementById('error')
 		if (errorDiv.style.display=='block') {return}
 		errorDiv.style.display = 'block'
@@ -19,13 +19,12 @@ function ajaxSuccess () {
 		newP.innerHTML = response['msg']
 		errorDiv.appendChild(newP)
 	}
-	else if (response['status']=="go") {
+	else if (response['rstatus']=="go") {
 		location.href = response['link']
 	}
-	else if (response['status']=="login") {
+	else if (response['rstatus']=="login") {
 		document.getElementById('formcontainer').style.display = 'block'
 	}
-  console.log(response);
 }
 
 
