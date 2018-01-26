@@ -49,39 +49,26 @@
 
         <div class="col-4 mt-3 border-right" id="numberOfProducts">
 
-            <div class="row input-group input-group-sm mb-3">
-              <div class="col input-group-prepend mx-auto">
-                <span class="input-group-text col">tea</span>
-                <input class="col-4" type="number" name="howManyPerProduct" placeholder="1">
-                <span class="input-group-text col-2" name="totalOrderedPerProduct">55</span>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">X</button>
-                </div>
-              </div>
-            </div>
+          <form action="../php/user_home.php" method="POST" enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;" >
 
-            <div class="row input-group input-group-sm mb-3">
-              <div class="col input-group-prepend mx-auto">
-                <span class="input-group-text col">coffee</span>
-                <input class="col-4" type="number" name="howManyPerProduct" placeholder="1">
-                <span class="input-group-text col-2" name="totalOrderedPerProduct">60</span>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">X</button>
-                </div>
-              </div>
+            <div class="border row m-1" id="1">
+                <div class="col">tea</div>
+                <input class="col-4" type="number" name="amount-1" placeholder="1" min="1">
+                <div class="col-2">55</div>
+                <button class="btn" type="button">X</button>
             </div>
-
+        
             <div class="row">
               <div class="col">
-                <label class="">Notes</label>
+                <label class="" for="notes">Notes</label>
                 <textarea class="form-control" name="notes">more sugar</textarea>
               </div>
             </div>
 
             <div class="row mt-3">
-              <label class="col" for="notes">Room
-              <select class="custom-select">
-                <option>choose ...</option>
+              <label class="col" for="room">Room
+              <select class="custom-select" name="room">
+                <option>choose ...</option> 
                 <option>room 1</option>
                 <option>room 2</option>
                 <option>room 3</option>
@@ -90,11 +77,21 @@
             </div>
 
             <div class="row border-top mt-3">
-              <div class="col">total </div>
+              <div class="col">Total </div>
               <div class="col">105</div>
             </div>
 
-        </div>
+            <div class="row mt-3 col">
+              <button type="submit" class="btn btn-default" id="submit">Submit</button>
+            </div>
+
+
+        </form>
+
+      </div>
+
+
+
 
         <div class="col">
           <div class="row">
@@ -111,31 +108,6 @@
           <div class="border-top">
 
             <div class="row" id="products">
-<!--               <div class="drinkdiv m-4">
-                <div class="drinkimg"><img src="../img/Drink.ico" class="rounded-circle imgindiv"></div>
-                <div class="rounded-circle price align-middle text-center">20 LE</div>
-                <div class="dname text-center">Tea</div>
-              </div>
-              <div class="drinkdiv m-4">
-                <div class="drinkimg"><img src="../img/Drink.ico" class="rounded-circle imgindiv"></div>
-                <div class="rounded-circle price align-middle text-center">20 LE</div>
-                <div class="dname text-center">Tea</div>
-              </div>
-              <div class="drinkdiv m-4">
-                <div class="drinkimg"><img src="../img/Drink.ico" class="rounded-circle imgindiv"></div>
-                <div class="rounded-circle price align-middle text-center">20 LE</div>
-                <div class="dname text-center">Tea</div>
-              </div>
-              <div class="drinkdiv m-4">
-                <div class="drinkimg"><img src="../img/Drink.ico" class="rounded-circle imgindiv"></div>
-                <div class="rounded-circle price align-middle text-center">20 LE</div>
-                <div class="dname text-center">Tea</div>
-              </div>
-              <div class="drinkdiv m-4">
-                <div class="drinkimg"><img src="../img/Drink.ico" class="rounded-circle imgindiv"></div>
-                <div class="rounded-circle price align-middle text-center">20 LE</div>
-                <div class="dname text-center">Tea</div>
-              </div> -->
             </div>
 
           </div>

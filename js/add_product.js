@@ -1,8 +1,8 @@
 var form=document.getElementById('form');
 var pname=document.getElementById('product');
 var select=document.getElementById('select');
-// var nameDiv=document.getElementById('nameDiv')
-// var email=document.getElementById('email');
+var pnameDiv=document.getElementById('nameDiv')
+var email=document.getElementById('email');
 // var emailDiv=document.getElementById('emailDiv')
 // var password=document.getElementById('password');
 // var passDiv=document.getElementById('passDiv');
@@ -13,13 +13,13 @@ var select=document.getElementById('select');
 // var ext=document.getElementById('ext');
 // var extDiv=document.getElementById('extDiv');
 // var superDiv=document.getElementById('superDiv');
-// var nameFlag=false;
-// var emailFlag=false;
-// var passFlag=false;
+var nameFlag=false;
+var priceFlag=false;
+var categoryFlag=false;
 // var conf_passFlag=false;
 // var roomFlag=false;
 // var extFlag=false;
-// var successFlag=false;
+var successFlag=false;
 
 
 function categoryMan(row)
@@ -44,40 +44,46 @@ function ajaxSuccess ()
     	Req.open("post", "../php/get_category.php");
     	Req.send();
   	}
-  else if (response['admin']=="false"){
+  else if (response['admin']=="false")
+  	{
   	location.href="login.html";
-  }
+  	}
   
-else{
-		 if (response["place"]=="category")
-	  	{var rows=response["rows"]
+  else{
+		if (response["place"]=="category")
+	  	{
+	  		var rows=response["rows"]
 	  		console.log(rows);
-	  		for (var i = 0; i < rows.length; i++) {
+	  		for (var i = 0; i < rows.length; i++) 
+	  		{
 	  			categoryMan(rows[i]);
 	  		}
-	  };
+	  	}
 	}
- //  else{	
- //  ///to remove the success message on beginning of every json request to prevent duplication
- //  if(successFlag==true)
-	// {
-	// 	successFlag==false;
-	// 	superDiv.removeChild(success)
-	// }
 
-	// ////to view a Success message
- //  if (response.indexOf("success")!=-1)
- //  	{
- //  		console.log("success")
-	//   	success=document.createElement('h3');
-	// 	superDiv.appendChild(success);
-	// 	success.innerHTML="User was added Successfully"
-	// 	successFlag=true;
-	// 	document.getElementById("form").reset();
- //  	}
- //  else{
+  ///to remove the success message on beginning of every json request to prevent duplication
+  if(successFlag==true)
+	{
+		successFlag==false;
+		superDiv.removeChild(success)
+	}
+
+	////to view a Success message
+  if (response.indexOf("success")!=-1)
+  	{
+  		console.log("success")
+	  	success=document.createElement('h3');
+		superDiv.appendChild(success);
+		success.innerHTML="User was added Successfully"
+		successFlag=true;
+		document.getElementById("form").reset();
+  	}
+  if (response['status'=='error']) 
+  	{
+  		errorsArr=response['errors']
+  	};
  //  	///// messages of errors according to server
-	  if(response.indexOf("pname")!=-1)
+	  if(errorsArr.indexOf("pname")!=-1)
 	  {
 	  	if(nameFlag===false)
 		{

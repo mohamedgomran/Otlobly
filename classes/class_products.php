@@ -91,6 +91,15 @@
 			return $prep->fetchAll(PDO::FETCH_ASSOC);
 		}
 
+		public static function get_product($prod) {
+			
+			$sql_get_all_products = "SELECT * FROM products where pname=?;";
+
+			$prep = Product::manDb($sql_get_all_products, array($prod));
+			return $prep->fetchAll(PDO::FETCH_ASSOC);
+		}
+
+
 		public static function get_available_products() {
 			
 			$sql_get_available_products = "SELECT * FROM cafeteria.all_products WHERE availability=1";
