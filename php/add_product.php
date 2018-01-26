@@ -2,11 +2,9 @@
 
 	session_start();
 	require_once '../classes/dbase.php';
-	require_once '../classes/class_product.php';
+	require_once '../classes/class_products.php';
 	require_once './uploadimg.php';
 	
-	$cateArr=category::getCategory();
-	echo json_encode($cateArr)
 
 	$userId = !empty($_SESSION['userId']) ? $_SESSION['userId'] : "";
 	if ($userId) {

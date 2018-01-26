@@ -1,5 +1,5 @@
 var form=document.getElementById('form');
-var username=document.getElementById('product');
+var pname=document.getElementById('product');
 // var nameDiv=document.getElementById('nameDiv')
 // var email=document.getElementById('email');
 // var emailDiv=document.getElementById('emailDiv')
@@ -25,75 +25,76 @@ var username=document.getElementById('product');
 ///////////////ajax response////////////////////
 function ajaxSuccess () 
 {
+  // if 
   var response = (this.responseText)
   console.log(response)
 
-  ////to redirect uer if he is not admin
-  if(response["status"]==="go")
-  	{
-  		location.href=response["link"];
-  	}
+ //  ////to redirect uer if he is not admin
+ //  if(response["status"]==="go")
+ //  	{
+ //  		location.href=response["link"];
+ //  	}
 
-  else{	
-  ///to remove the success message on beginning of every json request to prevent duplication
-  if(successFlag==true)
-	{
-		successFlag==false;
-		superDiv.removeChild(success)
-	}
+ //  else{	
+ //  ///to remove the success message on beginning of every json request to prevent duplication
+ //  if(successFlag==true)
+	// {
+	// 	successFlag==false;
+	// 	superDiv.removeChild(success)
+	// }
 
-	////to view a Success message
-  if (response.indexOf("success")!=-1)
-  	{
-  		console.log("success")
-	  	success=document.createElement('h3');
-		superDiv.appendChild(success);
-		success.innerHTML="User was added Successfully"
-		successFlag=true;
-		document.getElementById("form").reset();
-  	}
-  else{
-  	///// messages of errors according to server
-	  if(response.indexOf("pname")!=-1)
-	  {
-	  	if(nameFlag===false)
-		{
-			console.log("wrong name")
-		  	nameErr=document.createElement('p');
-			nameDiv.appendChild(nameErr);
-			nameErr.innerHTML="*Product name name must be between 2 and 30 alphabetical or white space"
-			nameFlag=true
-		}
+	// ////to view a Success message
+ //  if (response.indexOf("success")!=-1)
+ //  	{
+ //  		console.log("success")
+	//   	success=document.createElement('h3');
+	// 	superDiv.appendChild(success);
+	// 	success.innerHTML="User was added Successfully"
+	// 	successFlag=true;
+	// 	document.getElementById("form").reset();
+ //  	}
+ //  else{
+ //  	///// messages of errors according to server
+	//   if(response.indexOf("pname")!=-1)
+	//   {
+	//   	if(nameFlag===false)
+	// 	{
+	// 		console.log("wrong name")
+	// 	  	nameErr=document.createElement('p');
+	// 		nameDiv.appendChild(nameErr);
+	// 		nameErr.innerHTML="*Product name name must be between 2 and 30 alphabetical or white space"
+	// 		nameFlag=true
+	// 	}
 	  	
-	  }	
+	//   }	
 
-	  if(response.indexOf("price")!=-1)
-	  {
-	  	if(priceFlag===false)
-		{
-			console.log("wrong price")
-		  	priceErr=document.createElement('p');
-			priceDiv.appendChild(priceErr);
-			priceErr.innerHTML="*Each product must have price"
-			priceFlag=true
-		}
+	//   if(response.indexOf("price")!=-1)
+	//   {
+	//   	if(priceFlag===false)
+	// 	{
+	// 		console.log("wrong price")
+	// 	  	priceErr=document.createElement('p');
+	// 		priceDiv.appendChild(priceErr);
+	// 		priceErr.innerHTML="*Each product must have price"
+	// 		priceFlag=true
+	// 	}
 	  	
-	  }
+	//   }
 	  	
 
-	  if(response.indexOf("category")!=-1)
-	  {
-	  	if(roomFlag===false)
-		{
-			console.log("wrong category")
-		  	categoryErr=document.createElement('p');
-			categoryDiv.appendChild(categoryErr);
-			categoryErr.innerHTML="*Category is missing";
-			categoryFlag=true;
-		}
-  	  }
-  	}	
-  }	
+	//   if(response.indexOf("category")!=-1)
+	//   {
+	//   	if(roomFlag===false)
+	// 	{
+	// 		console.log("wrong category")
+	// 	  	categoryErr=document.createElement('p');
+	// 		categoryDiv.appendChild(categoryErr);
+	// 		categoryErr.innerHTML="*Category is missing";
+	// 		categoryFlag=true;
+	// 	}
+ //  	  }
+ //  	}	
+  // }	
 }
   
   
@@ -128,6 +129,6 @@ function AJAXSubmit (oFormElement) {
 document.addEventListener("DOMContentLoaded", function () {
   	var oReq = new XMLHttpRequest();
  	oReq.onload = ajaxSuccess;
-    oReq.open("post", "../php/add_product.php");
+    oReq.open("post", "../php/get_category.php");
     oReq.send();
 })
