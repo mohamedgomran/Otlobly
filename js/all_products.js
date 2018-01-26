@@ -4,21 +4,21 @@ var allProductsContainer = document.getElementById('all-products-tbody');
 var arrayOfProducts; // to store the array of products via json by the corresponding php file
 
 ////////////////////////////////// make AJAX request ///////////////////////////////////////////////////
-var httpRequest = new XMLHttpRequest();
+var fetchHTTPRequest = new XMLHttpRequest();
 
-if (!httpRequest) {
+if (!fetchHTTPRequest) {
 	alert('Giving up :( Cannot create an XMLHTTP instance');
 }
 
-httpRequest.onreadystatechange = catchContents;
-httpRequest.open('GET', 'http://192.168.1.3/Otlobly/php/all_products.php');
-httpRequest.send();
+fetchHTTPRequest.onreadystatechange = catchContents;
+fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/all_products.php');
+fetchHTTPRequest.send();
 
 function catchContents() {
-	if (httpRequest.readyState === XMLHttpRequest.DONE) {
-		if (httpRequest.status === 200) {
-			// alert(httpRequest.responseText);
-			arrayOfProducts = JSON.parse(httpRequest.responseText);
+	if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
+		if (fetchHTTPRequest.status === 200) {
+			// alert(fetchHTTPRequest.responseText);
+			arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText);
 			putElementsInTBody();
 		} else {
 			alert('There was a problem with the request.');
@@ -28,11 +28,8 @@ function catchContents() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function putElementsInTBody() {
 	if (arrayOfProducts.length > 0) {
-		console.log('hi');
+
 		arrayOfProducts.forEach( function(element, index) {
-
-			console.log(index + ' : ' + element);
-
 
 			var parentTr = document.createElement('tr');
 
@@ -66,10 +63,12 @@ function putElementsInTBody() {
 			var edit_delTd = document.createElement('td');
 			var editAnc = document.createElement('a');
 			editAnc.href = '#', editAnc.textContent = 'Edit';
+			editAnc.id = arrayOfProducts[index]['PID'];
 			var slashSpan = document.createElement('span');
 			slashSpan.textContent = ' / ';
 			var delAnc = document.createElement('a');
 			delAnc.href = '#', delAnc.textContent = 'Delete';
+			delAnc.id = arrayOfProducts[index]['PID'];
 			edit_delTd.appendChild(editAnc);
 			edit_delTd.appendChild(slashSpan);
 			edit_delTd.appendChild(delAnc);
@@ -93,6 +92,38 @@ function putElementsInTBody() {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-// allProductsContainer.addEventListener('click', function(event) {
-// 	allProductsContainer.
-// })
+allProductsContainer.addEventListener('click', function(event) {
+
+	if (event.target.textContent == 'Delete') {
+		
+		var btnDel = event.target;
+
+		////////////////////////////////// make AJAX request ///////////////////////////////////////////////////
+		var fetchHTTPRequest = new XMLHttpRequest();
+
+		if (!fetchHTTPRequest) {
+			alert('Giving up :( Cannot create an XMLHTTP instance');
+		}
+
+		fetchHTTPRequest.onreadystatechange = catchContents;
+		fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/all_products.php');
+		fetchHTTPRequest.send();
+
+		function catchContents() {
+			if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
+				if (fetchHTTPRequest.status === 200) {
+					// alert(fetchHTTPRequest.responseText);
+					arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText);
+					putElementsInTBody();
+				} else {
+					alert('There was a problem with the request.');
+				}
+			}
+		}
+		// send the request to php file to delete the file
+		
+	} else if (event.target.textContent == 'Edit') {
+		var btnEdit = event.target;
+
+	}
+})

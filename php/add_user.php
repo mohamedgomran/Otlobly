@@ -15,14 +15,64 @@
 
 	if (preg_match('/^[a-zA-Z ]{2,30}$/',$name))
 		{echo "correct";}
-	else {array_push($errors, "name");}
-	
-	// $searchArray=user::getSingleUser($email);
-	// if(empty($searchArray))
-	// {
-	// 	$newUser= new user($name,$email,$password,$room,$admin,$picture,$extension);
-	// 	$newUser->addUser();
+	else{
+			array_push($errors, "name");
+			echo "incorrect";
+		}
 
-	// }
+	if (preg_match('/\S+@\S+\.\S+/',$email))
+		{echo "correct";}
+	else{
+			array_push($errors, "name");
+			echo "incorrect";
+		}
+
+	if (preg_match('/^[a-zA-Z0-9_$@#!%&*^~]{8,}$/',$password) && $password===$duplPassword)
+		{
+				echo "correct";
+		}
+	else{
+			array_push($errors, "password");
+			echo "incorrect";
+		}
+
+	if (preg_match('/^[0-9]$/',$room))
+		{echo "correct";}
+	else{
+			array_push($errors, "room");
+			echo "incorrect";
+		}
+
+	if (preg_match('/^[0-9]$/',$extension))
+		{echo "correct";}
+	else{
+			array_push($errors, "extension");
+			echo "incorrect";
+		}
+
+	if (preg_match('/^\S+\.(jpg|JPG|png|PNG)/',$picture))
+		{echo "correct";}
+	else{
+			array_push($errors, "picture");
+			echo "incorrect";
+		}
+
+	if($errors)
+	{
+		echo json_encode("$errors");
+	}
+
+	else
+	{
+		$searchArray=user::getSingleUser($email);
+		if(empty($searchArray))
+		{
+			$newUser= new user($name,$email,sha1($password),$room,$admin,$picture,$extension);
+			$newUser->addUser();
+
+		}
+	}
+	
+	
 
  ?>
