@@ -1,16 +1,26 @@
 <?php
-    function manDb ($sql, $dataarr){
-        global $conn;
-        $prep = $conn->prepare($sql);
-        $prep->execute($dataarr);
-        return $prep;
-    }
+    session_start();
+    
+    include_once "../classes/class_order.php";
+    include_once "../classes/class_user.php";
 
-    $dsn="mysql:host=192.168.1.3;dbname=cafeteria";
-    $conn= new PDO($dsn,"Otlobly","iti38");
+    $userId = !empty($_SESSION['userId']) ? $_SESSION['userId'] : "";
+  
+    if ($userId) {
+		if (user::isAdmin($userId)) {
+            echo json_encode(array('rstatus'=>'go', 'link'=>'admin_home.html'));
+    		exit;
+		}
+    }
+    
+	else{
+		echo json_encode(array('rstatus'=>'login'));
+		exit;
+	}
+
     $query = "call my_orders(?, ?, ?)";
-    $dataArr  = array(1, $_REQUEST["datefrom"], $_REQUEST["dateto"]);
-    $prep = manDb($query, $dataArr);
+    $dataArr  = array($userId, $_REQUEST["datefrom"], $_REQUEST["dateto"]);
+    $prep = Order::manDb($query, $dataArr);
     $result = $prep->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
 ?>

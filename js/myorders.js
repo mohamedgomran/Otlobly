@@ -9,6 +9,8 @@ var tableBody = document.getElementById('orders_body');
 function appendIntoTable(row) {
     //tableBody.innerHTML = '';
     tr = document.createElement('tr');
+    tr.setAttribute('id', row["OID"]);
+    delete row["OID"];
     tableBody.appendChild(tr);
     for (var i in row) {
         td = document.createElement('td');
@@ -23,9 +25,19 @@ function handler() {
         if (this.readyState == 4 && this.status == 200) {
             tableBody.innerHTML = '';
             result = JSON.parse(this.responseText);
+            if (result['rstatus']=="login") {
+                location.href = '../pages/login.html';
+                return;
+            }
+            else if (result['rstatus']=="go") {
+                location.href = result["link"];
+                return;
+            }
             for (var i = 0; i < result.length; i++) {
                 if (result[i]["status"] === "processing") {
                     result[i]["action"] = "cancel";
+                } else {
+                    result[i]["action"] = "";
                 }
                 appendIntoTable(result[i]);
             }
