@@ -83,60 +83,22 @@
 			return $prep->fetch(PDO::FETCH_ASSOC);
 		}
 
-		// public static function set_field($Id, $field, $new_value) {
+		public static function get_all_products() {
 			
-		// 	$sql_set_field = "UPDATE cafeteria.products
-		// 	SET
-		// 	? = ?
-		// 	WHERE PID = ?;";
+			$sql_get_all_products = "SELECT * FROM cafeteria.all_products;";
 
-		// 	$parameters = [$field, "$new_value", "$Id"];
-
-		// 	Product::manDb($sql_set_field, $parameters);
-		// }
-
-		// public static function get_field($Id, $field) {
-			
-		// 	$sql_get_field = "SELECT ? FROM cafeteria.products
-		// 	WHERE PID = ?;";
-
-		// 	$parameters = [$field, $Id];
-
-		// 	$prep = Product::manDb($sql_get_field, $parameters);
-		// 	return $prep->fetchAll();
-		// }
-
+			$prep = Product::manDb($sql_get_all_products, array());
+			return $prep->fetchAll(PDO::FETCH_ASSOC);
+		}
 
 		public static function get_available_products() {
 			
-			$sql_get_available_products = "SELECT * FROM cafeteria.all_products;";
+			$sql_get_available_products = "SELECT * FROM cafeteria.all_products WHERE availability=1";
 
 			$prep = Product::manDb($sql_get_available_products, array());
 			return $prep->fetchAll(PDO::FETCH_ASSOC);
 		}
 
 	}
-
-	// print_r(Product::get_available_products());
-
-
-
-	// function manDb ($conn, $sql, $dataarr){
-
-	// 	$prep = $conn->prepare($sql);
-	// 	$prep->execute($dataarr);
-	// 	return $prep;
-	// }
-
-	// $dsn = "mysql:host=192.168.1.3;dbname=cafeteria";
-	// $conn_pdo = new PDO($dsn, 'Otlobly', 'iti38');
-	// $conn_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-	// $sql_add_product = "INSERT INTO cafeteria.products
-	// 		(PID, Pname, P_CID, price, picture, availability)
-	// 		VALUES (?, ?, ?, ?, ?, ?);";
-
-	// manDb($conn_pdo, $sql_add_product, array(13, 'a', 1, 1, 'a', 1));
-
 
 ?>

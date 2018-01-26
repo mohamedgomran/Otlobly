@@ -1,5 +1,6 @@
 var form=document.getElementById('form');
 var pname=document.getElementById('product');
+var select=document.getElementById('select');
 // var nameDiv=document.getElementById('nameDiv')
 // var email=document.getElementById('email');
 // var emailDiv=document.getElementById('emailDiv')
@@ -21,13 +22,36 @@ var pname=document.getElementById('product');
 // var successFlag=false;
 
 
-
+function categoryMan(row)
+{
+	let cname=row['cname'];
+	let CID=row['CID'];
+	let option=document.createElement('option');
+	select.appendChild(option);
+	option.innerHTML=cname;
+	option.value=CID;
+}
 ///////////////ajax response////////////////////
 function ajaxSuccess () 
 {
-  // if 
-  var response = (this.responseText)
-  console.log(response)
+  var response = JSON.parse(this.responseText)
+  if (response["admin"]=="true")
+  	{
+  		form.style.display='block';
+  	}
+  else if (response["admin"]=="false"){
+  	location.href="login.html";
+  }
+  
+else{
+		 if (response["place"]=="category")
+	  	{var rows=response["rows"]
+	  		console.log(rows);
+	  		for (var i = 0; i < rows.length; i++) {
+	  			categoryMan(rows[i]);
+	  		}
+	  };
+	}
 
  //  ////to redirect uer if he is not admin
  //  if(response["status"]==="go")
@@ -129,6 +153,6 @@ function AJAXSubmit (oFormElement) {
 document.addEventListener("DOMContentLoaded", function () {
   	var oReq = new XMLHttpRequest();
  	oReq.onload = ajaxSuccess;
-    oReq.open("post", "../php/get_category.php");
+    oReq.open("post", "../php/admin_check.php");
     oReq.send();
 })

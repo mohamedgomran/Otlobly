@@ -3,6 +3,7 @@
 	session_start();
 	require_once '../classes/dbase.php';
 	require_once '../classes/class_products.php';
+	include_once '../classes/class_user.php';
 	require_once './uploadimg.php';
 	
 
@@ -10,8 +11,6 @@
 	if ($userId) {
 		if (user::isAdmin($userId)) 
 		{
-
-			// echo json_encode(array('status'=>'admin');
 			$pname=!empty($_POST['pname'])?$_POST['pname']:"";
 			$price=!empty($_POST['price'])?$_POST['price']:"";
 			$category=!empty($_POST['category'])?$_POST['category']:"";
