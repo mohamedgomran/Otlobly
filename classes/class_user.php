@@ -14,9 +14,10 @@
 	private $picture;
 	private $extension;
 
-	public function __construct($UserName,$Password,$Room,$Admin=false,$Picture=NULL,$Extension=NULL)
+	public function __construct($UserName,$email,$Password,$Room,$Admin=false,$Picture=NULL,$Extension=NULL)
 	{
 		$this->userName=$UserName;
+		$this->email=$email;
 		$this->password=$Password;
 		$this->room=$Room;
 		$this->admin=$Admin;
@@ -36,8 +37,8 @@
 	public function addUser()
 	{
 		
-		$query = "insert into users values(null,?,?,?,?,?,?)";
-		$parameters=["$this->userName","$this->room","$this->extension","$this->password","$this->picture","$this->admin"];
+		$query = "insert into users values(null,?,?,?,?,?,?,?)";
+		$parameters=["$this->userName","$this->email","$this->room","$this->extension","$this->password","$this->picture","$this->admin"];
 		$this->manDb($query,$parameters);
 	}
 
@@ -58,10 +59,20 @@
 		return $result;
 	}
 
-	static function getSingleUser($id)
+	static function isAdmin($id)
 	{
-		$query = "select * from users where UID=?";
-		$parameters = ["$id"];
+		$query = "select admin from users where UID=?";
+
+		$dataArr  = array($id);
+		$prep = user::manDb($query, $dataArr);
+		$result = $prep->fetch(PDO::FETCH_ASSOC);
+		return $result['admin'];
+	}
+
+	static function getSingleUser($email)
+	{
+		$query = "select * from users where email=?";
+		$parameters = ["$email"];
 		$prep = user::manDb($query, $parameters);
 		$result = $prep->fetch(PDO::FETCH_ASSOC);
 		return $result;
@@ -69,11 +80,12 @@
 	
 	public function editUser($id)
 	{
-		$query="update users set userName=? , room=? , extension=? , password=?, picture=? , admin=? where UID=$id";
-		$parameters=["$this->userName","$this->room","$this->extension","$this->password","$this->picture","$this->admin"];
+		$query="update users set userName=? , email=? , room=? , extension=? , password=?, picture=? , admin=? where UID=$id";
+		$parameters=["$this->userName","$this->email","$this->room","$this->extension","$this->password","$this->picture","$this->admin"];
 		$this->manDb($query,$parameters);
 	}
 
 }
+
 
  ?>

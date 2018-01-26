@@ -13,6 +13,7 @@
 
 
 		public function __construct($Name, $Category, $Price, $Picture_source, $Availability) {
+
 			$this->name = $Name;
 			$this->category = $Category;
 			$this->price = $Price;
@@ -71,8 +72,18 @@
 			$this->manDb($sql_edit_product, $parameters);
 		}
 
+
+		public static function get_available_products() {
+			
+			$sql_get_available_products = "SELECT * FROM cafeteria.all_products;";
+
+			$prep = Product::manDb($sql_get_available_products, array());
+			return $prep->fetchAll(PDO::FETCH_ASSOC);
+		}
+
 	}
 
+	// print_r(Product::get_available_products());
 
 
 
