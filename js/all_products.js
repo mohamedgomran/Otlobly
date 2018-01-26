@@ -2,26 +2,29 @@ var btnAddProduct = document.getElementById('add-product');
 var allProductsContainer = document.getElementById('all-products-tbody');
 
 var arrayOfProducts; // to store the array of products via json by the corresponding php file
-
+var deleteResponse;
 ////////////////////////////////// make AJAX request ///////////////////////////////////////////////////
 var fetchHTTPRequest = new XMLHttpRequest();
 
-if (!fetchHTTPRequest) {
-	alert('Giving up :( Cannot create an XMLHTTP instance');
-}
+function fetchProducts() {
+	
+	if (!fetchHTTPRequest) {
+		alert('Giving up :( Cannot create an XMLHTTP instance');
+	}
 
-fetchHTTPRequest.onreadystatechange = catchContents;
-fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/all_products.php');
-fetchHTTPRequest.send();
+	fetchHTTPRequest.onreadystatechange = catchContents;
+	fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/all_products.php');
+	fetchHTTPRequest.send();
 
-function catchContents() {
-	if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
-		if (fetchHTTPRequest.status === 200) {
-			// alert(fetchHTTPRequest.responseText);
-			arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText);
-			putElementsInTBody();
-		} else {
-			alert('There was a problem with the request.');
+	function catchContents() {
+		if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
+			if (fetchHTTPRequest.status === 200) {
+				// alert(fetchHTTPRequest.responseText);
+				arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText);
+				putElementsInTBody();
+			} else {
+				alert('There was a problem with the request.');
+			}
 		}
 	}
 }
@@ -29,9 +32,12 @@ function catchContents() {
 function putElementsInTBody() {
 	if (arrayOfProducts.length > 0) {
 
-		arrayOfProducts.forEach( function(element, index) {
+		arrayOfProducts.forEach(function(element, index) {
+
+			console.log(element + ' ' + index);
 
 			var parentTr = document.createElement('tr');
+			parentTr.id = arrayOfProducts[index]['PID'];
 
 			var lableTd = document.createElement('td');
 			lableTd.class = 'test', lableTd.textContent = arrayOfProducts[index]['pname'];
@@ -63,12 +69,10 @@ function putElementsInTBody() {
 			var edit_delTd = document.createElement('td');
 			var editAnc = document.createElement('a');
 			editAnc.href = '#', editAnc.textContent = 'Edit';
-			editAnc.id = arrayOfProducts[index]['PID'];
 			var slashSpan = document.createElement('span');
 			slashSpan.textContent = ' / ';
 			var delAnc = document.createElement('a');
 			delAnc.href = '#', delAnc.textContent = 'Delete';
-			delAnc.id = arrayOfProducts[index]['PID'];
 			edit_delTd.appendChild(editAnc);
 			edit_delTd.appendChild(slashSpan);
 			edit_delTd.appendChild(delAnc);
@@ -79,14 +83,12 @@ function putElementsInTBody() {
 	}
 }
 
-
-
-
-
-
-
-
-
+// function removeProduct() {
+// 	var tempCollection = allProductsContainer.getElementsByTagName('tr');
+// 	tempCollection.forEach(function(element) {
+// 		allProductsContainer.removeChild(element);
+// 	});
+// }
 
 
 
@@ -96,25 +98,27 @@ allProductsContainer.addEventListener('click', function(event) {
 
 	if (event.target.textContent == 'Delete') {
 		
-		var btnDel = event.target;
+		var ancDel = event.target;
 
 		////////////////////////////////// make AJAX request ///////////////////////////////////////////////////
-		var fetchHTTPRequest = new XMLHttpRequest();
+		var deleteHTTPRequest = new XMLHttpRequest();
 
-		if (!fetchHTTPRequest) {
+		if (!deleteHTTPRequest) {
 			alert('Giving up :( Cannot create an XMLHTTP instance');
 		}
 
-		fetchHTTPRequest.onreadystatechange = catchContents;
-		fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/all_products.php');
-		fetchHTTPRequest.send();
+		deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
+		deleteHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/delete_product.php');
+	    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	    console.log(ancDel.parentNode.parentNode.id);
+		deleteHTTPRequest.send('productID=' + encodeURIComponent(ancDel.parentNode.parentNode.id));
 
-		function catchContents() {
-			if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
-				if (fetchHTTPRequest.status === 200) {
-					// alert(fetchHTTPRequest.responseText);
-					arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText);
-					putElementsInTBody();
+		function deleteResponseStateCallBack() {
+			if (deleteHTTPRequest.readyState === XMLHttpRequest.DONE) {
+				if (deleteHTTPRequest.status === 200) {
+					// alert(deleteHTTPRequest.responseText);
+					// deleteResponse = JSON.parse(deleteHTTPRequest.responseText);
+					allProductsContainer.removeChild(ancDel.parentNode.parentNode);
 				} else {
 					alert('There was a problem with the request.');
 				}
@@ -123,7 +127,10 @@ allProductsContainer.addEventListener('click', function(event) {
 		// send the request to php file to delete the file
 		
 	} else if (event.target.textContent == 'Edit') {
-		var btnEdit = event.target;
+		var ancEdit = event.target;
 
 	}
 })
+//////////////////////////////////////// main  ///////////////////////////////////////////////////
+
+fetchProducts();
