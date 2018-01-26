@@ -115,6 +115,7 @@ function cancelOrder(id, amount) {
                 total_tr.children[0].children[0].textContent = 'Total = ' + (total_amount-amount) + ' LE'; 
                 if (orderExpand !== undefined && order_row !== undefined) {
                     deleteElement(orderExpand, order_row);
+                    clicked_before = 0;
                 }   
             }
         }
