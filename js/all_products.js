@@ -123,7 +123,7 @@ allProductsContainer.addEventListener('click', function(event) {
 			break;
 
 		default:
-			if (/[A|Una]vailable/.test(event.target.textContent)) {
+			if (/^(A|Una)vailable$/.test(targetAnc.textContent) && targetAnc.tagName == 'A') {
 				////////////////////////////////// make AJAX request ////////////////////////////////////////
 				var availabilityHTTPRequest = new XMLHttpRequest();
 
