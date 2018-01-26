@@ -48,10 +48,4 @@
 		echo json_encode(array('status'=>'error', 'msg'=>'Login info is not correct'));
 	}
 
-
-
-	// echo json_encode($_POST);
-
-
-
 ?>
