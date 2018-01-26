@@ -3,23 +3,25 @@
 	session_start();
 	require_once '../classes/dbase.php';
 	require_once '../classes/class_products.php';
+	include_once '../classes/class_user.php';
 	require_once './uploadimg.php';
+	include_once '/classes/class_category.php';
 	
 
 	$userId = !empty($_SESSION['userId']) ? $_SESSION['userId'] : "";
 	if ($userId) {
 		if (user::isAdmin($userId)) 
 		{
-
-			// echo json_encode(array('status'=>'admin');
 			$pname=!empty($_POST['pname'])?$_POST['pname']:"";
 			$price=!empty($_POST['price'])?$_POST['price']:"";
 			$category=!empty($_POST['category'])?$_POST['category']:"";
 
-			$path = '../img/user/';
+			$path = '../img/product/';
 			$picture=!empty($_FILES['picture']['tmp_name'])?$_FILES['picture']['tmp_name']:"";
 			$img_info = getimagesize($picture)?getimagesize($picture):"";
 
+			$cateArr=category::getCategory();
+			$catNo=count($cateArr);
 			$errors=[];
 
 			if (!preg_match('/^[a-zA-Z ]{2,30}$/',$pname))
@@ -27,25 +29,14 @@
 					array_push($errors, "pname");
 				}
 
-			if (!preg_match('/\S+@\S+\.\S+/',$price1))
+			if (!preg_match('/\S+@\S+\.\S+/',$price))
 			{
-					array_push($errors, "name");
+					array_push($errors, "price");
 			}
 
-			if (!preg_match('/^[a-zA-Z0-9_$@#!%&*^~]{8,}$/',$password) || $password!==$duplPassword)
+			if ($category>$catNo)
 			{
-					array_push($errors, "password");
-			}
-
-			if (!preg_match('/^[0-9]+$/',$room) && $room!=null)
-			{	
-				array_push($errors, "room"); 
-			}
-				
-
-			if (!preg_match('/^[0-9]+$/',$extension) && $extension!=null)
-			{
-					array_push($errors, "extension");
+					array_push($errors, "category");
 			}
 
 			if (!$img_info&&!$picture)
@@ -53,30 +44,28 @@
 				array_push($errors, "picture");
 			}
 			
-			$searchArray=user::getSingleUser($email);
+			$searchArray=Product::get_product($pname);
 			if(!empty($searchArray))
 			{
-				array_push($errors,"email_duplication");
+				array_push($errors,"pname_duplication");
 			}
-
-			
 
 		////check if any errors exist to reply back
 			if($errors)
 			{
-				echo json_encode($errors);
+				echo json_encode(array('status'=>'error','errors'=>$errors));
 			}
 		//// if no errors then send data to database
 			else
 			{
 
-				$newUser= new user($name,$email,sha1($password),$room,$admin,$picture,$extension);
-				$newUser->addUser();
-				$userId = user::getSingleUser($email)['UID'];
-				$success=["success", $userId];
+				$newProduct= new Product($pname, $category, $price, $picture,1);
+				$newProduct->add();
+				$productId = Product::get_product($pname)['PID'];
+				$success=["success", $productId];
 				echo json_encode($success);
 				if ($img_info) {
-					uploadimg($picture, $img_info, $path, $userId);
+					uploadimg($picture, $img_info, $path, $productId);
 				}
 				
 			}
