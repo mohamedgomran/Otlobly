@@ -1,10 +1,4 @@
 var productsDiv = document.getElementById('products')
-              // <div class="drinkdiv m-4">
-              //     <div class="drinkimg"><img src="../img/Drink.ico" class="rounded-circle imgindiv"></div>
-              //     <div class="dname text-center">Tea</div>
-              //     <div class="rounded-circle price align-middle text-center">20 LE</div>
-              // </div>
-
 
 function appendIntoTable(row) {
     var parentDiv = document.createElement('div')

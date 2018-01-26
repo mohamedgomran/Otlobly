@@ -35,10 +35,14 @@ function categoryMan(row)
 function ajaxSuccess () 
 {
   var response = JSON.parse(this.responseText)
-  console.log(response);
+ 
   if (response["admin"]=="true")
   	{
   		form.style.display='block';
+  		var Req = new XMLHttpRequest();
+ 		Req.onload = ajaxSuccess;
+    	Req.open("post", "../php/get_category.php");
+    	Req.send();
   	}
   else if (response['admin']=="false"){
   	location.href="login.html";
@@ -53,13 +57,6 @@ else{
 	  		}
 	  };
 	}
-
- //  ////to redirect uer if he is not admin
- //  if(response["status"]==="go")
- //  	{
- //  		location.href=response["link"];
- //  	}
-
  //  else{	
  //  ///to remove the success message on beginning of every json request to prevent duplication
  //  if(successFlag==true)
@@ -80,47 +77,46 @@ else{
  //  	}
  //  else{
  //  	///// messages of errors according to server
-	//   if(response.indexOf("pname")!=-1)
-	//   {
-	//   	if(nameFlag===false)
-	// 	{
-	// 		console.log("wrong name")
-	// 	  	nameErr=document.createElement('p');
-	// 		nameDiv.appendChild(nameErr);
-	// 		nameErr.innerHTML="*Product name name must be between 2 and 30 alphabetical or white space"
-	// 		nameFlag=true
-	// 	}
+	  if(response.indexOf("pname")!=-1)
+	  {
+	  	if(nameFlag===false)
+		{
+			console.log("wrong name")
+		  	nameErr=document.createElement('p');
+			nameDiv.appendChild(nameErr);
+			nameErr.innerHTML="*Product name name must be between 2 and 30 alphabetical or white space"
+			nameFlag=true
+		}
 	  	
-	//   }	
+	  }	
 
-	//   if(response.indexOf("price")!=-1)
-	//   {
-	//   	if(priceFlag===false)
-	// 	{
-	// 		console.log("wrong price")
-	// 	  	priceErr=document.createElement('p');
-	// 		priceDiv.appendChild(priceErr);
-	// 		priceErr.innerHTML="*Each product must have price"
-	// 		priceFlag=true
-	// 	}
+	  if(response.indexOf("price")!=-1)
+	  {
+	  	if(priceFlag===false)
+		{
+			console.log("wrong price")
+		  	priceErr=document.createElement('p');
+			priceDiv.appendChild(priceErr);
+			priceErr.innerHTML="*Each product must have price"
+			priceFlag=true
+		}
 	  	
-	//   }
+	  }
 	  	
 
-	//   if(response.indexOf("category")!=-1)
-	//   {
-	//   	if(roomFlag===false)
-	// 	{
-	// 		console.log("wrong category")
-	// 	  	categoryErr=document.createElement('p');
-	// 		categoryDiv.appendChild(categoryErr);
-	// 		categoryErr.innerHTML="*Category is missing";
-	// 		categoryFlag=true;
-	// 	}
- //  	  }
- //  	}	
-  // }	
-}
+	  if(response.indexOf("category")!=-1)
+	  {
+	  	if(roomFlag===false)
+		{
+			console.log("wrong category")
+		  	categoryErr=document.createElement('p');
+			categoryDiv.appendChild(categoryErr);
+			categoryErr.innerHTML="*Category is missing";
+			categoryFlag=true;
+		}
+  	  }
+  	}	
+
   
   
 
