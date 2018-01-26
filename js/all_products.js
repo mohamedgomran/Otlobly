@@ -104,7 +104,6 @@ allProductsContainer.addEventListener('click', function(event) {
 			deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
 			deleteHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/product_delete.php');
 		    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		    console.log(targetAnc.parentNode.parentNode.id);
 			deleteHTTPRequest.send('productID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
 
 			function deleteResponseStateCallBack() {
@@ -123,7 +122,7 @@ allProductsContainer.addEventListener('click', function(event) {
 			break;
 
 		default:
-			if (/[A|Una]vailable/.test(event.target.textContent)) {
+			if (/^(A|Una)vailable$/.test(targetAnc.textContent) && targetAnc.tagName == 'A') {
 				////////////////////////////////// make AJAX request ////////////////////////////////////////
 				var availabilityHTTPRequest = new XMLHttpRequest();
 
@@ -133,7 +132,6 @@ allProductsContainer.addEventListener('click', function(event) {
 				availabilityHTTPRequest.onreadystatechange = availabilityResponseStateCallBack;
 				availabilityHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/product_change_availability.php');
 			    availabilityHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			    console.log(targetAnc.parentNode.parentNode.id);
 				availabilityHTTPRequest.send('productID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
 
 				function availabilityResponseStateCallBack() {
