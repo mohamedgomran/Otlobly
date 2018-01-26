@@ -1,27 +1,32 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//???????????????????????????????????????????????????????????????????????????????????????????????????//
+//?????????????????? needs to check the identity of whoever sends these requests ????????????????????//
+//???????????????????????????????????????????????????????????????????????????????????????????????????//
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 var btnAddProduct = document.getElementById('add-product');
 var allProductsContainer = document.getElementById('all-products-tbody');
 
 var arrayOfProducts; // to store the array of products via json by the corresponding php file
-var deleteResponse;
+var deleteResponse; // response (not used currently)
+var availabilityResponse; // response (not used currently)
 ////////////////////////////////// make AJAX request ///////////////////////////////////////////////////
 var fetchHTTPRequest = new XMLHttpRequest();
 
 function fetchProducts() {
 	
-	if (!fetchHTTPRequest) {
+	if (!fetchHTTPRequest)
 		alert('Giving up :( Cannot create an XMLHTTP instance');
-	}
 
 	fetchHTTPRequest.onreadystatechange = catchContents;
-	fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/all_products.php');
+	fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/product_get_all.php');
 	fetchHTTPRequest.send();
 
 	function catchContents() {
 		if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
-			if (fetchHTTPRequest.status === 200) {
+			if (fetchHTTPRequest.status === 200) { // if success
 				// alert(fetchHTTPRequest.responseText);
-				arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText);
-				putElementsInTBody();
+				arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText); // receive response into array
+				putElementsInTBody(); // function to loop on products array and create rows
 			} else {
 				alert('There was a problem with the request.');
 			}
@@ -33,8 +38,6 @@ function putElementsInTBody() {
 	if (arrayOfProducts.length > 0) {
 
 		arrayOfProducts.forEach(function(element, index) {
-
-			console.log(element + ' ' + index);
 
 			var parentTr = document.createElement('tr');
 			parentTr.id = arrayOfProducts[index]['PID'];
@@ -83,54 +86,71 @@ function putElementsInTBody() {
 	}
 }
 
-// function removeProduct() {
-// 	var tempCollection = allProductsContainer.getElementsByTagName('tr');
-// 	tempCollection.forEach(function(element) {
-// 		allProductsContainer.removeChild(element);
-// 	});
-// }
-
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 allProductsContainer.addEventListener('click', function(event) {
 
-	if (event.target.textContent == 'Delete') {
-		
-		var ancDel = event.target;
+	var targetAnc = event.target;
 
-		////////////////////////////////// make AJAX request ///////////////////////////////////////////////////
-		var deleteHTTPRequest = new XMLHttpRequest();
+	switch (targetAnc.textContent) {
+		case 'Delete':
+			////////////////////////////////// make AJAX request ////////////////////////////////////////////
+			var deleteHTTPRequest = new XMLHttpRequest();
 
-		if (!deleteHTTPRequest) {
-			alert('Giving up :( Cannot create an XMLHTTP instance');
-		}
+			if (!deleteHTTPRequest)
+				alert('Giving up :( Cannot create an XMLHTTP instance');
 
-		deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
-		deleteHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/delete_product.php');
-	    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	    console.log(ancDel.parentNode.parentNode.id);
-		deleteHTTPRequest.send('productID=' + encodeURIComponent(ancDel.parentNode.parentNode.id));
+			deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
+			deleteHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/product_delete.php');
+		    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		    console.log(targetAnc.parentNode.parentNode.id);
+			deleteHTTPRequest.send('productID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
 
-		function deleteResponseStateCallBack() {
-			if (deleteHTTPRequest.readyState === XMLHttpRequest.DONE) {
-				if (deleteHTTPRequest.status === 200) {
-					// alert(deleteHTTPRequest.responseText);
-					// deleteResponse = JSON.parse(deleteHTTPRequest.responseText);
-					allProductsContainer.removeChild(ancDel.parentNode.parentNode);
-				} else {
-					alert('There was a problem with the request.');
+			function deleteResponseStateCallBack() {
+				if (deleteHTTPRequest.readyState === XMLHttpRequest.DONE) {
+					if (deleteHTTPRequest.status === 200) {
+						allProductsContainer.removeChild(targetAnc.parentNode.parentNode);
+					} else {
+						alert('There was a problem with the request.');
+					}
 				}
 			}
-		}
-		// send the request to php file to delete the file
-		
-	} else if (event.target.textContent == 'Edit') {
-		var ancEdit = event.target;
+			break;
+			
+		case 'Edit':
+			// statements_1
+			break;
 
+		default:
+			if (/[A|Una]vailable/.test(event.target.textContent)) {
+				////////////////////////////////// make AJAX request ////////////////////////////////////////
+				var availabilityHTTPRequest = new XMLHttpRequest();
+
+				if (!availabilityHTTPRequest)
+					alert('Giving up :( Cannot create an XMLHTTP instance');
+
+				availabilityHTTPRequest.onreadystatechange = availabilityResponseStateCallBack;
+				availabilityHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/product_change_availability.php');
+			    availabilityHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			    console.log(targetAnc.parentNode.parentNode.id);
+				availabilityHTTPRequest.send('productID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
+
+				function availabilityResponseStateCallBack() {
+					if (availabilityHTTPRequest.readyState === XMLHttpRequest.DONE) {
+						if (availabilityHTTPRequest.status === 200) {
+							targetAnc.textContent = targetAnc.textContent == 'Available' ? 'Unavailable' : 'Available';
+						} else {
+							alert('There was a problem with the request.');
+						}
+					}
+				}
+			}
+			break;
 	}
-})
+
+
+});
 //////////////////////////////////////// main  ///////////////////////////////////////////////////
 
 fetchProducts();
