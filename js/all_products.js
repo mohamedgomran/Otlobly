@@ -55,8 +55,9 @@ function putElementsInTBody() {
 			srcDiv.setAttribute('class', 'productimgdiv');
 			var srcImg = document.createElement('img');
 			srcImg.setAttribute('class', 'rounded imgindiv');
-			srcImg.src = arrayOfProducts[index]['picture'];
-			srcTd.appendChild(srcDiv.appendChild(srcImg));
+			srcImg.src = "../img/product/"+arrayOfProducts[index]['PID']+".jpg";
+			srcDiv.appendChild(srcImg);
+			srcTd.appendChild(srcDiv);
 			parentTr.appendChild(srcTd);
 
 			var availTd = document.createElement('td');
