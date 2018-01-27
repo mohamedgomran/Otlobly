@@ -20,6 +20,8 @@ var roomFlag=false;
 var extFlag=false;
 var successFlag=false;
 
+var userInfo;
+
 
 username.addEventListener("input",function() {
 
@@ -270,15 +272,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			alert('Giving up :( Cannot create an XMLHTTP instance');
 
 		fetchHTTPRequest.onreadystatechange = catchContents;
-		fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/product_get_all.php');
-		fetchHTTPRequest.send();
+		fetchHTTPRequest.open('POST', 'http://localhost/Otlobly/php/user_get_single.php');
+	    fetchHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		fetchHTTPRequest.send('UserId=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
 
 		function catchContents() {
 			if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
 				if (fetchHTTPRequest.status === 200) { // if success
 					// alert(fetchHTTPRequest.responseText);
-					arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText); // receive response into array
-					putElementsInTBody(); // function to loop on products array and create rows
+					userInfo = JSON.parse(fetchHTTPRequest.responseText); // receive response into array
+					putElementsInForm(); // function to loop on products array and create rows
 				} else {
 					alert('There was a problem with the request.');
 				}
@@ -286,8 +289,4 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	}
 
-  	var oReq = new XMLHttpRequest();
- 	oReq.onload = ajaxSuccess;
-    oReq.open("post", "../php/add_user.php");
-    oReq.send();
 });
