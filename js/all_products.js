@@ -18,7 +18,7 @@ function fetchProducts() {
 		alert('Giving up :( Cannot create an XMLHTTP instance');
 
 	fetchHTTPRequest.onreadystatechange = catchContents;
-	fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/product_get_all.php');
+	fetchHTTPRequest.open('GET', 'http://localhost/Otlobly/php/product_get_all.php');
 	fetchHTTPRequest.send();
 
 	function catchContents() {
@@ -102,7 +102,7 @@ allProductsContainer.addEventListener('click', function(event) {
 				alert('Giving up :( Cannot create an XMLHTTP instance');
 
 			deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
-			deleteHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/product_delete.php');
+			deleteHTTPRequest.open('POST', 'http://localhost/Otlobly/php/product_delete.php');
 		    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			deleteHTTPRequest.send('productID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
 
@@ -130,7 +130,7 @@ allProductsContainer.addEventListener('click', function(event) {
 					alert('Giving up :( Cannot create an XMLHTTP instance');
 
 				availabilityHTTPRequest.onreadystatechange = availabilityResponseStateCallBack;
-				availabilityHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/product_change_availability.php');
+				availabilityHTTPRequest.open('POST', 'http://localhost/Otlobly/php/product_change_availability.php');
 			    availabilityHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 				availabilityHTTPRequest.send('productID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
 

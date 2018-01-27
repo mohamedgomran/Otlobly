@@ -14,8 +14,11 @@
 		echo json_encode(array('rstatus'=>'login'));
 		exit;
 	}
-
+	$userRow=user::getSingleUserById($userId);
+	$name=$userRow['userName'];
 	$res = Product::get_available_products();
+	array_push($res,$name);
+	array_push($res,$userId);	
 	echo json_encode($res);
 
  ?>
