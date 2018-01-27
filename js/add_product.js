@@ -2,26 +2,40 @@ var form=document.getElementById('form');
 var pname=document.getElementById('product');
 var select=document.getElementById('select');
 var pnameDiv=document.getElementById('nameDiv')
-var email=document.getElementById('email');
-// var emailDiv=document.getElementById('emailDiv')
-// var password=document.getElementById('password');
-// var passDiv=document.getElementById('passDiv');
-// var conf_pass=document.getElementById('confirm_password');
-// var conf_passDiv=document.getElementById('confirm_passwordDiv');
-// var room=document.getElementById('room_no');
-// var roomDiv=document.getElementById('roomDiv');
-// var ext=document.getElementById('ext');
-// var extDiv=document.getElementById('extDiv');
-// var superDiv=document.getElementById('superDiv');
-var nameFlag=false;
+var priceDiv=document.getElementById('priceDiv');
+var categoryDiv=document.getElementById('categoryDiv')
+var price=document.getElementById('price');
+
+var pnameFlag=false;
 var priceFlag=false;
 var categoryFlag=false;
-// var conf_passFlag=false;
-// var roomFlag=false;
-// var extFlag=false;
 var successFlag=false;
 
+pname.addEventListener("input",function() {
 
+	if (pnameFlag)
+	{
+		pnameDiv.removeChild(pnameErr)
+		pnameFlag=false;
+	}
+});
+
+price.addEventListener("input",function() {
+
+	if (priceFlag)
+	{
+		priceDiv.removeChild(priceErr)
+		priceFlag=false;
+	}
+});
+select.addEventListener("input",function() {
+
+	if (categoryFlag)
+	{
+		categoryDiv.removeChild(categoryErr)
+		categoryFlag=false;
+	}
+});
 function categoryMan(row)
 {
 	let cname=row['cname'];
@@ -32,19 +46,15 @@ function categoryMan(row)
 	option.value=CID;
 }
 ///////////////ajax response////////////////////
-function ajaxSuccess () 
+function ajaxSuccess ()
 {
   var response = JSON.parse(this.responseText)
- 
+  console.log(response)
   if (response["admin"]=="true")
   	{
   		form.style.display='block';
-  		var Req = new XMLHttpRequest();
- 		Req.onload = ajaxSuccess;
-    	Req.open("post", "../php/get_category.php");
-    	Req.send();
   	}
-  else if (response['admin']=="false")
+   if (response['admin']=="false")
   	{
   	location.href="login.html";
   	}
@@ -64,39 +74,27 @@ function ajaxSuccess ()
   ///to remove the success message on beginning of every json request to prevent duplication
   if(successFlag==true)
 	{
-		successFlag==false;
-		superDiv.removeChild(success)
+		successFlag=false;
+		form.removeChild(success)
 	}
-
-	////to view a Success message
-  if (response.indexOf("success")!=-1)
+	if (response['status']=='error') 
   	{
-  		console.log("success")
-	  	success=document.createElement('h3');
-		superDiv.appendChild(success);
-		success.innerHTML="User was added Successfully"
-		successFlag=true;
-		document.getElementById("form").reset();
-  	}
-  if (response['status'=='error']) 
-  	{
-  		errorsArr=response['errors']
-  	};
- //  	///// messages of errors according to server
+  	  console.log("errors found")
+  	  errorsArr=response['errors']
 	  if(errorsArr.indexOf("pname")!=-1)
 	  {
-	  	if(nameFlag===false)
+	  	if(pnameFlag===false)
 		{
 			console.log("wrong name")
-		  	nameErr=document.createElement('p');
-			nameDiv.appendChild(nameErr);
-			nameErr.innerHTML="*Product name name must be between 2 and 30 alphabetical or white space"
-			nameFlag=true
+		  	pnameErr=document.createElement('p');
+			pnameDiv.appendChild(pnameErr);
+			pnameErr.innerHTML="*Product name must be between 2 and 30 alphabetical or white space"
+			pnameFlag=true
 		}
 	  	
 	  }	
 
-	  if(response.indexOf("price")!=-1)
+	  if(errorsArr.indexOf("price")!=-1)
 	  {
 	  	if(priceFlag===false)
 		{
@@ -110,9 +108,9 @@ function ajaxSuccess ()
 	  }
 	  	
 
-	  if(response.indexOf("category")!=-1)
+	  if(errorsArr.indexOf("category")!=-1)
 	  {
-	  	if(roomFlag===false)
+	  	if(categoryFlag===false)
 		{
 			console.log("wrong category")
 		  	categoryErr=document.createElement('p');
@@ -121,10 +119,31 @@ function ajaxSuccess ()
 			categoryFlag=true;
 		}
   	  }
-  	}	
 
+  	  if(errorsArr.indexOf("pname_duplication")!=-1)
+	  {
+	  	if(pnameFlag===false)
+		{
+			console.log("wrong name")
+		  	pnameErr=document.createElement('p');
+			pnameDiv.appendChild(pnameErr);
+			pnameErr.innerHTML="*This Product name is already taken, choose another one"
+			pnameFlag=true
+		}
+	  }
+	}
+	////to view a Success message
+  if (response["status"]=="success")
+  	{
+  		console.log("success")
+	  	success=document.createElement('h3');
+		form.appendChild(success);
+		success.innerHTML="Product was added Successfully"
+		successFlag=true;
+		document.getElementById("form").reset();
+  	}
   
-  
+  	}
 
 var oReq = new XMLHttpRequest();
 
@@ -158,4 +177,11 @@ document.addEventListener("DOMContentLoaded", function () {
  	oReq.onload = ajaxSuccess;
     oReq.open("post", "../php/admin_check.php");
     oReq.send();
+})
+
+select.addEventListener("focus", function() {
+	var Req = new XMLHttpRequest();
+ 		Req.onload = ajaxSuccess;
+    	Req.open("post", "../php/get_category.php");
+    	Req.send();
 })

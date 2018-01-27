@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <title>Edit User</title>
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css"> <!-- bootstrap default styling file-->
+    <link rel="stylesheet" href="../css/myorders.css">
+</head>
+
+<body>
+
+    <div class="container" id="superDiv" style="display: block;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="admin_home.html">Otlobly</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse position-relative" id="navbarNav">
+                <ul class="navbar-nav">
+                	<li class="nav-item">
+                	    <a class="nav-link" href="all_products.html">Products</a>
+                	</li>
+
+                	<li class="nav-item">
+                	    <a class="nav-link" href="users.html">Users</a>
+                	</li>
+
+                	<li class="nav-item ">
+                	    <a class="nav-link" href="admin_latest_order.html">Manual Order</a>
+                	</li>
+
+                	<li class="nav-item ">
+                	    <a class="nav-link" href="checks.html">Checks</a>
+                	</li>
+
+                    <div class="row position-absolute right h-100">
+                        <div class="col-md-4">
+                            <img src="../img/ninja.png" class="img-thumbnail imgindiv">
+                        </div>
+
+                        <div class="col-md-8 px-2">
+                            <p>UserName</p>
+                        </div>
+                    </div>
+
+                </ul>
+            </div>
+        </nav>
+
+        <div class="row m-3">
+            <h4>Edit User</h4></div>
+
+        <form id="form" action="../php/add_user.php" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this) ;return false;">
+            <div class="form-group row">
+                <label for="name" class="col-2 col-form-label">Name</label>
+                <div class="col-3" id="nameDiv">
+                    <input type="text" class="form-control position-relative" id="name" name="name" required value="">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-2 col-form-label">Email</label>
+                <div class="col-3" id="emailDiv">
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-2 col-form-label">Password</label>
+                <div class="col-3" id="passDiv">
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+            </div>
+            <div class="form-group row" id="confirm_passwordDiv">
+                <label for="confirm_password" class="col-2 col-form-label">Confirm Password</label>
+                <div class="col-3">
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                </div>
+            </div>
+            <div class="form-group row" id="roomDiv">
+                <label for="room_no" class="col-2 col-form-label">Room No.</label>
+                <div class="col-3">
+                    <input type="text" class="form-control" id="room_no" name="room_no">
+                </div>
+            </div>
+            <div class="form-group row" id="extDiv">
+                <label for="ext" class="col-2 col-form-label">Ext.</label>
+                <div class="col-3">
+                    <input type="text" class="form-control" id="ext" name="ext">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="picture" class="col-2 col-form-label">Profile Picture</label>
+                <div class="col-3">
+                    <input type="file" class="form-control" id="picture" name="picture">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <button type="submit" class="btn btn-default" id="save">Save</button>
+                    <button type="Reset" class="btn btn-default">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="../js/edit_user.js"></script>
+</body>
+
+</html>

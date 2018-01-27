@@ -1,9 +1,28 @@
 <?php
 
+	function upload($picture, $img_info, $path, $userId){
+
+		$width = $img_info[0];
+		$height = $img_info[1];
+		switch ($img_info[2]) {
+	  		case IMAGETYPE_GIF  : $src = imagecreatefromgif($picture);  break;
+	  		case IMAGETYPE_JPEG : $src = imagecreatefromjpeg($picture); break;
+	  		case IMAGETYPE_PNG  : $src = imagecreatefrompng($picture);  break;
+	  		case IMAGETYPE_JPG  : $src = imagecreatefromjpeg($picture);  break;
+	  		case IMAGETYPE_BMP  : $src = imagecreatefrombmp($picture);  break;
+		default : die("Unknown filetype");
+		}
+	
+		$tmp = imagecreatetruecolor(200, 200);
+		imagecopyresampled($tmp, $src, 0, 0, 0, 0, 200, 200, $width, $height);
+		$dst = $path . $userId . ".jpg";
+		imagejpeg($tmp, $dst, 100);
+	}
+	
+
 	session_start();
 	require_once '../classes/dbase.php';
 	require_once '../classes/class_user.php';
-	require_once './uploadimg.php';
 	$userId = !empty($_SESSION['userId']) ? $_SESSION['userId'] : "";
 	if ($userId) {
 		if (user::isAdmin($userId)) 
@@ -78,7 +97,8 @@
 				$success=["success", $userId];
 				echo json_encode($success);
 				if ($img_info) {
-					uploadimg($picture, $img_info, $path, $userId);
+					upload($picture, $img_info, $path, $userId);
+					
 				}
 				
 			}

@@ -1,4 +1,94 @@
+var room=document.getElementById('select');
+
+room.addEventListener("focus", function() {
+	var Req = new XMLHttpRequest();
+ 		Req.onload = ajaxSuccess;
+    	Req.open("post", "../php/get_rooms.php");
+    	Req.send();
+})
+
+function roomManp($roomNo)
+{
+	let option=document.createElement('option');
+	room.appendChild(option);
+	option.innerHTML=$roomNo;
+	option.value=$roomNo;
+}
+
+var delRow = function (e) {
+	if(e.target.parentElement.parentElement.children.length==1){
+		document.getElementById('form').style.display = "none"
+	}
+	e.target.parentElement.remove()
+}
+
+var exist = function (parent, product) {
+	for (var i in parent.children) {
+		if (parent.children.hasOwnProperty(i)) {
+			if(parent.children[i].id==product){
+				return parent.children[i]
+			}
+		}
+	}
+	return 0
+}
+
+var addToOrder = function (e) {
+	if (e.target.className=="drinkdiv m-4") {
+		var mainDiv = document.getElementById('orderlist')
+		var form = document.getElementById('form')
+		if (form.style.display == "none") {form.style.display = "block"}
+
+		if (productRow = exist(mainDiv,"p_"+e.target.id)) {
+			productRow.children[1].value++
+			productRow.children[2].value = parseInt(productRow.children[2].value) + parseInt(e.target.children[2].innerHTML.split(" ")[0])
+
+			return
+		}
+
+	    var parentDiv = document.createElement('div')
+    	parentDiv.setAttribute('class', "border row m-1")
+    	parentDiv.setAttribute('id', "p_"+e.target.id)
+
+
+	 	var productName = document.createElement('div')
+	    productName.setAttribute("class" ,"col-4")
+	    productName.innerHTML = e.target.children[1].innerHTML
+
+
+	 	var productInput = document.createElement('input')
+	    productInput.setAttribute("class" ,"col-3")
+	    productInput.setAttribute("type" ,"number")
+	    productInput.setAttribute("name" ,"p_"+e.target.id)
+	    productInput.setAttribute("value" , "1")
+	    productInput.setAttribute("min" , "1")
+	    productInput.setAttribute("oninput" , "output_"+e.target.id+".value=this.value*"+e.target.children[2].innerHTML.split(" ")[0])
+
+	 	var productOutput = document.createElement('input')
+	    productOutput.setAttribute("class" ,"col-3")
+	    productOutput.setAttribute("type" ,"output")
+	    productOutput.setAttribute("value" ,e.target.children[2].innerHTML.split(" ")[0])
+	    productOutput.setAttribute("name" ,"output_"+e.target.id)
+	    productOutput.setAttribute("for" ,"p_"+e.target.id)
+
+	    var delButton = document.createElement('button')
+	    delButton.setAttribute("class" ,"btn")
+	    delButton.setAttribute("type" ,"button")
+	    delButton.addEventListener('click', delRow)
+	    delButton.innerHTML = "X"
+
+	    parentDiv.appendChild(productName)
+	    parentDiv.appendChild(productInput)
+	    parentDiv.appendChild(productOutput)
+	    parentDiv.appendChild(delButton)
+
+	    mainDiv.insertBefore(parentDiv, mainDiv.children[0])
+
+	}
+}
+
 var productsDiv = document.getElementById('products')
+productsDiv.addEventListener('click', addToOrder)
 
 function appendIntoTable(row) {
     var parentDiv = document.createElement('div')
@@ -29,16 +119,24 @@ function appendIntoTable(row) {
 
 }
 
-
-
 function ajaxSuccess () {
 
-	var response = (this.responseText)
-  	console.log(response);
+	var response = JSON.parse(this.responseText)
+	if (response['get']=='room')
+		{
+			let allRooms=response['rooms'];
+			for (var i = 0; i < allRooms.length; i++) {
+				roomManp(allRooms[i]['room'])
+			};
+		}
 	if (response['rstatus']=="error") {
 	}
 	else if (response['rstatus']=="login") {
 		location.href = '../pages/login.html'
+	}
+	else if (response['rstatus']=="submitted") {
+		// location.href = '../pages/login.html'
+		console.log('aaaaaaaaaaaaaaa')
 	}
 	else {
 		for (i in response) {

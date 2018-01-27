@@ -12,7 +12,7 @@
 	
 		# order's constructor
 		# parameters: order's status, order's room and order notes
-		public function __construct($status, $room, $notes) {
+		public function __construct($room, $notes, $status="processing") {
 			$this->status = $status;
 			$this->room = $room;
 			$this->notes = $notes;

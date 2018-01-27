@@ -104,7 +104,7 @@
 			$sql_get_all_products = "SELECT * FROM products where pname=?;";
 
 			$prep = Product::manDb($sql_get_all_products, array($prod));
-			return $prep->fetchAll(PDO::FETCH_ASSOC);
+			return $prep->fetch(PDO::FETCH_ASSOC);
 		}
 
 	}
