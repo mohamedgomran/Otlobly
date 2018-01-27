@@ -139,7 +139,11 @@ function ajaxSuccess () {
 		mainDiv.innerHTML=""
 		document.getElementById('form').style.display = 'none'
 	}
-	else {
+	else { 
+		var Id=response.pop();
+		var Name=response.pop();
+		document.getElementById('userImg').src="../img/user/"+Id+".jpg";
+		document.getElementById('userName').innerHTML=Name;
 		for (i in response) {
 			appendIntoTable(response[i])
 		}

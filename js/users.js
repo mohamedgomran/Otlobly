@@ -18,7 +18,7 @@ function fetchUsers() {
 		alert('Giving up :( Cannot create an XMLHTTP instance');
 
 	fetchHTTPRequest.onreadystatechange = catchContents;
-	fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/user_get_all.php');
+	fetchHTTPRequest.open('GET', 'http://localhost/Otlobly/php/user_get_all.php');
 	fetchHTTPRequest.send();
 
 	function catchContents() {
@@ -96,7 +96,7 @@ allUsersContainer.addEventListener('click', function(event) {
 				alert('Giving up :( Cannot create an XMLHTTP instance');
 
 			deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
-			deleteHTTPRequest.open('POST', 'http://192.168.1.3/Otlobly/php/user_delete.php');
+			deleteHTTPRequest.open('POST', 'http://localhost/Otlobly/php/user_delete.php');
 		    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    console.log(targetAnc.parentNode.parentNode.id);
 			deleteHTTPRequest.send('userID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
@@ -113,7 +113,7 @@ allUsersContainer.addEventListener('click', function(event) {
 			break;
 			
 		case 'Edit':
-			window.location.href = "http://192.168.1.3/Otlobly/pages/edit_user.html?UID=" + targetAnc.parentNode.parentNode.id;
+			window.location.href = "http://localhost/Otlobly/pages/edit_user.html?UID=" + targetAnc.parentNode.parentNode.id;
 			break;
 	}
 
