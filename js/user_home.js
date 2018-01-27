@@ -135,8 +135,9 @@ function ajaxSuccess () {
 		location.href = '../pages/login.html'
 	}
 	else if (response['rstatus']=="submitted") {
-		// location.href = '../pages/login.html'
-		console.log('aaaaaaaaaaaaaaa')
+		var mainDiv = document.getElementById('orderlist')
+		mainDiv.innerHTML=""
+		document.getElementById('form').style.display = 'none'
 	}
 	else {
 		for (i in response) {
