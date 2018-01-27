@@ -43,7 +43,7 @@ function putElementsInTBody() {
 			parentTr.id = arrayOfUsers[index]['UID'];
 
 			var nameTd = document.createElement('td');
-			nameTd.textContent = arrayOfUsers[index]['userName'];
+			nameTd.textContent = arrayOfUsers[index]['name'];
 			parentTr.appendChild(nameTd);
 
 			var roomTd = document.createElement('td');
@@ -113,7 +113,7 @@ allUsersContainer.addEventListener('click', function(event) {
 			break;
 			
 		case 'Edit':
-			// statements_1
+			window.location.href = "http://192.168.1.3/Otlobly/pages/edit_user.html?UID=" + targetAnc;
 			break;
 	}
 
