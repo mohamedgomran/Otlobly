@@ -113,7 +113,7 @@ allUsersContainer.addEventListener('click', function(event) {
 			break;
 			
 		case 'Edit':
-			// statements_1
+			window.location.href = "http://192.168.1.3/Otlobly/pages/edit_user.html?UID=" + targetAnc;
 			break;
 	}
 
