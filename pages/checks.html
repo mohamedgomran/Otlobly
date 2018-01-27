@@ -3,12 +3,13 @@
 <head>
     <title>Checks</title>
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css"> <!-- bootstrap default styling file-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- bootstrap default styling file-->
     <link rel="stylesheet" href="../css/myorders.css">
-    
+
 </head>
 
-<body>
+<body onload="usersTotalAmount();">
 
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,22 +20,21 @@
 
             <div class="collapse navbar-collapse position-relative" id="navbarNav">
                 <ul class="navbar-nav">
-                	<li class="nav-item">
-                	    <a class="nav-link" href="all_products.html">Products</a>
-                	</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="all_products.html">Products</a>
+                    </li>
 
-                	<li class="nav-item">
-                	    <a class="nav-link" href="users.html">Users</a>
-                	</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="users.html">Users</a>
+                    </li>
 
-                	<li class="nav-item ">
-                	    <a class="nav-link" href="admin_latest_order.html">Manual Order</a>
-                	</li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="admin_latest_order.html">Manual Order</a>
+                    </li>
 
-                	<li class="nav-item active">
-                	    <a class="nav-link" href="checks.html">Checks</a>
-                	</li>
-
+                    <li class="nav-item active">
+                        <a class="nav-link" href="checks.html">Checks</a>
+                    </li>
 
                     <div class="row position-absolute right h-100">
                         <div class="col-md-4">
@@ -54,24 +54,22 @@
             <h4>Checks</h4></div>
         <div class="row m-3 justify-content-md-center">
             <div class="col-2 m-3">
-                <input id="datefrom" type="date">
+                <input id="datefrom" type="date" oninput="usersTotalAmount();">
             </div>
             <div class="col-2 m-3">
-                <input id="dateto" type="date">
+                <input id="dateto" type="date" oninput="usersTotalAmount();">
             </div>
         </div>
-        <form action="" method="post">
-            <div class="form-group row">
-                <div class="col-3">
-                    <select class="form-control" name="category">
-                        <option>User</option>
-                        <option>Gemy</option>
-                        <option>Omran</option>
-                        <option>Hassan</option>
-                    </select>
-                </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <select class="form-control" name="category">
+                    <option>User</option>
+                    <option>Gemy</option>
+                    <option>Omran</option>
+                    <option>Hassan</option>
+                </select>
             </div>
-        </form>
+        </div>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -79,56 +77,14 @@
                     <th scope="col">Total amount</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <a href="#">+</a> Mohamed Gamal
-                    </td>
-                    <td>110</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#">+</a> Mohamed Omran
-                    </td>
-                    <td>500</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#">-</a> Mohamed Hassan
-                    </td>
-                    <td>1000</td>
-                </tr>
+            <tbody id="users_amounts">
             </tbody>
         </table>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Order Date</th>
-                    <th scope="col">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <a href="#">+</a> 0000/00/00 00:00 AM
-                    </td>
-                    <td>55 EGP</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#">+</a> 0000/00/00 00:00 AM
-                    </td>
-                    <td>20 EGP</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#">-</a> 0000/00/00 00:00 AM
-                    </td>
-                    <td>20 EGP</td>
-                </tr>
+        <table class="table table-bordered" id="table">
+            <tbody id="orderExpand">
             </tbody>
         </table>
-        <table class="table table-bordered">
+        <!-- <table class="table table-bordered">
             <tbody>
                 <tr>
                     <td class="" colspan="2" align="center">
@@ -171,9 +127,9 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
     </div>
-
+    <script src="../js/checks.js"></script>
 </body>
 
 </html>
