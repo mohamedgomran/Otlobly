@@ -172,3 +172,29 @@ tableBody.addEventListener('click', function(e) {
         
     }
 });
+
+
+function ajaxSuccess () 
+{
+  var response=JSON.parse(this.responseText)
+  console.log(response)
+  ////to redirect uer if he is not admin
+  if(response["status"]=="error")
+    {
+        location.href=response['login']
+    }
+    else
+    {
+        var Name=response['userName']
+        var Id=response['userId']
+        document.getElementById('userImg').src="../img/user/"+Id+".jpg";
+        document.getElementById('userName').innerHTML=Name;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var oReq = new XMLHttpRequest();
+    oReq.onload = ajaxSuccess;
+    oReq.open("post","../pages/user_img_name.php");
+    oReq.send();
+})
