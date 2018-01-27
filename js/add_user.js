@@ -96,9 +96,8 @@ conf_pass.addEventListener("input",function() {
 ///////////////ajax response////////////////////
 function ajaxSuccess () 
 {
-  var response = (this.responseText)
+  var response = JSON.parse(this.responseText)
   console.log(response)
-
   ////to redirect uer if he is not admin
   if(response["status"]==="go")
   	{
@@ -242,20 +241,20 @@ function AJAXSubmit (oFormElement) {
   if (oFormElement.method.toLowerCase() === "post") {
     oReq.open("post", oFormElement.action);
     oReq.send(new FormData(oFormElement));
-  } else {
-    var oField, sFieldType, nFile, sSearch = "";
-    for (var nItem = 0; nItem < oFormElement.elements.length; nItem++) {
-      oField = oFormElement.elements[nItem];
-      if (!oField.hasAttribute("name")) { continue; }
-      sFieldType = oField.nodeName.toUpperCase() === "INPUT" ?
-          oField.getAttribute("type").toUpperCase() : "TEXT";
-      if (sFieldType === "FILE") {
-        for (nFile = 0; nFile < oField.files.length;
-            sSearch += "&" + escape(oField.name) + "=" + escape(oField.files[nFile++].name));
-      } else if ((sFieldType !== "RADIO" && sFieldType !== "CHECKBOX") || oField.checked) {
-        sSearch += "&" + escape(oField.name) + "=" + escape(oField.value);
-      }
-    }
+  // } else {
+  //   var oField, sFieldType, nFile, sSearch = "";
+  //   for (var nItem = 0; nItem < oFormElement.elements.length; nItem++) {
+  //     oField = oFormElement.elements[nItem];
+  //     if (!oField.hasAttribute("name")) { continue; }
+  //     sFieldType = oField.nodeName.toUpperCase() === "INPUT" ?
+  //         oField.getAttribute("type").toUpperCase() : "TEXT";
+  //     if (sFieldType === "FILE") {
+  //       for (nFile = 0; nFile < oField.files.length;
+  //           sSearch += "&" + escape(oField.name) + "=" + escape(oField.files[nFile++].name));
+  //     } else if ((sFieldType !== "RADIO" && sFieldType !== "CHECKBOX") || oField.checked) {
+  //       sSearch += "&" + escape(oField.name) + "=" + escape(oField.value);
+  //     }
+  //   }
     oReq.open("get", oFormElement.action.replace(/(?:\?.*)?$/, sSearch.replace(/^&/, "?")), true);
     oReq.send(null);
   }
