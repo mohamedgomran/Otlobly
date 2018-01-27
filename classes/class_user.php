@@ -1,3 +1,4 @@
+
 <?php 
 	
 	include_once 'dbase.php';
@@ -43,8 +44,10 @@
 
 	static function removeUser($id)
 	{
+		echo 'hi';
+
 		$query = "delete from users where UID=?";
-		$parameters=["$id"];
+		$parameters=[$id];
 		user::manDb($query,$parameters);
 	}
 
@@ -76,6 +79,15 @@
 		$result = $prep->fetch(PDO::FETCH_ASSOC);
 		return $result;
 	}
+
+	static function getSingleUserById($Id)
+	{
+		$query = "select * from users where UID=?";
+		$parameters = ["$Id"];
+		$prep = user::manDb($query, $parameters);
+		$result = $prep->fetch(PDO::FETCH_ASSOC);
+		return $result;
+	}
 	
 	public function editUser($id)
 	{
@@ -84,6 +96,23 @@
 		$this->manDb($query,$parameters);
 	}
 
+	static function getRoom($id)
+	{
+		$query="select room from users where UID=?";
+		$parameters=["$id"];
+		$prep=user::manDb($query,$parameters);
+		$result=$prep->fetch(PDO::FETCH_ASSOC);
+		return $result;
+	}
+
+	static function getRooms()
+	{
+		$query="select room from users";
+		$parameters=[""];
+		$prep=user::manDb($query,$parameters);
+		$result=$prep->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
+	}
 }
 
 
