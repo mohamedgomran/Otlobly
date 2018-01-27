@@ -1,4 +1,18 @@
-var room=document.getElementById('select');
+var room=document.getElementById('select')
+var form = document.getElementById('form')
+
+var totalAmount = function () {
+	var totalDiv = document.getElementById('total')
+	var mainDiv = document.getElementById('orderlist').children
+	var totalLE = 0
+	for(var i = 0, length1 = mainDiv.length; i < length1; i++){
+		totalLE+= parseFloat(mainDiv[i].children[2].value)
+	}
+	totalDiv.nextElementSibling.innerHTML = totalLE+" LE"
+}
+
+form.addEventListener('input', totalAmount)
+
 
 room.addEventListener("focus", function() {
 	var Req = new XMLHttpRequest();
@@ -20,6 +34,7 @@ var delRow = function (e) {
 		document.getElementById('form').style.display = "none"
 	}
 	e.target.parentElement.remove()
+	totalAmount()
 }
 
 var exist = function (parent, product) {
@@ -42,7 +57,7 @@ var addToOrder = function (e) {
 		if (productRow = exist(mainDiv,"p_"+e.target.id)) {
 			productRow.children[1].value++
 			productRow.children[2].value = parseInt(productRow.children[2].value) + parseInt(e.target.children[2].innerHTML.split(" ")[0])
-
+			totalAmount()
 			return
 		}
 
@@ -83,7 +98,7 @@ var addToOrder = function (e) {
 	    parentDiv.appendChild(delButton)
 
 	    mainDiv.insertBefore(parentDiv, mainDiv.children[0])
-
+		totalAmount()
 	}
 }
 
@@ -129,8 +144,7 @@ function ajaxSuccess () {
 				roomManp(allRooms[i]['room'])
 			};
 		}
-	if (response['rstatus']=="error") {
-	}
+
 	else if (response['rstatus']=="login") {
 		location.href = '../pages/login.html'
 	}
@@ -138,6 +152,10 @@ function ajaxSuccess () {
 		var mainDiv = document.getElementById('orderlist')
 		mainDiv.innerHTML=""
 		document.getElementById('form').style.display = 'none'
+	}
+	else if (response['rstatus']=="go") {
+		location.href = response['link']
+
 	}
 	else { 
 		var Id=response.pop();

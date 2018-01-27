@@ -25,7 +25,6 @@ function usersTotalAmount() {
             users_amounts.innerHTML = '';
             select_user.innerHTML = "<option>Select User</option>";
             result = JSON.parse(this.responseText);
-            console.log(result);
             for (var i = 0; i < result.length; i++) {
                 showUsersAmounts(result[i]);
                 fillSelectUser(result[i]);
@@ -62,7 +61,6 @@ users_amounts.addEventListener('click', function(e) {
         if (clicked_before) {
             order_date_amount_table.removeEventListener('click', orderDateHandler);
             deleteElement(table, order_date_amount_table);
-            console.log(order_date_amount_table);
             deleteElement(table, thead);
             clicked_before = 0;
             if (date_clicked_before) {
@@ -74,7 +72,6 @@ users_amounts.addEventListener('click', function(e) {
             order_date_amount_table.addEventListener('click', orderDateHandler);
             clicked_before = 1;
         }
-        console.log('clicked');
     }
 });
 
@@ -84,7 +81,6 @@ function getOrdersOfUser(id) {
         if (this.readyState == 4 && this.status == 200) {
             order_date_amount_table.innerHTML = '';
             var result = JSON.parse(this.responseText);
-            //console.log(result);
             table.appendChild(thead);
             for (var i = 0; i < result.length; i++) {
                 appendIntoTable(result[i]);
@@ -119,7 +115,6 @@ function orderDateHandler(e) {
         // delete the row in database
         //var deleted_amount = parseInt(e.target.previousElementSibling.textContent);
         //cancelOrder(e.target.parentElement.getAttribute('id'), deleted_amount);
-        console.log(e.target);
         if (e.target.getAttribute('class') === 'date') {
             if (date_clicked_before) {
                 deleteElement(orderExpand, order_row);
