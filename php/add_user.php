@@ -105,8 +105,13 @@
 		}
 		else 
 		{
-			echo json_encode(array('status'=>'go', 'link'=>'login.html'));
+			echo json_encode (array('status'=>'go', 'link'=>'user_home.html'));
 		}
+		
 	}
+	else 
+		{
+			echo json_encode (array('status'=>'go', 'link'=>'login.html'));
+		}
 
  ?>
