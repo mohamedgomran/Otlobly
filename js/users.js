@@ -55,8 +55,9 @@ function putElementsInTBody() {
 			srcDiv.setAttribute('class', 'productimgdiv');
 			var srcImg = document.createElement('img');
 			srcImg.setAttribute('class', 'rounded imgindiv');
-			srcImg.src = arrayOfUsers[index]['picture'];
-			srcTd.appendChild(srcDiv.appendChild(srcImg));
+			srcImg.src = "../img/user/"+arrayOfUsers[index]['UID']+".jpg";
+			srcDiv.appendChild(srcImg)
+			srcTd.appendChild(srcDiv);
 			parentTr.appendChild(srcTd);
 
 			var extensionTd = document.createElement('td');

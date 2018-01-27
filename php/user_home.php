@@ -8,6 +8,7 @@
 	if ($userId) {
 		if (user::isAdmin($userId)) {
 			echo json_encode(array('rstatus'=>'go', 'link'=>'admin_home.html'));
+			exit;
 		}
 	}
 	else{
