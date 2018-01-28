@@ -179,7 +179,7 @@ tableBody.addEventListener('click', function(e) {
 function ajaxSuccess () 
 {
   var response=JSON.parse(this.responseText)
-  console.log(response)
+
   ////to redirect uer if he is not admin
   if(response["status"]=="error")
     {
