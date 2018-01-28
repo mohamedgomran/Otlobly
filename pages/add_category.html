@@ -1,15 +1,15 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Add Product</title>
+    <title>Add Category</title>
 
     <link rel="stylesheet" href="../css/bootstrap.min.css"> <!-- bootstrap default styling file-->
     <link rel="stylesheet" href="../css/myorders.css">
 </head>
 
 <body>
-
-    <div class="container" id="mainDiv" style="display: none;">
+    <div class="container" id="mainDiv">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="admin_home.html">Otlobly</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,39 +49,13 @@
         </nav>
 
         <div class="row m-3" id="superDiv">
-            <h4>Add Product</h4></div>
+            <h4>Add Category</h4></div>
 
-        <form action="../php/add_product.php" method="post" id="form" onsubmit="AJAXSubmit(this) ;return false;">
+        <form action="../php/add_category.php" method="post" id="form" onsubmit="AJAXSubmit(this) ;return false;">
             <div class="form-group row" id="nameDiv">
-                <label for="product" class="col-2 col-form-label">Product</label>
+                <label for="category" class="col-2 col-form-label">Category Name</label>
                 <div class="col-3">
-                    <input type="text" class="form-control position-relative" id="product" name="product">
-                </div>
-            </div>
-            <div class="form-group row" id="priceDiv">
-                <label for="product" class="col-2 col-form-label">Price</label>
-                <div class="col-3">
-                    <input type="number" class="form-control position-relative" id="price" name="price" min="0" step="0.5">
-                </div>
-            </div>
-            <div class="form-group row" id="categoryDiv">
-                <label for="category" class="col-2 col-form-label">Category</label>
-                <div style="display:inline-block;" class="col-3">
-                    <select class="form-control" name="category" id="select">
-
-                    </select>
-
-                </div>
-                <div>
-                    <a style="display:inline-block;" href="add_category.html">Add Category</a>
-
-                </div>
-
-            </div>
-            <div class="form-group row" id="pictureDiv">
-                <label for="picture" class="col-2 col-form-label">Product Picture</label>
-                <div class="col-3">
-                    <input type="file" class="form-control" id="picture" name="picture">
+                    <input type="text" class="form-control position-relative" id="category" name="category">
                 </div>
             </div>
             <div class="form-group row">
@@ -92,7 +66,6 @@
             </div>
         </form>
     </div>
-    <script type="text/javascript" src="../js/add_product.js"></script>
 </body>
 
 </html>
