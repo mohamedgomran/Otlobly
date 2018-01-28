@@ -71,6 +71,11 @@ function ajaxSuccess ()
 {
   var response =JSON.parse(this.responseText)
   console.log(response);
+
+  if (response.success) {
+  	console.log('hi');
+  	location.href = "../pages/all_products.html"
+  }
   if (response["admin"]=="true")
   	{
   		mainDiv.style.display='block';

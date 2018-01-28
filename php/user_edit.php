@@ -29,7 +29,6 @@
 		if (user::isAdmin($userId)) 
 		{
 
-			echo json_encode(array('status'=>'admin'));
 			$name=!empty($_POST['name'])?$_POST['name']:"";
 			$email=!empty($_POST['email'])?$_POST['email']:"";
 			$password=!empty($_POST['password'])?$_POST['password']:"";
@@ -97,15 +96,12 @@
 				if ($password == "") {
 					$newUser= new user($name,$email,NULL,$room,$admin,$picture,$extension);
 					$newUser->editUserWithoutPassword($_POST['uId']);
-					echo json_encode($_POST['uId']);
 				} else {
 					$newUser= new user($name,$email,sha1($password),$room,$admin,$picture,$extension);
 					$newUser->editUser($_POST['uId']);
-					echo json_encode($_POST['uId']);
 				}
 				$userId = user::getSingleUser($email)['UID'];
-				$success=["success", $userId];
-				echo json_encode($success);
+				echo json_encode(array('success'));
 				if ($img_info) {
 					upload($picture, $img_info, $path, $userId);
 					

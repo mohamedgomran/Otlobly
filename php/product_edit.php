@@ -45,13 +45,6 @@
 				array_push($errors,"pname_duplication");
 			}
 
-
-			// if(count($searchArray) > 6)
-			// {
-			// 	array_push($errors,"pname_duplication");
-			// 	array_push($errors, count($searchArray));
-			// }
-
 		////check if any errors exist to reply back
 			if($errors)
 			{
@@ -60,13 +53,9 @@
 		//// if no errors then send data to database
 			else
 			{
-				// $catId = category::getOneCategory($category)['CID'];
-				// $newProduct= new Product('a', $catId, 3, NULL, 1);
 				$newProduct= new Product($pname, $category, $price, $picture, 1);
-				echo print_r($newProduct);
 				$newProduct->edit($PID);
-				// $productId = Product::get_product_by_id($PID)['PID'];
-				echo json_encode(array('status'=>'success'));
+				echo json_encode(array('success'=>"$PID"));
 				if ($img_info) {
 					uploadimg($picture, $img_info, $path, $productId);
 				}

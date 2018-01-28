@@ -113,16 +113,20 @@ conf_pass.addEventListener("input",function() {
 /////////////ajax response////////////////////
 function ajaxSuccess () 
 {
-  var response = (this.responseText);
-  console.log(response);
+var response = JSON.parse(this.responseText)
+console.log(response);
 
-  ////to redirect uer if he is not admin
-  if(response["status"]==="go")
-  	{
-  		location.href=response["link"];
-  	}
+if(response["admin"]==="true")
+{
+	mainDiv.style.display='block';
+}
+else if(response["admin"]==="false" || response["status"]==="go")
+{
+	location.href="login.html";
+}
+else
+{	
 
-  else{	
   ///to remove the success message on beginning of every json request to prevent duplication
   if(successFlag==true)
 	{
@@ -133,12 +137,13 @@ function ajaxSuccess ()
 	////to view a Success message
   if (response.indexOf("success")!=-1)
   	{
-  		console.log("success")
-	  	success=document.createElement('h3');
-		superDiv.appendChild(success);
-		success.innerHTML="User was edited Successfully"
-		successFlag=true;
-		document.getElementById("form").reset();
+  		location.href = "../pages/users.html"
+  // 		console.log("success")
+	 //  	success=document.createElement('h3');
+		// superDiv.appendChild(success);
+		// success.innerHTML="User was edited Successfully"
+		// successFlag=true;
+		// document.getElementById("form").reset();
   	}
   else{
   	///// messages of errors according to server
@@ -279,6 +284,11 @@ function AJAXSubmit (oFormElement) {
 }
 /////to send ajax request on loading of page to check the user 
 document.addEventListener("DOMContentLoaded", function () {
+    var oReq = new XMLHttpRequest();
+    oReq.onload = ajaxSuccess;
+    oReq.open("post", "../php/admin_check.php");
+    oReq.send();
+
 	var fetchHTTPRequest = new XMLHttpRequest();
 	if (!fetchHTTPRequest)
 		alert('Giving up :( Cannot create an XMLHTTP instance');
@@ -323,22 +333,4 @@ function populateForm() {
 }
 
 var mainDiv = document.getElementById('superDiv');
-function ajaxSuccess ()
-{
-  var response =JSON.parse(this.responseText)
-  if (response["admin"]=="true")
-    {
-        mainDiv.style.display='block';
-    }
-   if (response['admin']=="false")
-    {
-    location.href="login.html";
-    }
-}
 
-document.addEventListener("DOMContentLoaded", function () {
-    var oReq = new XMLHttpRequest();
-    oReq.onload = ajaxSuccess;
-    oReq.open("post", "../php/admin_check.php");
-    oReq.send();
-})
