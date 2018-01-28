@@ -78,7 +78,7 @@
 			// }
 			
 			$searchArray=user::getSingleUser($email);
-			if(!empty($searchArray))
+			if(!empty($searchArray) && $searchArray['UID'] !== $_POST['uId'])
 			{
 				array_push($errors,"email_duplication");
 			}

@@ -2,20 +2,19 @@
 <html>
 
 <head>
-    <title>Checks</title>
+    <title>Add Category</title>
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- bootstrap default styling file-->
     <link rel="stylesheet" href="../css/myorders.css">
-
 </head>
 
-<body onload="usersTotalAmount();">
-
+<body>
     <div class="container" id="mainDiv" style="display: none;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="admin_home.html">Otlobly</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -33,14 +32,14 @@
                         <a class="nav-link" href="order_admin.html">Manual Order</a>
                     </li>
 
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="checks.html">Checks</a>
                     </li>
-
                     <li class="nav-item ">
                         <a class="nav-link" href="../php/logout.php">Logout</a>
                     </li>
-
+                </ul>
+              </div>
                     <div class="row position-absolute right h-100">
                         <div class="col-md-4">
                             <img src="../img/ninja.png" class="img-thumbnail imgindiv">
@@ -54,39 +53,28 @@
                 </ul>
             </div>
         </nav>
-
-        <div class="row m-3">
-            <h4>Checks</h4></div>
-        <div class="row m-3 justify-content-md-center">
-            <div class="col-2 m-3">
-                <input id="datefrom" type="date" oninput="usersTotalAmount();">
-            </div>
-            <div class="col-2 m-3">
-                <input id="dateto" type="date" oninput="usersTotalAmount();">
+        <div class="container">
+        <div class="row m-3" id="superDiv">
+            <h4>Add Category</h4>
+        </div>
+    </div>
+        <div class="container">
+        <div class="form-group row" id="nameDiv">
+            <label for="category" class="col-2 col-form-label">Category Name</label>
+            <div class="col-3">
+                <input type="text" class="form-control position-relative" id="category" name="category">
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-3">
-                <select class="form-control" name="category" id="select_user">
-                </select>
+            <div class="col">
+                <button type="submit" class="btn btn-default" id="submit">Save</button>
+                <button type="Reset" class="btn btn-default">Reset</button>
             </div>
         </div>
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Total amount</th>
-                </tr>
-            </thead>
-            <tbody id="users_amounts">
-            </tbody>
-        </table>
-        <table class="table table-bordered table-hover" id="table">
-        </table>
-        <table id="orderExpand" class="table table-bordered">
-        </table>
+        <p id="message" style="display: none;"></p>
     </div>
-    <script src="../js/checks.js"></script>
+</div>
+    <script src="../js/add_category.js"></script>
 </body>
 
 </html>

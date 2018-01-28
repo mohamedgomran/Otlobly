@@ -155,7 +155,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (111,1,NULL,'in place','2018-01-26 13:21:29','out for delivery'),(222,2,NULL,'in place','2018-01-19 13:47:29','out for delivery'),(333,3,NULL,'in place','2018-01-19 13:47:29','processing'),(444,4,NULL,'in place','2018-01-19 13:47:29','processing'),(555,1,NULL,'in place','2018-01-26 18:31:49','processing'),(777,2,NULL,'in place','2018-01-19 13:47:56','processing'),(778,3,NULL,'in place','2018-01-19 21:06:40','processing'),(888,1,NULL,'in place','2018-01-26 13:22:59','processing'),(999,1,NULL,'in place','2018-01-26 15:38:46','processing'),(1000,1,'','1','2018-01-27 00:38:17','processing'),(1001,1,'','1','2018-01-27 00:39:25','processing'),(1002,1,'','1','2018-01-27 00:43:43','processing'),(1003,1,'','1','2018-01-27 00:44:22','processing'),(1004,1,'','1','2018-01-27 00:44:40','processing'),(1005,1,'','1','2018-01-27 00:44:42','processing'),(1006,1,'','1','2018-01-27 00:53:20','processing'),(1007,1,'','1','2018-01-27 00:53:44','processing'),(1008,1,'','1','2018-01-27 00:54:08','processing'),(1009,1,'more sugar','1','2018-01-27 00:57:06','processing'),(1010,1,'more sugar','1','2018-01-27 00:57:16','processing'),(1011,1,'more sugar','1','2018-01-27 00:57:29','processing'),(1013,1,'more sugar','1','2018-01-27 01:00:22','processing'),(1014,1,'more sugar','1','2018-01-27 01:01:10','processing'),(1015,1,'more sugar','1','2018-01-27 01:01:34','processing'),(1016,1,'more sugar','1','2018-01-27 01:01:53','processing'),(1017,1,'more sugar','1','2018-01-27 01:03:32','processing'),(1018,1,'more sugar','1','2018-01-27 01:03:34','processing'),(1019,1,'more sugar','1','2018-01-27 01:17:24','processing'),(1020,1,'more sugar','1','2018-01-27 01:17:33','processing'),(1021,1,'','1','2018-01-27 01:23:01','processing'),(1022,1,'','1','2018-01-27 01:23:33','processing'),(1023,1,'','1','2018-01-27 01:23:53','processing'),(1024,1,'','1','2018-01-27 01:32:07','processing'),(1025,1,'','1','2018-01-27 01:32:47','processing'),(1026,1,'','1','2018-01-27 01:34:03','processing'),(1027,1,'','1','2018-01-27 01:40:14','processing');
+INSERT INTO `orders` VALUES (111,1,NULL,'in place','2018-01-26 13:21:29','out for delivery'),(222,2,NULL,'in place','2018-01-19 13:47:29','out for delivery'),(333,3,NULL,'in place','2018-01-19 13:47:29','out for delivery'),(444,4,NULL,'in place','2018-01-19 13:47:29','out for delivery'),(555,1,NULL,'in place','2018-01-26 18:31:49','out for delivery'),(777,2,NULL,'in place','2018-01-19 13:47:56','processing'),(778,3,NULL,'in place','2018-01-19 21:06:40','processing'),(888,1,NULL,'in place','2018-01-26 13:22:59','processing'),(999,1,NULL,'in place','2018-01-26 15:38:46','processing'),(1000,1,'','1','2018-01-27 00:38:17','processing'),(1001,1,'','1','2018-01-27 00:39:25','processing'),(1002,1,'','1','2018-01-27 00:43:43','processing'),(1003,1,'','1','2018-01-27 00:44:22','processing'),(1004,1,'','1','2018-01-27 00:44:40','processing'),(1005,1,'','1','2018-01-27 00:44:42','processing'),(1006,1,'','1','2018-01-27 00:53:20','processing'),(1007,1,'','1','2018-01-27 00:53:44','processing'),(1008,1,'','1','2018-01-27 00:54:08','processing'),(1009,1,'more sugar','1','2018-01-27 00:57:06','processing'),(1010,1,'more sugar','1','2018-01-27 00:57:16','processing'),(1011,1,'more sugar','1','2018-01-27 00:57:29','processing'),(1013,1,'more sugar','1','2018-01-27 01:00:22','out for delivery'),(1014,1,'more sugar','1','2018-01-27 01:01:10','processing'),(1015,1,'more sugar','1','2018-01-27 01:01:34','processing'),(1016,1,'more sugar','1','2018-01-27 01:01:53','processing'),(1017,1,'more sugar','1','2018-01-27 01:03:32','processing'),(1018,1,'more sugar','1','2018-01-27 01:03:34','processing'),(1019,1,'more sugar','1','2018-01-27 01:17:24','processing'),(1020,1,'more sugar','1','2018-01-27 01:17:33','processing'),(1021,1,'','1','2018-01-27 01:23:01','processing'),(1022,1,'','1','2018-01-27 01:23:33','processing'),(1023,1,'','1','2018-01-27 01:23:53','processing'),(1024,1,'','1','2018-01-27 01:32:07','processing'),(1025,1,'','1','2018-01-27 01:32:47','processing'),(1026,1,'','1','2018-01-27 01:34:03','processing'),(1027,1,'','1','2018-01-27 01:40:14','processing');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +177,7 @@ CREATE TABLE `products` (
   UNIQUE KEY `pname` (`pname`),
   KEY `category` (`p_CID`),
   CONSTRAINT `category` FOREIGN KEY (`p_CID`) REFERENCES `categories` (`CID`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'tea',1,5,'',1),(2,'coffee',2,8,'',1),(3,'orange',2,12,'',1),(4,'Soda',3,6,'',0),(5,'nescafe',1,20,'',1),(15,'',1,4,'',1),(26,'assd',1,1,'',1),(37,'dcd',1,2,'',1),(39,'jbjb',1,1.5,'',1),(55,'wd',1,3.5,'',1),(60,'mon',1,4,'',1),(63,'ert',1,1.5,'',1),(64,'coffeeeee',1,1.5,'',1),(66,'aDD',1,0.5,'',1),(68,'hyy',3,1.5,'',1),(69,'dffffg',1,3.5,'/tmp/phph2uxhs',1),(70,'wfwf',1,2.5,'',1),(71,'dwd',1,1.5,'/tmp/phpULwo8h',1),(72,'efef',1,1,'/tmp/phpRpqgf6',1),(73,'efefwd',1,1,'/tmp/phpq34WrK',1),(74,'wdwdwd',1,2.5,'',1),(75,'wwr',1,1.5,'',1),(76,'wdw',1,111,'/tmp/phptOsUqw',1),(77,'ww',1,1,'/tmp/phpljxHHA',1);
+INSERT INTO `products` VALUES (1,'tea',1,5,'',1),(2,'coffee',2,8,'',1),(3,'orange',2,12,'',1),(4,'Soda',3,6,'',0),(5,'nescafe',1,20,'',1),(15,'',1,4,'',1),(26,'assd',1,1,'',1),(37,'dcd',1,2,'',1),(39,'jbjb',1,1.5,'',1),(55,'wd',1,3.5,'',1),(60,'mon',1,4,'',1),(63,'ert',1,1.5,'',1),(64,'coffeeeee',1,1.5,'',1),(66,'aDD',1,0.5,'',1),(68,'hyy',3,1.5,'',1),(69,'dffffg',1,3.5,'/tmp/phph2uxhs',1),(70,'wfwf',1,2.5,'',1),(71,'dwd',1,1.5,'/tmp/phpULwo8h',1),(72,'efef',1,1,'/tmp/phpRpqgf6',1),(73,'efefwd',1,1,'/tmp/phpq34WrK',1),(74,'wdwdwd',1,2.5,'',1),(75,'wwr',1,1.5,'',1),(76,'wdw',1,111,'/tmp/phptOsUqw',1),(77,'ww',1,1,'/tmp/phpljxHHA',1),(78,'fefo',6,3.5,'/tmp/phpRSaeSW',1),(79,'edee',2,3,'/tmp/php8Qkomm',1);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,4 +295,4 @@ USE `cafeteria`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-27 23:30:01
+-- Dump completed on 2018-01-28 13:27:33

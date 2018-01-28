@@ -254,13 +254,13 @@ function ajaxSuccess ()
 var oReq = new XMLHttpRequest();
 
 function AJAXSubmit (oFormElement) {
-	console.log(oFormElement);
+	
 	if (!oFormElement.action) { return; }
 	oReq.onload = ajaxSuccess;
 	if (oFormElement.method.toLowerCase() === "post") {
 		oReq.open("POST", oFormElement.action);
 		oReq.send(new FormData(oFormElement));
-		console.log(oReq.responseText);
+		
 	} else {
 		var oField, sFieldType, nFile, sSearch = "";
 		for (var nItem = 0; nItem < oFormElement.elements.length; nItem++) {
@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	uId = getQueryParameterByName('UID');
 
 	fetchHTTPRequest.onreadystatechange = catchContents;
-	fetchHTTPRequest.open('POST', 'http://localhost/Otlobly/php/user_get_single.php');
+	fetchHTTPRequest.open('POST', '../php/user_get_single.php');
 	fetchHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	fetchHTTPRequest.send('uId=' + encodeURIComponent(uId));
 
@@ -299,9 +299,9 @@ document.addEventListener("DOMContentLoaded", function () {
 					location.href = fetchHTTPRequest.responseText["link"];
 				} else {
 					userInfo = JSON.parse(fetchHTTPRequest.responseText); // receive response into array
-					console.log(userInfo);
+
 					populateForm(); // function to loop on products array and create rows
-					// console.log(userInfo);
+
 				}
 			} else {
 				alert('There was a problem with the request.');
@@ -321,3 +321,24 @@ function populateForm() {
 	newHiddenInput.value = uId;
 	nameDiv.appendChild(newHiddenInput);
 }
+
+var mainDiv = document.getElementById('superDiv');
+function ajaxSuccess ()
+{
+  var response =JSON.parse(this.responseText)
+  if (response["admin"]=="true")
+    {
+        mainDiv.style.display='block';
+    }
+   if (response['admin']=="false")
+    {
+    location.href="login.html";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var oReq = new XMLHttpRequest();
+    oReq.onload = ajaxSuccess;
+    oReq.open("post", "../php/admin_check.php");
+    oReq.send();
+})

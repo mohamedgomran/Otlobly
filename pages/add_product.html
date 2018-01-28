@@ -4,7 +4,8 @@
 <head>
     <title>Add Product</title>
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css"> <!-- bootstrap default styling file-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- bootstrap default styling file-->
     <link rel="stylesheet" href="../css/myorders.css">
 </head>
 
@@ -13,7 +14,8 @@
     <div class="container" id="mainDiv" style="display: none;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="admin_home.html">Otlobly</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -34,25 +36,31 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="checks.html">Checks</a>
                     </li>
-
-                    <div class="row position-absolute right h-100">
-                        <div class="col-md-4">
-                            <img src="../img/ninja.png" class="img-thumbnail imgindiv">
-                        </div>
-
-                        <div class="col-md-8 px-2">
-                            <p>Admin</p>
-                        </div>
-                    </div>
-
+                    <li class="nav-item ">
+                        <a class="nav-link" href="../php/logout.php">Logout</a>
+                    </li>
                 </ul>
             </div>
-        </nav>
+            <div class="row position-absolute right h-100">
+                <div class="col-md-4">
+                    <img src="../img/ninja.png" class="img-thumbnail imgindiv">
+                </div>
 
+                <div class="col-md-8 px-2">
+                    <p>Admin</p>
+                </div>
+            </div>
+
+            </ul>
+    </div>
+    </nav>
+    <div class="container">
         <div class="row m-3" id="superDiv">
-            <h4>Add Product</h4></div>
+            <h4>Add Product</h4>
+        </div>
 
         <form action="../php/add_product.php" method="post" id="form" onsubmit="AJAXSubmit(this) ;return false;">
+            <div id="msg" class="p-3 mb-2 bg-success text-white" style="display: none;">Order was submitted successfully</div>
             <div class="form-group row" id="nameDiv">
                 <label for="product" class="col-2 col-form-label">Product</label>
                 <div class="col-3">
@@ -74,7 +82,7 @@
 
                 </div>
                 <div>
-                    <a style="display:inline-block;" href="#">Add Category</a>
+                    <a style="display:inline-block;" href="add_category.html">Add Category</a>
 
                 </div>
 
@@ -88,10 +96,11 @@
             <div class="form-group row">
                 <div class="col">
                     <button type="submit" class="btn btn-default">Save</button>
-                    <button type="Reset" class="btn btn-default">Reset</button>
+                    <button type="Reset" class="btn btn-default" id="resetbtn">Reset</button>
                 </div>
             </div>
         </form>
+    </div>
     </div>
     <script type="text/javascript" src="../js/add_product.js"></script>
 </body>

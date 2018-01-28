@@ -18,6 +18,8 @@ function deleteElement(parent, element) {
 function appendIntoTable(row) {
     var tr = document.createElement('tr');
     tr.setAttribute('id', row["OID"]);
+    tr.setAttribute('class', "hoverDiv");
+
     delete row["OID"];
     tableBody.appendChild(tr);
     for (var i in row) {
@@ -25,7 +27,7 @@ function appendIntoTable(row) {
         td.textContent = row[i];
         
         if (i === 'total_amount') {
-            total_amount += parseInt(row[i]);
+            total_amount += parseFloat(row[i]);
         }
 
         if (row[i] === 'cancel') {
@@ -111,8 +113,9 @@ function cancelOrder(id, amount) {
                 return;
             } */
             if (isOk) {
-                tableBody.removeChild(document.getElementById(id));  
+                tableBody.removeChild(document.getElementById(id));
                 total_tr.children[0].children[0].textContent = 'Total = ' + (total_amount-amount) + ' LE'; 
+		total_amount-=amount
                 if (orderExpand !== undefined && order_row !== undefined) {
                     deleteElement(orderExpand, order_row);
                     clicked_before = 0;
@@ -157,7 +160,7 @@ tableBody.addEventListener('click', function(e) {
     if (e.target.getAttribute('class') === 'action') {
         //tableBody.removeChild(e.target.parentElement);
         // delete the row in database
-        var deleted_amount = parseInt(e.target.previousElementSibling.textContent);
+        var deleted_amount = parseFloat(e.target.previousElementSibling.textContent);
         cancelOrder(e.target.parentElement.getAttribute('id'), deleted_amount);
     }
 
@@ -177,7 +180,7 @@ tableBody.addEventListener('click', function(e) {
 function ajaxSuccess () 
 {
   var response=JSON.parse(this.responseText)
-  console.log(response)
+
   ////to redirect uer if he is not admin
   if(response["status"]=="error")
     {
@@ -187,7 +190,9 @@ function ajaxSuccess ()
     {
         var Name=response['userName']
         var Id=response['userId']
-        document.getElementById('userImg').src="../img/user/"+Id+".jpg";
+        var userImg=document.getElementById('userImg')
+        userImg.src="../img/user/"+Id+".jpg";
+        userImg.onerror= function(e){e.target.src="../img/ninja.png";}
         document.getElementById('userName').innerHTML=Name;
     }
 }

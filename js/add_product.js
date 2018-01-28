@@ -7,13 +7,17 @@ var priceDiv=document.getElementById('priceDiv');
 var categoryDiv=document.getElementById('categoryDiv')
 var pictureDiv=document.getElementById('pictureDiv')
 var price=document.getElementById('price');
-
+var resetbtn=document.getElementById('resetbtn');
+var msg=document.getElementById('msg');
 var pnameFlag=false;
 var priceFlag=false;
 var categoryFlag=false;
 var pictureFlag=false
 var successFlag=false;
 
+resetbtn.addEventListener('click',function(e) {
+	msg.style.display='none'
+})
 pname.addEventListener("input",function() {
 
 	if (pnameFlag)
@@ -52,7 +56,6 @@ function categoryMan(row)
 function ajaxSuccess ()
 {
   var response =JSON.parse(this.responseText)
-  console.log(response)
   if (response["admin"]=="true")
   	{
   		mainDiv.style.display='block';
@@ -66,7 +69,6 @@ function ajaxSuccess ()
 		if (response["place"]=="category")
 	  	{
 	  		var rows=response["rows"]
-	  		console.log(rows);
 	  		for (var i = 0; i < rows.length; i++) 
 	  		{
 	  			categoryMan(rows[i]);
@@ -78,7 +80,7 @@ function ajaxSuccess ()
   if(successFlag==true)
 	{
 		successFlag=false;
-		form.removeChild(success)
+		msg.style.display = 'none'
 	}
 	if (response['status']=='error') 
   	{
@@ -151,10 +153,8 @@ function ajaxSuccess ()
   if (response["status"]=="success")
   	{
   		console.log("success")
-	  	success=document.createElement('h3');
-		form.appendChild(success);
-		success.innerHTML="Product was added Successfully"
 		successFlag=true;
+		msg.style.display = 'block'
 		document.getElementById("form").reset();
   	}
   

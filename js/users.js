@@ -41,6 +41,7 @@ function putElementsInTBody() {
 
 			var parentTr = document.createElement('tr');
 			parentTr.id = arrayOfUsers[index]['UID'];
+    		parentTr.setAttribute('class', "hoverDiv");
 
 			var nameTd = document.createElement('td');
 			nameTd.textContent = arrayOfUsers[index]['name'];
@@ -56,6 +57,8 @@ function putElementsInTBody() {
 			var srcImg = document.createElement('img');
 			srcImg.setAttribute('class', 'rounded imgindiv');
 			srcImg.src = "../img/user/"+arrayOfUsers[index]['UID']+".jpg";
+        	srcImg.onerror= function(e){e.target.src="../img/ninja.png";}
+
 			srcDiv.appendChild(srcImg)
 			srcTd.appendChild(srcDiv);
 			parentTr.appendChild(srcTd);
@@ -99,7 +102,6 @@ allUsersContainer.addEventListener('click', function(event) {
 			deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
 			deleteHTTPRequest.open('POST', '../php/user_delete.php');
 		    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		    console.log(targetAnc.parentNode.parentNode.id);
 			deleteHTTPRequest.send('userID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
 
 			function deleteResponseStateCallBack() {
@@ -121,5 +123,26 @@ allUsersContainer.addEventListener('click', function(event) {
 
 });
 //////////////////////////////////////// main  ///////////////////////////////////////////////////
+var mainDiv = document.getElementById('mainDiv');
+function ajaxSuccess ()
+{
+  var response =JSON.parse(this.responseText)
+  console.log(response)
+  if (response["admin"]=="true")
+    {
+        mainDiv.style.display='block';
+    }
+   if (response['admin']=="false")
+    {
+    location.href="login.html";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var oReq = new XMLHttpRequest();
+    oReq.onload = ajaxSuccess;
+    oReq.open("post", "../php/admin_check.php");
+    oReq.send();
+})
 
 fetchUsers();

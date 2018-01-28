@@ -43,6 +43,10 @@
           	    <a class="nav-link" href="checks.html">Checks</a>
           	</li>
             
+            <li class="nav-item ">
+              <a class="nav-link" href="../php/logout.php">Logout</a>
+            </li>
+            
           </ul>
         </div>
 
@@ -61,7 +65,7 @@
       <div class="row mt-5">
 
         <div class="col-4 mt-3 border-right" id="numberOfProducts">
-
+          <div id="msg" class="p-3 mb-2 bg-success text-white" style="display: none;">Order was submitted successfully</div>
           <form action="../php/order_submit.php" method="POST" enctype="multipart/form-data" id="form" style="display: none;" onsubmit="AJAXSubmit(this) ;return false;">
 
             <div class="row" id="orderlist">
