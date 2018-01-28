@@ -1,3 +1,4 @@
+var mainDiv=document.getElementById('mainDiv')
 var containerElement = document.getElementById('containerElement');
 var tables = document.getElementsByTagName('table');
 var table;
@@ -133,3 +134,23 @@ function change_status(e) {
     xhttp.send();
 }
 
+function ajaxSuccess ()
+{
+  var response =JSON.parse(this.responseText)
+  console.log(response)
+  if (response["admin"]=="true")
+    {
+        mainDiv.style.display='block';
+    }
+   if (response['admin']=="false")
+    {
+    location.href="login.html";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var oReq = new XMLHttpRequest();
+    oReq.onload = ajaxSuccess;
+    oReq.open("post", "../php/admin_check.php");
+    oReq.send();
+})
