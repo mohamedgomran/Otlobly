@@ -2,20 +2,22 @@
 
     include_once "../classes/class_order.php";
 
-    $query = "insert into categories values(null, ?)";
-    $dataArr  = array($_POST["category"]);
     
     $success = true;
 
-    try {
-        Order::manDb($query, $dataArr);
-    } catch (Exception $e) {
+    $query = "select cname from categories where cname = ?";
+    $dataArr  = array($_REQUEST["category"]);
+    $prep = Order::manDb($query, $dataArr);
+    $result = $prep->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($result)) {
+        $query1 = "insert into categories values(null, ?)";
+        $dataArr1  = array($_REQUEST["category"]);
+        Order::manDb($query1, $dataArr1);
+        $success = true;
+    } else {
         $success = false;
     }
     
-    if($success) {
-        header("Location: ../pages/add_product.html");
-    } else {
-        header("Location: ../pages/add_category.html");
-    }
+    echo json_encode($success);
 ?>

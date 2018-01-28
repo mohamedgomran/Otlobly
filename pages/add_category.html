@@ -4,7 +4,8 @@
 <head>
     <title>Add Category</title>
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css"> <!-- bootstrap default styling file-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- bootstrap default styling file-->
     <link rel="stylesheet" href="../css/myorders.css">
 </head>
 
@@ -12,7 +13,8 @@
     <div class="container" id="mainDiv">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="admin_home.html">Otlobly</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -49,23 +51,24 @@
         </nav>
 
         <div class="row m-3" id="superDiv">
-            <h4>Add Category</h4></div>
+            <h4>Add Category</h4>
+        </div>
 
-        <form action="../php/add_category.php" method="post" id="form" onsubmit="AJAXSubmit(this) ;return false;">
-            <div class="form-group row" id="nameDiv">
-                <label for="category" class="col-2 col-form-label">Category Name</label>
-                <div class="col-3">
-                    <input type="text" class="form-control position-relative" id="category" name="category">
-                </div>
+        <div class="form-group row" id="nameDiv">
+            <label for="category" class="col-2 col-form-label">Category Name</label>
+            <div class="col-3">
+                <input type="text" class="form-control position-relative" id="category" name="category">
             </div>
-            <div class="form-group row">
-                <div class="col">
-                    <button type="submit" class="btn btn-default">Save</button>
-                    <button type="Reset" class="btn btn-default">Reset</button>
-                </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" class="btn btn-default" id="submit">Save</button>
+                <button type="Reset" class="btn btn-default">Reset</button>
             </div>
-        </form>
+        </div>
+        <p id="message" style="display: none;"></p>
     </div>
+    <script src="../js/add_category.js"></script>
 </body>
 
 </html>
