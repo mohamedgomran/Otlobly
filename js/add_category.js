@@ -14,7 +14,7 @@ function update_category() {
                 message.style.color = 'red';
                 message.style.fontSize = '20px';
                 message.textContent =
-                    `category ${document.getElementById('category').value} is already exist!`;
+                    `category is already exist or you type nothing!`;
                 document.getElementById('category').value = '';
             }
         }

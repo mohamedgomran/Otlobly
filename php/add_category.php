@@ -10,7 +10,7 @@
     $prep = category::manDb($query, $dataArr);
     $result = $prep->fetchAll(PDO::FETCH_ASSOC);
 
-    if (empty($result)) {
+    if (empty($result) && $_REQUEST["category"] !== '') {
         $query1 = "insert into categories values(null, ?)";
         $dataArr1  = array($_REQUEST["category"]);
         category::manDb($query1, $dataArr1);
