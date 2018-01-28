@@ -182,6 +182,8 @@ function ajaxSuccess () {
 	}
 	else {
 		for (i in response) {
+			var mainDiv = document.getElementById('mainDiv');
+			mainDiv.style.display='block'
 			appendIntoTable(response[i])
 		}
 	}
