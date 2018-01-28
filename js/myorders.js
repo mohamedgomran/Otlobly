@@ -27,7 +27,7 @@ function appendIntoTable(row) {
         td.textContent = row[i];
         
         if (i === 'total_amount') {
-            total_amount += parseInt(row[i]);
+            total_amount += parseFloat(row[i]);
         }
 
         if (row[i] === 'cancel') {
