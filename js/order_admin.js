@@ -67,8 +67,9 @@ var addToOrder = function (e) {
 	if (e.target.className=="drinkdiv m-4") {
 		var mainDiv = document.getElementById('orderlist')
 		var form = document.getElementById('form')
-		if (form.style.display == "none") {form.style.display = "block"}
-
+		if (form.style.display == "none")
+			{document.getElementById('msg').style.display = 'none'
+			form.style.display = "block"}
 		if (productRow = exist(mainDiv,"p_"+e.target.id)) {
 			productRow.children[1].value++
 			productRow.children[2].value = parseInt(productRow.children[2].value) + parseInt(e.target.children[2].innerHTML.split(" ")[0])
@@ -179,6 +180,7 @@ function ajaxSuccess () {
 		var mainDiv = document.getElementById('orderlist')
 		mainDiv.innerHTML=""
 		document.getElementById('form').style.display = 'none'
+		document.getElementById('msg').style.display = 'block'
 	}
 	else {
 		for (i in response) {

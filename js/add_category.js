@@ -22,3 +22,25 @@ function update_category() {
     xhttp.open("GET", "../php/add_category.php?category=" + document.getElementById('category').value, true);
     xhttp.send();
 }
+
+var mainDiv = document.getElementById('mainDiv');
+function ajaxSuccess ()
+{
+  var response =JSON.parse(this.responseText)
+  console.log(response)
+  if (response["admin"]=="true")
+    {
+        mainDiv.style.display='block';
+    }
+   if (response['admin']=="false")
+    {
+    location.href="login.html";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var oReq = new XMLHttpRequest();
+    oReq.onload = ajaxSuccess;
+    oReq.open("post", "../php/admin_check.php");
+    oReq.send();
+})

@@ -52,8 +52,9 @@ var addToOrder = function (e) {
 	if (e.target.className=="drinkdiv m-4") {
 		var mainDiv = document.getElementById('orderlist')
 		var form = document.getElementById('form')
-		if (form.style.display == "none") {form.style.display = "block"}
-
+		if (form.style.display == "none") 
+			{document.getElementById('msg').style.display = 'none'
+			form.style.display = "block"}
 		if (productRow = exist(mainDiv,"p_"+e.target.id)) {
 			productRow.children[1].value++
 			productRow.children[2].value = parseInt(productRow.children[2].value) + parseInt(e.target.children[2].innerHTML.split(" ")[0])
@@ -113,7 +114,7 @@ function appendIntoTable(row) {
 	var  img = document.createElement('img')
     img.setAttribute("class" , "rounded-circle imgindiv")
     img.src = "../img/product/"+row['PID']+".jpg"
-	img.onerror=img.src="../img/product/default.png";
+
 	var  imgDiv = document.createElement('div')
     imgDiv.setAttribute("class" ,"drinkimg")
     imgDiv.appendChild(img)
@@ -152,6 +153,8 @@ function ajaxSuccess () {
 		var mainDiv = document.getElementById('orderlist')
 		mainDiv.innerHTML=""
 		document.getElementById('form').style.display = 'none'
+		document.getElementById('msg').style.display = 'block'
+		superDiv.appendChild(msg)
 	}
 	else if (response['rstatus']=="go") {
 		location.href = response['link']

@@ -56,6 +56,8 @@ function putElementsInTBody() {
 			var srcImg = document.createElement('img');
 			srcImg.setAttribute('class', 'rounded imgindiv');
 			srcImg.src = "../img/user/"+arrayOfUsers[index]['UID']+".jpg";
+        	srcImg.onerror= function(e){e.target.src="../img/ninja.png";}
+
 			srcDiv.appendChild(srcImg)
 			srcTd.appendChild(srcDiv);
 			parentTr.appendChild(srcTd);

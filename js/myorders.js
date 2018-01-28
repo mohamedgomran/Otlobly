@@ -187,7 +187,9 @@ function ajaxSuccess ()
     {
         var Name=response['userName']
         var Id=response['userId']
-        document.getElementById('userImg').src="../img/user/"+Id+".jpg";
+        var userImg=document.getElementById('userImg')
+        userImg.src="../img/user/"+Id+".jpg";
+        userImg.onerror= function(e){e.target.src="../img/ninja.png";}
         document.getElementById('userName').innerHTML=Name;
     }
 }
