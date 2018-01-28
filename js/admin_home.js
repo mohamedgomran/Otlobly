@@ -14,14 +14,10 @@ function getAllUsersOrders() {
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         result1 = JSON.parse(this.responseText);
-        console.log(result1);
-        //console.log(JSON.parse(this.responseText));
         for (var i=0; i<result1.length; i++) {
-            //console.log(i);
             makeFirstRows(result1[i]);
         }
         if (tables) {
-            //console.log('Hello');
             for (var i=0; i < tables.length; i++) {
                 getOrder(tables[i].id);
             }
@@ -66,6 +62,7 @@ function makeFirstRows(row) {
             break;
             case 4:
             td.textContent = "deliver";
+            td.addEventListener('click', change_status);
         }
         tr1.appendChild(td);
     }
@@ -100,7 +97,6 @@ function getOrder(id) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             result2 = JSON.parse(this.responseText);
-            console.log(result2);
             var tr = document.createElement('tr');
             var td = document.createElement('td');
             td.setAttribute('colspan', '5');
@@ -121,4 +117,19 @@ function getOrder(id) {
     xhttp.send();
 }
 
+
+function change_status(e) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var isOK = JSON.parse(this.responseText);
+            if (isOK) {
+                containerElement.removeChild(document.getElementById(e.target.parentElement.parentElement.parentElement.id));
+            }
+        }
+    };
+    xhttp.open("GET",
+        "../php/change_status.php?id=" + e.target.parentElement.parentElement.parentElement.id, true);
+    xhttp.send();
+}
 
