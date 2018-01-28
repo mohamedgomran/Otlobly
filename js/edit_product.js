@@ -71,6 +71,11 @@ function ajaxSuccess ()
 {
   var response =JSON.parse(this.responseText)
   console.log(response);
+
+  if (response.success) {
+  	console.log('hi');
+  	location.href = "../pages/all_products.html"
+  }
   if (response["admin"]=="true")
   	{
   		mainDiv.style.display='block';
@@ -218,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	PID = getQueryParameterByName('PID');
 
 	fetchHTTPRequest.onreadystatechange = catchContents;
-	fetchHTTPRequest.open('POST', '../Otlobly/php/product_get_single.php');
+	fetchHTTPRequest.open('POST', '../php/product_get_single.php');
 	fetchHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	fetchHTTPRequest.send('PID=' + encodeURIComponent(PID));
 
