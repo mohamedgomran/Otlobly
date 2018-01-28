@@ -102,7 +102,6 @@ allUsersContainer.addEventListener('click', function(event) {
 			deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
 			deleteHTTPRequest.open('POST', '../php/user_delete.php');
 		    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		    console.log(targetAnc.parentNode.parentNode.id);
 			deleteHTTPRequest.send('userID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
 
 			function deleteResponseStateCallBack() {

@@ -144,7 +144,6 @@ function change_status(e) {
 function ajaxSuccess ()
 {
   var response =JSON.parse(this.responseText)
-  console.log(response)
   if (response["admin"]=="true")
     {
         containerElement.style.display='block';

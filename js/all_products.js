@@ -7,7 +7,6 @@ var mainDiv = document.getElementById('mainDiv');
 function ajaxSuccess ()
 {
   var response =JSON.parse(this.responseText)
-  console.log(response)
   if (response["admin"]=="true")
     {
         mainDiv.style.display='block';

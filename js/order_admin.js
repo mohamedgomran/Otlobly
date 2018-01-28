@@ -72,7 +72,7 @@ var addToOrder = function (e) {
 			form.style.display = "block"}
 		if (productRow = exist(mainDiv,"p_"+e.target.id)) {
 			productRow.children[1].value++
-			productRow.children[2].value = parseInt(productRow.children[2].value) + parseInt(e.target.children[2].innerHTML.split(" ")[0])
+			productRow.children[2].value = parseFloat(productRow.children[2].value) + parseFloat(e.target.children[2].innerHTML.split(" ")[0])
 			totalAmount()
 			return
 		}

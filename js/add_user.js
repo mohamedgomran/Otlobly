@@ -97,7 +97,6 @@ conf_pass.addEventListener("input",function() {
 function ajaxSuccess () 
 {
   var response=JSON.parse(this.responseText)
-  console.log(response)
   ////to redirect uer if he is not admin
   if(response["admin"]==="true")
 	{
