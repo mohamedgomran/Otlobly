@@ -296,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (fetchHTTPRequest.status === 200) { // if success
 				// alert(fetchHTTPRequest.responseText);
 				if(fetchHTTPRequest.responseText["status"]==="go") {
-					location.href=fetchHTTPRequest.responseText["link"];
+					location.href = fetchHTTPRequest.responseText["link"];
 				} else {
 					userInfo = JSON.parse(fetchHTTPRequest.responseText); // receive response into array
 					console.log(userInfo);

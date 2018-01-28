@@ -24,8 +24,7 @@
 
 		public function add() {
 
-			$sql_add_product = "INSERT INTO products
-			VALUES (NULL, ?, ?, ?, ?, ?);";
+			$sql_add_product = "INSERT INTO products VALUES (NULL, ?, ?, ?, ?, ?);";
 
 			$parameters = ["$this->name", "$this->category", "$this->price", "$this->picture_source", "$this->availability"];
 
@@ -106,6 +105,23 @@
 			$prep = Product::manDb($sql_get_all_products, array($prod));
 			return $prep->fetch(PDO::FETCH_ASSOC);
 		}
+
+		public static function get_product_by_id($Id) {
+			
+			$sql_get_product = "SELECT * FROM products
+			JOIN categories ON products.p_CID = categories.CID WHERE products.PID = ?";
+
+			$prep = Product::manDb($sql_get_product, array($Id));
+			return $prep->fetch(PDO::FETCH_ASSOC);
+		}
+		
+	// 	public function edit_product($pId) {
+
+	// 		$query = "UPDATE Products SET pname = ? , p_CID = ? , price = ? , picture = ? , availability = ?
+	// 		where PID = $pId";
+	// 		$parameters=["$this->name", "$this->category", "$this->price", "$this->picture_source", "$this->availability"];
+	// 		$this->manDb($query,$parameters);
+	// 	}
 
 	}
 

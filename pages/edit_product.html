@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Add Product</title>
+    <title>Edit Product</title>
 
     <link rel="stylesheet" href="../css/bootstrap.min.css"> <!-- bootstrap default styling file-->
     <link rel="stylesheet" href="../css/myorders.css">
@@ -10,7 +10,8 @@
 
 <body>
 
-    <div class="container" id="mainDiv" style="display: none;">
+    <div class="container" id="mainDiv" style="display: block;">
+<!--     <div class="container" id="mainDiv" style="display: none;"> -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="admin_home.html">Otlobly</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,9 +51,9 @@
         </nav>
 
         <div class="row m-3" id="superDiv">
-            <h4>Add Product</h4></div>
+            <h4>Edit Product</h4></div>
 
-        <form action="../php/add_product.php" method="post" id="form" onsubmit="AJAXSubmit(this) ;return false;">
+        <form action="../php/product_edit.php" method="post" id="form" onsubmit="AJAXSubmit(this) ;return false;">
             <div class="form-group row" id="nameDiv">
                 <label for="product" class="col-2 col-form-label">Product</label>
                 <div class="col-3">
@@ -93,7 +94,7 @@
             </div>
         </form>
     </div>
-    <script type="text/javascript" src="../js/add_product.js"></script>
+    <script type="text/javascript" src="../js/edit_product.js"></script>
 </body>
 
 </html>

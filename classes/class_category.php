@@ -44,6 +44,14 @@
 		$result = $prep->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
+	static function getOneCategory($catName)
+	{
+		$query = "SELECT * FROM categories WHERE cname = ?";
+		$dataArr  = array($catName);
+		$prep = category::manDb($query, $dataArr);
+		$result = $prep->fetch(PDO::FETCH_ASSOC);
+		return $result;
+	}
 }
 
 ?>

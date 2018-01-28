@@ -119,7 +119,7 @@ allProductsContainer.addEventListener('click', function(event) {
 			break;
 			
 		case 'Edit':
-			// statements_1
+			window.location.href = "edit_product.html?PID=" + targetAnc.parentNode.parentNode.id;
 			break;
 
 		default:
