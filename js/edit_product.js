@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	PID = getQueryParameterByName('PID');
 
 	fetchHTTPRequest.onreadystatechange = catchContents;
-	fetchHTTPRequest.open('POST', 'http://localhost/Otlobly/php/product_get_single.php');
+	fetchHTTPRequest.open('POST', '../Otlobly/php/product_get_single.php');
 	fetchHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	fetchHTTPRequest.send('PID=' + encodeURIComponent(PID));
 
