@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	uId = getQueryParameterByName('UID');
 
 	fetchHTTPRequest.onreadystatechange = catchContents;
-	fetchHTTPRequest.open('POST', 'http://localhost/Otlobly/php/user_get_single.php');
+	fetchHTTPRequest.open('POST', '../php/user_get_single.php');
 	fetchHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	fetchHTTPRequest.send('uId=' + encodeURIComponent(uId));
 
