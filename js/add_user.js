@@ -1,4 +1,4 @@
-var form=document.getElementById('form');
+// var form=document.getElementById('form');
 var username=document.getElementById('name');
 var nameDiv=document.getElementById('nameDiv')
 var email=document.getElementById('email');
@@ -12,6 +12,8 @@ var roomDiv=document.getElementById('roomDiv');
 var ext=document.getElementById('ext');
 var extDiv=document.getElementById('extDiv');
 var mainDiv=document.getElementById('mainDiv');
+var resetbtn=document.getElementById('resetbtn');
+var msg=document.getElementById('msg');
 var nameFlag=false;
 var emailFlag=false;
 var passFlag=false;
@@ -20,6 +22,9 @@ var roomFlag=false;
 var extFlag=false;
 var successFlag=false;
 
+resetbtn.addEventListener('click',function(e) {
+	msg.style.display='none'
+})
 
 username.addEventListener("input",function() {
 
@@ -36,6 +41,7 @@ username.addEventListener("input",function() {
 	{
 		nameDiv.removeChild(nameErr)
 		nameFlag=false;
+		msg.style.display='none'
 	}
 });
 
@@ -113,17 +119,15 @@ function ajaxSuccess ()
 	  if(successFlag==true)
 		{
 			successFlag==false;
-			mainDiv.removeChild(success)
+			msg.style.display='none'
 		}
 
 		////to view a Success message
-	  if (response.indexOf("success")!=-1)
+	  if (response["success"])
 	  	{
-		  	success=document.createElement('h3');
-			mainDiv.appendChild(success);
-			success.innerHTML="User was added Successfully"
+			msg.style.display='block'
 			successFlag=true;
-			document.getElementById("form").reset();
+			document.getElementById('form').reset();
 	  	}
 	  else{
 	  	///// messages of errors according to server
