@@ -1,3 +1,4 @@
+var mainDiv=document.getElementById('mainDiv')
 var form=document.getElementById('form');
 var pname=document.getElementById('product');
 var select=document.getElementById('select');
@@ -54,7 +55,7 @@ function ajaxSuccess ()
   console.log(response)
   if (response["admin"]=="true")
   	{
-  		form.style.display='block';
+  		mainDiv.style.display='block';
   	}
    if (response['admin']=="false")
   	{
