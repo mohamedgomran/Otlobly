@@ -114,13 +114,11 @@ function ajaxSuccess ()
 		{
 			successFlag==false;
 			mainDiv.removeChild(success)
-			console.log("hi")
 		}
 
 		////to view a Success message
 	  if (response.indexOf("success")!=-1)
 	  	{
-	  		console.log("success")
 		  	success=document.createElement('h3');
 			mainDiv.appendChild(success);
 			success.innerHTML="User was added Successfully"
