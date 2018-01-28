@@ -4,11 +4,13 @@ var select=document.getElementById('select');
 var pnameDiv=document.getElementById('nameDiv')
 var priceDiv=document.getElementById('priceDiv');
 var categoryDiv=document.getElementById('categoryDiv')
+var pictureDiv=document.getElementById('pictureDiv')
 var price=document.getElementById('price');
 
 var pnameFlag=false;
 var priceFlag=false;
 var categoryFlag=false;
+var pictureFlag=false
 var successFlag=false;
 
 pname.addEventListener("input",function() {
@@ -48,7 +50,7 @@ function categoryMan(row)
 ///////////////ajax response////////////////////
 function ajaxSuccess ()
 {
-  var response = JSON.parse(this.responseText)
+  var response =JSON.parse(this.responseText)
   console.log(response)
   if (response["admin"]=="true")
   	{
@@ -117,6 +119,18 @@ function ajaxSuccess ()
 			categoryDiv.appendChild(categoryErr);
 			categoryErr.innerHTML="*Category is missing";
 			categoryFlag=true;
+		}
+  	  }
+
+  	  if(errorsArr.indexOf("picture")!=-1)
+	  {
+	  	if(pictureFlag===false)
+		{
+			console.log("wrong picture")
+		  	pictureErr=document.createElement('p');
+			pictureDiv.appendChild(pictureErr);
+			pictureErr.innerHTML="*picture is missing";
+			pictureFlag=true;
 		}
   	  }
 
