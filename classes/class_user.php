@@ -96,6 +96,13 @@
 		$this->manDb($query,$parameters);
 	}
 
+	public function editUserWithoutPassword($id)
+	{
+		$query="update users set userName=? , email=? , room=? , extension=? , picture=? , admin=? where UID=$id";
+		$parameters=["$this->userName","$this->email","$this->room","$this->extension","$this->picture","$this->admin"];
+		$this->manDb($query,$parameters);
+	}
+
 	static function getRoom($id)
 	{
 		$query="select room from users where UID=?";

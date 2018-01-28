@@ -53,7 +53,7 @@
 
             <h4>Edit User</h4></div>
 
-        <form id="form" action="../php/add_user.php" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this) ;return false;">
+        <form id="form" action="../php/user_edit.php" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this) ;return false;">
             <div class="form-group row">
                 <label for="name" class="col-2 col-form-label">Name</label>
                 <div class="col-3" id="nameDiv">
@@ -69,13 +69,13 @@
             <div class="form-group row">
                 <label for="password" class="col-2 col-form-label">Password</label>
                 <div class="col-3" id="passDiv">
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password">
                 </div>
             </div>
             <div class="form-group row" id="confirm_passwordDiv">
                 <label for="confirm_password" class="col-2 col-form-label">Confirm Password</label>
                 <div class="col-3">
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                 </div>
             </div>
             <div class="form-group row" id="roomDiv">

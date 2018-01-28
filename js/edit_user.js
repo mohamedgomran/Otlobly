@@ -20,6 +20,20 @@ var roomFlag=false;
 var extFlag=false;
 var successFlag=false;
 
+var userInfo;
+var uId;
+
+
+function getQueryParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 
 username.addEventListener("input",function() {
 
@@ -96,11 +110,11 @@ conf_pass.addEventListener("input",function() {
 	}
 });
 
-///////////////ajax response////////////////////
+/////////////ajax response////////////////////
 function ajaxSuccess () 
 {
-  var response = (this.responseText)
-  console.log(response)
+  var response = (this.responseText);
+  console.log(response);
 
   ////to redirect uer if he is not admin
   if(response["status"]==="go")
@@ -122,7 +136,7 @@ function ajaxSuccess ()
   		console.log("success")
 	  	success=document.createElement('h3');
 		superDiv.appendChild(success);
-		success.innerHTML="User was added Successfully"
+		success.innerHTML="User was edited Successfully"
 		successFlag=true;
 		document.getElementById("form").reset();
   	}
@@ -240,54 +254,70 @@ function ajaxSuccess ()
 var oReq = new XMLHttpRequest();
 
 function AJAXSubmit (oFormElement) {
-  if (!oFormElement.action) { return; }
-  oReq.onload = ajaxSuccess;
-  if (oFormElement.method.toLowerCase() === "post") {
-    oReq.open("post", oFormElement.action);
-    oReq.send(new FormData(oFormElement));
-  } else {
-    var oField, sFieldType, nFile, sSearch = "";
-    for (var nItem = 0; nItem < oFormElement.elements.length; nItem++) {
-      oField = oFormElement.elements[nItem];
-      if (!oField.hasAttribute("name")) { continue; }
-      sFieldType = oField.nodeName.toUpperCase() === "INPUT" ?
-          oField.getAttribute("type").toUpperCase() : "TEXT";
-      if (sFieldType === "FILE") {
-        for (nFile = 0; nFile < oField.files.length;
-            sSearch += "&" + escape(oField.name) + "=" + escape(oField.files[nFile++].name));
-      } else if ((sFieldType !== "RADIO" && sFieldType !== "CHECKBOX") || oField.checked) {
-        sSearch += "&" + escape(oField.name) + "=" + escape(oField.value);
-      }
-    }
-    oReq.open("get", oFormElement.action.replace(/(?:\?.*)?$/, sSearch.replace(/^&/, "?")), true);
-    oReq.send(null);
-  }
+	console.log(oFormElement);
+	if (!oFormElement.action) { return; }
+	oReq.onload = ajaxSuccess;
+	if (oFormElement.method.toLowerCase() === "post") {
+		oReq.open("POST", oFormElement.action);
+		oReq.send(new FormData(oFormElement));
+		console.log(oReq.responseText);
+	} else {
+		var oField, sFieldType, nFile, sSearch = "";
+		for (var nItem = 0; nItem < oFormElement.elements.length; nItem++) {
+			oField = oFormElement.elements[nItem];
+			if (!oField.hasAttribute("name")) { continue; }
+			sFieldType = oField.nodeName.toUpperCase() === "INPUT" ? oField.getAttribute("type").toUpperCase() : "TEXT";
+			if (sFieldType === "FILE") {
+				for (nFile = 0; nFile < oField.files.length;
+				sSearch += "&" + escape(oField.name) + "=" + escape(oField.files[nFile++].name));
+			} else if ((sFieldType !== "RADIO" && sFieldType !== "CHECKBOX") || oField.checked)
+			    sSearch += "&" + escape(oField.name) + "=" + escape(oField.value);
+		}
+		oReq.open("get", oFormElement.action.replace(/(?:\?.*)?$/, sSearch.replace(/^&/, "?")), true);
+		oReq.send(null);
+	}
 }
 /////to send ajax request on loading of page to check the user 
 document.addEventListener("DOMContentLoaded", function () {
-		var fetchHTTPRequest = new XMLHttpRequest();
-		if (!fetchHTTPRequest)
-			alert('Giving up :( Cannot create an XMLHTTP instance');
+	var fetchHTTPRequest = new XMLHttpRequest();
+	if (!fetchHTTPRequest)
+		alert('Giving up :( Cannot create an XMLHTTP instance');
 
-		fetchHTTPRequest.onreadystatechange = catchContents;
-		fetchHTTPRequest.open('GET', 'http://192.168.1.3/Otlobly/php/product_get_all.php');
-		fetchHTTPRequest.send();
+	// fetchHTTPRequest.onreadystatechange = ajaxSuccess;
+	uId = getQueryParameterByName('UID');
 
-		function catchContents() {
-			if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
-				if (fetchHTTPRequest.status === 200) { // if success
-					// alert(fetchHTTPRequest.responseText);
-					arrayOfProducts = JSON.parse(fetchHTTPRequest.responseText); // receive response into array
-					putElementsInTBody(); // function to loop on products array and create rows
+	fetchHTTPRequest.onreadystatechange = catchContents;
+	fetchHTTPRequest.open('POST', 'http://localhost/Otlobly/php/user_get_single.php');
+	fetchHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	fetchHTTPRequest.send('uId=' + encodeURIComponent(uId));
+
+	function catchContents() {
+		if (fetchHTTPRequest.readyState === XMLHttpRequest.DONE) {
+			if (fetchHTTPRequest.status === 200) { // if success
+				// alert(fetchHTTPRequest.responseText);
+				if(fetchHTTPRequest.responseText["status"]==="go") {
+					location.href=fetchHTTPRequest.responseText["link"];
 				} else {
-					alert('There was a problem with the request.');
+					userInfo = JSON.parse(fetchHTTPRequest.responseText); // receive response into array
+					console.log(userInfo);
+					populateForm(); // function to loop on products array and create rows
+					// console.log(userInfo);
 				}
+			} else {
+				alert('There was a problem with the request.');
 			}
 		}
 	}
-
-  	var oReq = new XMLHttpRequest();
- 	oReq.onload = ajaxSuccess;
-    oReq.open("post", "../php/add_user.php");
-    oReq.send();
 });
+
+function populateForm() {
+	username.value = userInfo['userName'];
+	email.value = userInfo['email'];
+	room.value = userInfo['room'];
+	ext.value = userInfo['extension'];
+	newHiddenInput = document.createElement('input');
+	newHiddenInput.setAttribute('type', 'hidden');
+	newHiddenInput.setAttribute('name', 'uId');
+	newHiddenInput.value = uId;
+	nameDiv.appendChild(newHiddenInput);
+}
