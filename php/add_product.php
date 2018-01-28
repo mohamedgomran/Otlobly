@@ -65,7 +65,7 @@
 				if ($img_info) {
 					uploadimg($picture, $img_info, $path, $productId);
 				}
-				
+				exit;
 			}
 		}
 		else 
