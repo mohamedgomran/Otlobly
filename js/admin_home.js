@@ -1,4 +1,3 @@
-var mainDiv=document.getElementById('mainDiv')
 var containerElement = document.getElementById('containerElement');
 var tables = document.getElementsByTagName('table');
 var table;
@@ -140,7 +139,7 @@ function ajaxSuccess ()
   console.log(response)
   if (response["admin"]=="true")
     {
-        mainDiv.style.display='block';
+        containerElement.style.display='block';
     }
    if (response['admin']=="false")
     {
