@@ -113,8 +113,9 @@ function cancelOrder(id, amount) {
                 return;
             } */
             if (isOk) {
-                tableBody.removeChild(document.getElementById(id));  
+                tableBody.removeChild(document.getElementById(id));
                 total_tr.children[0].children[0].textContent = 'Total = ' + (total_amount-amount) + ' LE'; 
+		total_amount-=amount
                 if (orderExpand !== undefined && order_row !== undefined) {
                     deleteElement(orderExpand, order_row);
                     clicked_before = 0;
@@ -159,7 +160,7 @@ tableBody.addEventListener('click', function(e) {
     if (e.target.getAttribute('class') === 'action') {
         //tableBody.removeChild(e.target.parentElement);
         // delete the row in database
-        var deleted_amount = parseInt(e.target.previousElementSibling.textContent);
+        var deleted_amount = parseFloat(e.target.previousElementSibling.textContent);
         cancelOrder(e.target.parentElement.getAttribute('id'), deleted_amount);
     }
 
