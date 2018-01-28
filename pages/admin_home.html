@@ -7,9 +7,9 @@
 	<link rel="stylesheet" href="../css/myorders.css">
 
 </head>
-<body>
+<body onload="getAllUsersOrders();">
 
-	<div class="container">
+	<div id="containerElement" class="container">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <a class="navbar-brand" href="admin_home.html">Otlobly</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,8 +50,8 @@
 		</div>
 
 
-	<table class="table table-bordered">
- 	<thead>
+	<!-- <table class="table table-bordered"> -->
+ 	<!-- <thead>
 	    <tr>
 	      <th scope="col">Oreder Date</th>
 	      <th scope="col">Name</th>
@@ -93,58 +93,9 @@
 
 	  </tbody>
 	</table>
-	<table class="table table-bordered">
- 	<thead>
-	    <tr>
-	      <th scope="col">Oreder Date</th>
-	      <th scope="col">Name</th>
-	      <th scope="col">Room</th>
-	      <th scope="col">Ext.</th>
-	      <th scope="col">Action</th>
-	    </tr>
-	  </thead>
-
-	  <tbody>
-
-
-		<tr>
-			<td><h6>9999-12-31 23:59:59</h6></td>
-			<td>Assamhaa</td>
-			<td>2023</td>
-			<td>5050</td>
-			<td>deliver</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-					<div class="drinkdiv m-4">
-					<div class="drinkimg"><img src="../img/Drink.ico" class="rounded-circle imgindiv"></div>
-					<div class="rounded-circle price align-middle text-center"><h7>20 LE</h6></div>
-					<div class="dname text-center"><h7><b>Tea</b><b> x3</b></h6></div>
-				</div>
-				<div class="drinkdiv m-4">
-					<div class="drinkimg"><img src="../img/Drink.ico" class="rounded-circle imgindiv"></div>
-					<div class="rounded-circle price align-middle text-center"><h7>20 LE</h6></div>
-					<div class="dname text-center"><h7><b>Tea</b><b> x3</b></h6></div>
-				</div>
-			</td> 
-		</tr>
-
-		<tr>
-			<td colspan="5" class="text-center"><h4>Total = 40 LE</h4></td>
-		</tr>
-
-	  </tbody>
-	</table>
-
-
-
-
-
-
-
-
+ -->
 	</div>
+	<script src="../js/admin_home.js"></script>
 
 </body>
 </html>

@@ -19,15 +19,16 @@
 		imagejpeg($tmp, $dst, 100);
 	}
 	
-
 	session_start();
 	require_once '../classes/dbase.php';
 	require_once '../classes/class_user.php';
+
 	$userId = !empty($_SESSION['userId']) ? $_SESSION['userId'] : "";
-	if ($userId) {
+	
+	if ($userId) 
+	{
 		if (user::isAdmin($userId)) 
 		{
-
 			// echo json_encode(array('status'=>'admin');
 			$name=!empty($_POST['name'])?$_POST['name']:"";
 			$email=!empty($_POST['email'])?$_POST['email']:"";
@@ -35,11 +36,11 @@
 			$duplPassword=!empty($_POST['confirm_password'])?$_POST['confirm_password']:"";
 			$room=!empty($_POST['room_no'])?$_POST['room_no']:"";
 			$extension=!empty($_POST['ext'])?$_POST['ext']:"";
-	
 			$path = '../img/user/';
 			$picture=!empty($_FILES['picture']['tmp_name'])?$_FILES['picture']['tmp_name']:"";
-			$img_info = getimagesize($picture)?getimagesize($picture):"";
-
+			if($picture){
+			$img_info = getimagesize($picture)?getimagesize($picture):"";}
+			else{$img_info=null;}
 			$admin=0;
 			$errors=[];
 
@@ -69,7 +70,7 @@
 					array_push($errors, "extension");
 			}
 
-			if (!$img_info&&!$picture)
+			if ($img_info&&!$picture)
 			{
 				array_push($errors, "picture");
 			}
@@ -80,13 +81,13 @@
 				array_push($errors,"email_duplication");
 			}
 
-			
-
 		////check if any errors exist to reply back
 			if($errors)
 			{
 				echo json_encode($errors);
 			}
+
+			
 		//// if no errors then send data to database
 			else
 			{
@@ -94,24 +95,22 @@
 				$newUser= new user($name,$email,sha1($password),$room,$admin,$picture,$extension);
 				$newUser->addUser();
 				$userId = user::getSingleUser($email)['UID'];
-				$success=["success", $userId];
-				echo json_encode($success);
-				if ($img_info) {
+				echo json_encode(array('success'=>"$userId"));
+				if ($img_info) 
+				{
 					upload($picture, $img_info, $path, $userId);
 					
 				}
-				
 			}
 		}
 		else 
 		{
-			echo json_encode (array('status'=>'go', 'link'=>'user_home.html'));
+			echo json_encode(array('status'=>'go','link'=>'login.html'));
 		}
-		
 	}
 	else 
-		{
-			echo json_encode (array('status'=>'go', 'link'=>'login.html'));
-		}
+	{
+		echo json_encode(array('status'=>'go','link'=>'login.html'));
+	}
 
  ?>

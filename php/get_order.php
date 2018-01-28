@@ -4,7 +4,7 @@
     include_once "../classes/class_order.php";
     include_once "../classes/class_user.php";
 
-    $userId = !empty($_SESSION['userId']) ? $_SESSION['userId'] : "";
+    /* $userId = !empty($_SESSION['userId']) ? $_SESSION['userId'] : "";
   
     if ($userId) {
 		if (user::isAdmin($userId)) {
@@ -16,7 +16,7 @@
 	else{
 		echo json_encode(array('rstatus'=>'login'));
 		exit;
-    }
+    } */
 
     $query = "call order_expand(?)";
     $dataArr  = array($_REQUEST["id"]);

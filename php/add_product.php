@@ -10,14 +10,15 @@
 	if ($userId) 
 	{
 		if (user::isAdmin($userId)) 
-		{
+		{	
 			$pname=!empty($_POST['product'])?$_POST['product']:"";
 			$price=!empty($_POST['price'])?$_POST['price']:"";
 			$category=!empty($_POST['category'])?$_POST['category']:"";
 			$path = '../img/product/';
 			$picture=!empty($_FILES['picture']['tmp_name'])?$_FILES['picture']['tmp_name']:"";
-			$img_info = getimagesize($picture)?getimagesize($picture):"";
-
+			if($picture){
+			$img_info = getimagesize($picture)?getimagesize($picture):"";}
+			else{$img_info=null;}
 			$cateArr=category::getCategory();
 			$catNo=count($cateArr);
 			$errors=[];
@@ -37,7 +38,7 @@
 				array_push($errors, "category");
 			}
 
-			if (!$img_info&&!$picture)
+			if (!$img_info)
 			{
 				array_push($errors, "picture");
 			}	
@@ -67,11 +68,15 @@
 				
 			}
 		}
-	}
-
-	else 
+		else 
 		{
 			echo json_encode(array('status'=>'go', 'link'=>'login.html'));
 		}
+	}
+
+	else 
+	{
+		echo json_encode(array('status'=>'go', 'link'=>'login.html'));
+	}
 
  ?>

@@ -114,7 +114,7 @@
 
 	static function getRooms()
 	{
-		$query="select room from users";
+		$query="select distinct(room) from users";
 		$parameters=[""];
 		$prep=user::manDb($query,$parameters);
 		$result=$prep->fetchAll(PDO::FETCH_ASSOC);

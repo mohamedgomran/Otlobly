@@ -24,7 +24,7 @@
 
 		public function add() {
 
-			$sql_add_product = "INSERT INTO cafeteria.products
+			$sql_add_product = "INSERT INTO products
 			VALUES (NULL, ?, ?, ?, ?, ?);";
 
 			$parameters = ["$this->name", "$this->category", "$this->price", "$this->picture_source", "$this->availability"];
@@ -35,7 +35,7 @@
 
 		public function edit($Id) {
 
-			$sql_edit_product = "UPDATE cafeteria.products
+			$sql_edit_product = "UPDATE products
 			SET
 			pname = ?,
 			p_CID = ?,
@@ -52,7 +52,7 @@
 
 		public static function remove($Id) {
 
-			$sql_remove_product = "DELETE FROM cafeteria.products WHERE PID = ?;";
+			$sql_remove_product = "DELETE FROM products WHERE PID = ?;";
 
 			$parameters = ["$Id"];
 
@@ -62,7 +62,7 @@
 
 		public static function set_availability($Id, $availability) {
 			
-			$sql_set_availability = "UPDATE cafeteria.products
+			$sql_set_availability = "UPDATE products
 			SET
 			availability = ?
 			WHERE PID = ?;";
@@ -74,7 +74,7 @@
 
 		public static function get_availability($Id) {
 			
-			$sql_get_availability = "SELECT availability FROM cafeteria.products
+			$sql_get_availability = "SELECT availability FROM products
 			WHERE PID = ?;";
 
 			$parameters = ["$Id"];
@@ -85,7 +85,7 @@
 
 		public static function get_all_products() {
 			
-			$sql_get_all_products = "SELECT * FROM cafeteria.all_products;";
+			$sql_get_all_products = "SELECT * FROM all_products;";
 
 			$prep = Product::manDb($sql_get_all_products, array());
 			return $prep->fetchAll(PDO::FETCH_ASSOC);
@@ -93,7 +93,7 @@
 
 		public static function get_available_products() {
 			
-			$sql_get_available_products = "SELECT * FROM cafeteria.all_products WHERE availability=1";
+			$sql_get_available_products = "SELECT * FROM all_products WHERE availability=1";
 
 			$prep = Product::manDb($sql_get_available_products, array());
 			return $prep->fetchAll(PDO::FETCH_ASSOC);

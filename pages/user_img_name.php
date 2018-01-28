@@ -8,7 +8,12 @@
 	{
 		$userRow=user::getSingleUserById($userId);
 		$name=$userRow['userName'];
-		$result=array('userName'=>$name,'userID'=>$userId);	
+		$result=array('userName'=>$name,'userId'=>$userId);	
 		echo json_encode($result);
 	}
+	else
+	{
+		echo json_encode(array('status'=>'error','link'=>'login.html'));
+	}
 ?>
+

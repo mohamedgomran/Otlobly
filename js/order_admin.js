@@ -1,5 +1,6 @@
-var room=document.getElementById('select')
+var room=document.getElementById('select');
 var form = document.getElementById('form')
+var cst= document.getElementById('cst')
 
 var totalAmount = function () {
 	var totalDiv = document.getElementById('total')
@@ -13,6 +14,13 @@ var totalAmount = function () {
 
 form.addEventListener('input', totalAmount)
 
+cst.addEventListener("focus", function() {
+	var Req = new XMLHttpRequest();
+ 		Req.onload = ajaxUserReply;
+    	Req.open("post", "../php/user_get_all_names.php");
+    	Req.send();
+})
+
 
 room.addEventListener("focus", function() {
 	var Req = new XMLHttpRequest();
@@ -21,14 +29,21 @@ room.addEventListener("focus", function() {
     	Req.send();
 })
 
-function roomManp($roomNo)
+function roomManp(roomNo)
 {
 	let option=document.createElement('option');
 	room.appendChild(option);
-	option.innerHTML=$roomNo;
-	option.value=$roomNo;
+	option.innerHTML=roomNo;
+	option.value=roomNo;
 }
 
+function userManp(Id,Name)
+{
+	let option=document.createElement('option');
+	cst.appendChild(option);
+	option.innerHTML=Name;
+	option.value=Id;
+}
 var delRow = function (e) {
 	if(e.target.parentElement.parentElement.children.length==1){
 		document.getElementById('form').style.display = "none"
@@ -134,6 +149,18 @@ function appendIntoTable(row) {
 
 }
 
+function ajaxUserReply() {
+	var users=JSON.parse(this.responseText)
+	if(users)
+		{
+			for (var i = 0; i < users.length; i++) {
+				var uname=users[i]['userName']
+				var id=users[i]['UID']
+				userManp(id,uname)
+			};
+		}
+}
+
 function ajaxSuccess () {
 
 	var response = JSON.parse(this.responseText)
@@ -153,15 +180,7 @@ function ajaxSuccess () {
 		mainDiv.innerHTML=""
 		document.getElementById('form').style.display = 'none'
 	}
-	else if (response['rstatus']=="go") {
-		location.href = response['link']
-
-	}
-	else { 
-		var Id=response.pop();
-		var Name=response.pop();
-		document.getElementById('userImg').src="../img/user/"+Id+".jpg";
-		document.getElementById('userName').innerHTML=Name;
+	else {
 		for (i in response) {
 			appendIntoTable(response[i])
 		}
@@ -183,7 +202,7 @@ function AJAXSubmit (oFormElement) {
  document.addEventListener("DOMContentLoaded", function () {
   	var oReq = new XMLHttpRequest();
  		oReq.onload = ajaxSuccess;
-    	oReq.open("post", "../php/user_home.php");
+    	oReq.open("post", "../php/order_admin.php");
     	oReq.send();
 });
 

@@ -18,7 +18,7 @@ function fetchUsers() {
 		alert('Giving up :( Cannot create an XMLHTTP instance');
 
 	fetchHTTPRequest.onreadystatechange = catchContents;
-	fetchHTTPRequest.open('GET', 'http://localhost/Otlobly/php/user_get_all.php');
+	fetchHTTPRequest.open('GET', '../php/user_get_all.php');
 	fetchHTTPRequest.send();
 
 	function catchContents() {
@@ -55,8 +55,9 @@ function putElementsInTBody() {
 			srcDiv.setAttribute('class', 'productimgdiv');
 			var srcImg = document.createElement('img');
 			srcImg.setAttribute('class', 'rounded imgindiv');
-			srcImg.src = arrayOfUsers[index]['picture'];
-			srcTd.appendChild(srcDiv.appendChild(srcImg));
+			srcImg.src = "../img/user/"+arrayOfUsers[index]['UID']+".jpg";
+			srcDiv.appendChild(srcImg)
+			srcTd.appendChild(srcDiv);
 			parentTr.appendChild(srcTd);
 
 			var extensionTd = document.createElement('td');
@@ -96,7 +97,7 @@ allUsersContainer.addEventListener('click', function(event) {
 				alert('Giving up :( Cannot create an XMLHTTP instance');
 
 			deleteHTTPRequest.onreadystatechange = deleteResponseStateCallBack;
-			deleteHTTPRequest.open('POST', 'http://localhost/Otlobly/php/user_delete.php');
+			deleteHTTPRequest.open('POST', '../php/user_delete.php');
 		    deleteHTTPRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    console.log(targetAnc.parentNode.parentNode.id);
 			deleteHTTPRequest.send('userID=' + encodeURIComponent(targetAnc.parentNode.parentNode.id));
@@ -113,7 +114,7 @@ allUsersContainer.addEventListener('click', function(event) {
 			break;
 			
 		case 'Edit':
-			window.location.href = "http://localhost/Otlobly/pages/edit_user.html?UID=" + targetAnc.parentNode.parentNode.id;
+			window.location.href = "edit_user.html?UID=" + targetAnc.parentNode.parentNode.id;
 			break;
 	}
 
