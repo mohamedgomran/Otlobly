@@ -3,7 +3,7 @@
 // need to set a global CONFIG_HOST and CONFIG_PASSWORD and CONFIG_DB
 // as well as CONFIG_USER CONFIG_USER_PASSWORD
 	$dsn="mysql:host=localhost;dbname=cafeteria";
-	$conn= new PDO($dsn,"a7mad", "0000");
+	$conn= new PDO($dsn,"root");
 	// $conn= new PDO($dsn,"a7mad", "0000");
 	
 // Train to manipulate the data base, recives the PDO connection obj, 
