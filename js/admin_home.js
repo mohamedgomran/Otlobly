@@ -30,8 +30,9 @@ function getAllUsersOrders() {
 
 function makeFirstRows(row) {
     table = document.createElement('table');
-    table.setAttribute('class', "table table-bordered");
+    table.setAttribute('class', "table table-bordered table-hover");
     table.setAttribute('id', row["OID"]);
+
     containerElement.appendChild(table);
     thead = document.createElement('thead');
     thead.innerHTML = `<thead><tr>
@@ -45,6 +46,8 @@ function makeFirstRows(row) {
     tbody = document.createElement('tbody');
     table.appendChild(tbody);
     var tr1 = document.createElement('tr');
+    
+
     for (var i=0; i<5; i++) {
         var td = document.createElement('td');
         switch (i) {
@@ -61,7 +64,8 @@ function makeFirstRows(row) {
             td.textContent = row["extension"];
             break;
             case 4:
-            td.textContent = "deliver";
+            td.textContent = "Deliver";
+            td.setAttribute('class', "hoverDiv");
             td.addEventListener('click', change_status);
         }
         tr1.appendChild(td);
@@ -98,6 +102,8 @@ function getOrder(id) {
         if (this.readyState == 4 && this.status == 200) {
             result2 = JSON.parse(this.responseText);
             var tr = document.createElement('tr');
+            
+
             var td = document.createElement('td');
             td.setAttribute('colspan', '5');
             tr.appendChild(td);
@@ -107,6 +113,8 @@ function getOrder(id) {
             }
             document.getElementById(id).lastElementChild.appendChild(tr);
             tr = document.createElement('tr');
+            
+
             tr.innerHTML = `<td colspan="5" class="text-center"><h4>Total = ${totalAmounts[counterOnTables]} LE</h4></td>`;
             tables[counterOnTables].lastElementChild.appendChild(tr);
             counterOnTables++;

@@ -45,6 +45,7 @@ function fillSelectUser(row) {
 function showUsersAmounts(row) {
     var tr = document.createElement('tr');
     tr.setAttribute('id', row["UID"]);
+    tr.setAttribute('class', "hoverDiv");
     var td_1 = document.createElement('td');
     var td_2 = document.createElement('td');
     td_1.textContent = row["userName"];
@@ -96,6 +97,7 @@ function appendIntoTable(row) {
     table.appendChild(order_date_amount_table);
     order_date_amount = document.createElement('tr');
     order_date_amount.setAttribute('id', row["OID"]);
+    order_date_amount.setAttribute('class', "hoverDiv");
     delete row["OID"];
     delete row["status"];
     order_date_amount_table.appendChild(order_date_amount);

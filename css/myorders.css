@@ -85,3 +85,8 @@ form.form-login { /*login.html*/
 	border-width: 1px
 	
 }
+
+.hoverDiv{
+	cursor: pointer;
+	
+}

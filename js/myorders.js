@@ -18,6 +18,8 @@ function deleteElement(parent, element) {
 function appendIntoTable(row) {
     var tr = document.createElement('tr');
     tr.setAttribute('id', row["OID"]);
+    tr.setAttribute('class', "hoverDiv");
+
     delete row["OID"];
     tableBody.appendChild(tr);
     for (var i in row) {

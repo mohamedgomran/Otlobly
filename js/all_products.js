@@ -64,6 +64,7 @@ function putElementsInTBody() {
 
 			var parentTr = document.createElement('tr');
 			parentTr.id = arrayOfProducts[index]['PID'];
+    		parentTr.setAttribute('class', "hoverDiv");
 
 			var lableTd = document.createElement('td');
 			lableTd.setAttribute('class', 'test'), lableTd.textContent = arrayOfProducts[index]['pname'];

@@ -41,6 +41,7 @@ function putElementsInTBody() {
 
 			var parentTr = document.createElement('tr');
 			parentTr.id = arrayOfUsers[index]['UID'];
+    		parentTr.setAttribute('class', "hoverDiv");
 
 			var nameTd = document.createElement('td');
 			nameTd.textContent = arrayOfUsers[index]['name'];
