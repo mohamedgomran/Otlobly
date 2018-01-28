@@ -113,7 +113,7 @@ function appendIntoTable(row) {
 	var  img = document.createElement('img')
     img.setAttribute("class" , "rounded-circle imgindiv")
     img.src = "../img/product/"+row['PID']+".jpg"
-
+	img.onerror=img.src="../img/product/default.png";
 	var  imgDiv = document.createElement('div')
     imgDiv.setAttribute("class" ,"drinkimg")
     imgDiv.appendChild(img)
@@ -160,7 +160,9 @@ function ajaxSuccess () {
 	else { 
 		var Id=response.pop();
 		var Name=response.pop();
-		document.getElementById('userImg').src="../img/user/"+Id+".jpg";
+		var userImg=document.getElementById('userImg')
+		userImg.src="../img/user/"+Id+".jpg";
+		userImg.onerror=userImg.src="../img/ninja.png";
 		document.getElementById('userName').innerHTML=Name;
 		for (i in response) {
 			appendIntoTable(response[i])
