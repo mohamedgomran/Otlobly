@@ -101,6 +101,7 @@ var addToOrder = function (e) {
 	    productOutput.setAttribute("value" ,e.target.children[2].innerHTML.split(" ")[0])
 	    productOutput.setAttribute("name" ,"output_"+e.target.id)
 	    productOutput.setAttribute("for" ,"p_"+e.target.id)
+	    productOutput.setAttribute("disabled" , "")
 
 	    var delButton = document.createElement('button')
 	    delButton.setAttribute("class" ,"btn")
