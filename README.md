@@ -1,10 +1,7 @@
 # Otlobly - Ordering system
 
-Simple ordering system inside fir small organizaion/coorporation
+Simple ordering system inside for small organizaion/coorporation
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
@@ -29,11 +26,6 @@ set database name, username, password, host in /classes/dbase.php file
 ```
 start navigating your system /pages/login.html
 ```
-
-
-
-Add additional notes about how to deploy this on a live system
-
 
 
 
