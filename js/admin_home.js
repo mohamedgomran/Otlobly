@@ -7,7 +7,7 @@ var result1;
 var result2;
 var row2Added = false;
 var totalAmounts = [];
-counterOnTables = 0;
+var counterOnTables = 0;
 
 function getAllUsersOrders() {
     var xhttp = new XMLHttpRequest();
@@ -38,6 +38,7 @@ function makeFirstRows(row) {
     thead.innerHTML = `<thead><tr>
       <th scope="col">Oreder Date</th>
       <th scope="col">Name</th>
+      <th scope="col">Notes</th>
       <th scope="col">Room</th>
       <th scope="col">Ext.</th>
       <th scope="col">Action</th>
@@ -48,7 +49,7 @@ function makeFirstRows(row) {
     var tr1 = document.createElement('tr');
     
 
-    for (var i=0; i<5; i++) {
+    for (var i=0; i<6; i++) {
         var td = document.createElement('td');
         switch (i) {
             case 0:
@@ -58,12 +59,15 @@ function makeFirstRows(row) {
             td.textContent = row["userName"];
             break;
             case 2:
-            td.textContent = row["room"];
+            td.textContent = row["notes"];
             break;
             case 3:
-            td.textContent = row["extension"];
+            td.textContent = row["room"];
             break;
             case 4:
+            td.textContent = row["extension"];
+            break;
+            case 5:
             td.textContent = "Deliver";
             td.setAttribute('class', "hoverDiv");
             td.addEventListener('click', change_status);
@@ -105,7 +109,7 @@ function getOrder(id) {
             
 
             var td = document.createElement('td');
-            td.setAttribute('colspan', '5');
+            td.setAttribute('colspan', '6');
             tr.appendChild(td);
             for (var i=0; i<result2.length; i++) {
                 div = makeOrderTable(result2[i]);
@@ -115,7 +119,7 @@ function getOrder(id) {
             tr = document.createElement('tr');
             
 
-            tr.innerHTML = `<td colspan="5" class="text-center"><h4>Total = ${totalAmounts[counterOnTables]} LE</h4></td>`;
+            tr.innerHTML = `<td colspan="6" class="text-center"><h4>Total = ${totalAmounts[counterOnTables]} LE</h4></td>`;
             tables[counterOnTables].lastElementChild.appendChild(tr);
             counterOnTables++;
         }
